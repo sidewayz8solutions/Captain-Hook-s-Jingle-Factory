@@ -1,105 +1,90 @@
-# Captain Hook's Jingle Factory
+# Captain Hook's Jingle Factory - Setup Instructions
 
-🏴‍☠️ **Louisiana's Premier Audio Production Website** ⚓
+## Image Assets Required
 
-A modern, pirate-themed website for Captain Hook's Jingle Factory - where musical treasures are forged with passion, precision, and a touch of pirate magic.
+You need to add the following images to the `/public` folder:
 
-## 🎵 Features
+1. **chook.PNG** - The Captain Hook mascot image (shown in your screenshots)
+   - This is the main pirate captain character
+   - Should be a transparent PNG
+   - Place in: `/public/chook.PNG`
 
-- **Responsive Design**: Fully responsive website that works on all devices
-- **Pirate Theme**: Immersive pirate aesthetics with custom animations
-- **Hero Section**: Dynamic Captain Hook character with floating hook decorations
-- **Service Showcase**: Lightning fast creation, premium production, and global reach
-- **Audio Gallery**: Interactive audio players with animated soundwave visualizations
-- **Contact Forms**: Professional contact system with pirate-themed messaging
-- **Smooth Animations**: CSS-powered floating elements and transitions
+2. **hook.png** - The golden hook decoration images
+   - These are the floating hook elements
+   - Should be golden/brass colored hooks
+   - Place in: `/public/hook.png`
 
-## 🛠️ Tech Stack
+## How to Run the Website
 
-- **HTML5**: Semantic markup structure
-- **CSS3**: Custom animations, gradients, and responsive design
-- **Tailwind CSS v2.2.19**: Utility-first CSS framework for rapid styling
-- **JavaScript**: Interactive functionality and smooth scrolling
-- **Google Fonts**: Custom typography (Pirata One, Cinzel, Crimson Text)
+1. **Open the website:**
+   - Simply double-click on `index.html` to open in your browser
+   - Or use a local server like Live Server in VS Code
 
-## 🎨 Design Elements
+2. **Add your images:**
+   - Place your Captain Hook mascot image as `chook.PNG` in the public folder
+   - Place your hook decoration image as `hook.png` in the public folder
 
-- **Color Palette**: Purple (#7B2CBF), Gold (#FFD700), Green (#10B981)
-- **Custom Animations**: Floating hooks, pulse glow effects, particle backgrounds
-- **Typography**: Pirate-themed fonts for headers, elegant serif for content
-- **Interactive Elements**: Hover effects, animated buttons, soundwave visualizations
+## Features Implemented
 
-## 🚀 Getting Started
+✅ **Modern Louisiana/Mardi Gras Theme**
+- Purple (#7B2CBF), Gold (#FFD700), and Green (#10B981) color scheme
+- Gradient effects throughout
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/[your-username]/captain-hooks-jingle-factory.git
-   ```
+✅ **Pirate-Themed Typography**
+- Pirata One font for headings
+- Cinzel for subheadings
+- Crimson Text for body text
 
-2. Open the project:
-   ```bash
-   cd captain-hooks-jingle-factory
-   ```
+✅ **Interactive Elements**
+- Floating animated hooks in hero section
+- Animated soundwave visualizers in Mardi Gras colors
+- Smooth scroll navigation
+- Mobile responsive menu
+- Back to top button
+- Scroll animations on all sections
+- Hover effects on all interactive elements
 
-3. Launch the website:
-   - Open `index.html` in your web browser
-   - Or use a local server for development
+✅ **Sections**
+- Hero with Captain Hook mascot and floating hooks
+- Services (3 cards with icons)
+- Treasure Gallery (audio players with soundwaves)
+- About section with stats
+- Contact form with "Message in a Bottle" theme
+- Footer with newsletter signup
 
-## 📁 Project Structure
+✅ **Advanced Features**
+- Loading overlay with anchor animation
+- Parallax scrolling effects
+- Particle background animation
+- Gradient text effects
+- Glassmorphism effects
+- Custom scrollbar
+- Easter egg (Konami code)
 
-```
-captain-hooks-jingle-factory/
-├── index.html              # Main website file
-├── public/                 # Image assets
-│   ├── chook.PNG          # Captain Hook character image
-│   └── [other images]     # Additional assets
-├── README.md              # Project documentation
-└── .hintrc               # Development hints configuration
-```
+## Technologies Used
 
-## 🎯 Key Sections
+- **HTML5** - Semantic markup
+- **Tailwind CSS 3.4+** - Latest utility-first CSS framework
+- **Custom CSS** - Advanced animations and effects
+- **Vanilla JavaScript** - Smooth interactions
+- **Google Fonts** - Custom typography
 
-- **Hero**: Captain Hook character with floating decorations
-- **Services**: Lightning Fast Creation, Premium Production, Global Reach
-- **Gallery**: Showcased audio work with interactive players
-- **About**: Company story and achievements
-- **Contact**: Professional inquiry forms and consultation booking
+## Browser Compatibility
 
-## 🌊 Animations & Effects
+- Chrome (recommended)
+- Firefox
+- Safari
+- Edge
+- Mobile browsers
 
-- CSS-only floating hook decorations
-- Pulse glow animations for the main character
-- Particle background effects
-- Smooth scroll animations
-- Interactive soundwave visualizations
-- Gradient text effects and hover states
+## Customization
 
-## 📱 Responsive Features
+You can customize colors by editing the Tailwind config in the HTML file or the CSS variables in `styles.css`.
 
-- Mobile-first design approach
-- Adaptive navigation with hamburger menu
-- Flexible grid layouts
-- Optimized images and animations for mobile
-- Touch-friendly interactive elements
+## Support
 
-## 🔧 Development
-
-The website uses modern CSS features and is optimized for performance:
-- Minimal dependencies (only Tailwind CSS and Google Fonts)
-- Optimized animations with CSS transforms
-- Semantic HTML structure for accessibility
-- Clean, maintainable code structure
-
-## 📄 License
-
-This project is created for Captain Hook's Jingle Factory. All rights reserved.
-
-## 🤝 Contributing
-
-This is a client project. For any suggestions or issues, please contact the development team.
+For any issues or questions about the website, refer to the `CLAUDE.md` file for the complete development documentation.
 
 ---
 
-**⚓ Set sail with Captain Hook's Jingle Factory - Where music meets magic! 🎵**# Captain-Hook-s-Jingle-Factory
-# Captain-Hook-s-Jingle-Factory
-# Captain-Hook-s-Jingle-Factory
+⚓ **Built with passion, precision, and a touch of pirate magic!**

@@ -1,41 +1,101 @@
-<html lang="en"><head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Captain Hook's Jingle Factory - Louisiana's Premier Audio
-            Production</title>
-        <link href="https://unpkg.com/tailwindcss@3.4.17/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="./styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Pirata+One&amp;family=Cinzel:wght@400;600;700&amp;family=Crimson+Text:wght@400;600;700&amp;display=swap"
-            rel="stylesheet">
-
-    </head>
-<body class="text-gray-100 overflow-x-hidden">
-
-
-    <!-- Dangling Hooks -->
-    <div class="dangling-hooks">
-        <img src="./public/hook.png" alt="Hook" class="dangling-hook dangling-hook-1">
-        <img src="./public/hook.png" alt="Hook" class="dangling-hook dangling-hook-2">
-        <img src="./public/hook.png" alt="Hook" class="dangling-hook dangling-hook-3">
-        <img src="./public/hook.png" alt="Hook" class="dangling-hook dangling-hook-4">
-        <img src="./public/hook.png" alt="Hook" class="dangling-hook dangling-hook-5">
-    </div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain Hook's Jingle Factory - Louisiana's Premier Audio Production</title>
     
+    <!-- Latest Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mardi-purple': '#7B2CBF',
+                        'mardi-purple-dark': '#4C1D95',
+                        'mardi-gold': '#FFD700',
+                        'mardi-gold-dark': '#F59E0B',
+                        'mardi-green': '#10B981',
+                    },
+                    fontFamily: {
+                        'pirata': ['Pirata One', 'cursive'],
+                        'cinzel': ['Cinzel', 'serif'],
+                        'crimson': ['Crimson Text', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'swing': 'swing 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'wave': 'wave 1s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'particle-float': 'particleFloat 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+                        },
+                        swing: {
+                            '0%, 100%': { transform: 'rotate(-15deg)' },
+                            '50%': { transform: 'rotate(15deg)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% center' },
+                            '100%': { backgroundPosition: '200% center' },
+                        },
+                        wave: {
+                            '0%, 100%': { height: '10px' },
+                            '50%': { height: '30px' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { 
+                                boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(123, 44, 191, 0.3), 0 0 60px rgba(16, 185, 129, 0.2)'
+                            },
+                            '50%': { 
+                                boxShadow: '0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(123, 44, 191, 0.5), 0 0 80px rgba(16, 185, 129, 0.3)'
+                            },
+                        },
+                        fadeIn: {
+                            'from': { opacity: '0', transform: 'translateY(20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            'from': { opacity: '0', transform: 'translateY(40px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        particleFloat: {
+                            '0%': { backgroundPosition: '0% 0%' },
+                            '100%': { backgroundPosition: '100% 100%' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
     <!-- Loading Overlay -->
-    <div class="loading-overlay hidden" id="loadingOverlay">
+    <div class="loading-overlay fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-gray-900 to-mardi-purple-dark z-[9999] flex items-center justify-center transition-opacity duration-500">
         <div class="text-center">
             <div class="text-6xl mb-4 animate-bounce">⚓</div>
-            <h2 class="font-pirata text-4xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600">
-                Setting Sail...
-            </h2>
+            <div class="text-2xl font-pirata text-mardi-gold animate-pulse">Loading Treasures...</div>
         </div>
     </div>
 
-    <!-- Navigation Header -->
+    <!-- Navigation -->
     <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <div class="nav-backdrop absolute inset-0"></div>
         <div class="relative container mx-auto px-6">
@@ -67,7 +127,7 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none" aria-label="Open mobile menu" title="Open mobile menu">
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
                     <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-yellow-400 transform transition-all duration-300"></span>
                     <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-purple-400 transform transition-all duration-300"></span>
                     <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-green-400 transform transition-all duration-300"></span>
@@ -112,9 +172,7 @@
         <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
             <!-- Captain Hook Centerpiece -->
             <div class="captain-container animate-fade-in">
-                <img src="./public/chook.PNG" 
-                     class="captain-image enhanced-captain-glow" 
-                     alt="Captain Hook">
+                <img src="./public/chook.PNG" class="captain-image enhanced-captain-glow" alt="Captain Hook">
             </div>
 
             <h1 class="text-6xl md:text-8xl lg:text-9xl font-pirata mb-4 animate-slide-up">
@@ -146,7 +204,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900"></div>
         
         <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 animate-on-scroll visible">
+            <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4">
                     Our Legendary Services
                 </h2>
@@ -155,7 +213,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Service Card 1 -->
-                <div class="service-card p-8 rounded-2xl animate-on-scroll visible">
+                <div class="service-card p-8 rounded-2xl animate-on-scroll">
                     <div class="text-yellow-400 mb-6">
                         <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -174,7 +232,7 @@
                 </div>
 
                 <!-- Service Card 2 -->
-                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-200 visible">
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-200">
                     <div class="text-purple-400 mb-6">
                         <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
@@ -193,7 +251,7 @@
                 </div>
 
                 <!-- Service Card 3 -->
-                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-400 visible">
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-400">
                     <div class="text-green-400 mb-6">
                         <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
@@ -217,7 +275,7 @@
     <!-- Treasure Gallery Section -->
     <section id="gallery" class="py-20 relative">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-on-scroll visible">
+            <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-purple-600 mb-4">
                     Treasure Gallery
                 </h2>
@@ -226,7 +284,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Audio Player 1 -->
-                <div class="audio-player p-6 rounded-2xl animate-on-scroll visible">
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll">
                     <div class="text-yellow-400 text-sm font-cinzel mb-2">Technology</div>
                     <h3 class="text-xl font-bold mb-4">Tech Titan Anthem</h3>
                     <p class="text-gray-400 text-sm mb-4">CyberCore Systems</p>
@@ -248,7 +306,7 @@
                         <div class="soundwave-bar"></div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <button class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform" aria-label="Play Tech Titan Anthem" title="Play audio">
+                        <button class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z"></path>
                             </svg>
@@ -258,7 +316,7 @@
                 </div>
 
                 <!-- Audio Player 2 -->
-                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-200 visible">
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-200">
                     <div class="text-purple-400 text-sm font-cinzel mb-2">Broadcasting</div>
                     <h3 class="text-xl font-bold mb-4">Morning Wave ID</h3>
                     <p class="text-gray-400 text-sm mb-4">Ocean FM 101.5</p>
@@ -280,7 +338,7 @@
                         <div class="soundwave-bar"></div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <button class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform" aria-label="Play Morning Wave ID" title="Play audio">
+                        <button class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z"></path>
                             </svg>
@@ -290,7 +348,7 @@
                 </div>
 
                 <!-- Audio Player 3 -->
-                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-400 visible">
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-400">
                     <div class="text-green-400 text-sm font-cinzel mb-2">Media</div>
                     <h3 class="text-xl font-bold mb-4">Podcast Treasure</h3>
                     <p class="text-gray-400 text-sm mb-4">Pirates of Business</p>
@@ -312,7 +370,7 @@
                         <div class="soundwave-bar"></div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <button class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform" aria-label="Play Podcast Treasure" title="Play audio">
+                        <button class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z"></path>
                             </svg>
@@ -324,12 +382,12 @@
         </div>
     </section>
 
-    <!-- The Legend Begins Section -->
+    <!-- About Section -->
     <section id="about" class="py-20 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/30 to-gray-900"></div>
         
         <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll visible">
+            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
                 <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600 mb-8">
                     The Legend Begins
                 </h2>
@@ -343,19 +401,19 @@
 
             <!-- Stats Grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll">
                     <div class="text-4xl font-bold text-yellow-400 mb-2">1000+</div>
                     <div class="text-gray-400">Jingles Created</div>
                 </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-purple-400/20 animate-on-scroll animation-delay-200 visible">
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-purple-400/20 animate-on-scroll animation-delay-200">
                     <div class="text-4xl font-bold text-purple-400 mb-2">99%</div>
                     <div class="text-gray-400">Client Satisfaction</div>
                 </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-400 visible">
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-400">
                     <div class="text-4xl font-bold text-green-400 mb-2">15+</div>
                     <div class="text-gray-400">Years at Sea</div>
                 </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll animation-delay-600 visible">
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll animation-delay-600">
                     <div class="text-4xl font-bold text-yellow-400 mb-2">24/7</div>
                     <div class="text-gray-400">Support Crew</div>
                 </div>
@@ -363,12 +421,12 @@
 
             <!-- Achievement Cards -->
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-purple-900/20 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-purple-900/20 rounded-2xl border border-yellow-400/20 animate-on-scroll">
                     <div class="text-3xl mb-4">🏆</div>
                     <h3 class="text-2xl font-cinzel text-yellow-400 mb-4">Award Winning</h3>
                     <p class="text-gray-300 font-crimson">Industry Recognition for Excellence in Audio Production</p>
                 </div>
-                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-green-900/20 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-200 visible">
+                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-green-900/20 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-200">
                     <div class="text-3xl mb-4">🎧</div>
                     <h3 class="text-2xl font-cinzel text-green-400 mb-4">Premium Quality</h3>
                     <p class="text-gray-300 font-crimson">Studio Grade Audio with Cutting-Edge Technology</p>
@@ -377,10 +435,10 @@
         </div>
     </section>
 
-    <!-- Chart Your Course (Contact) Section -->
+    <!-- Contact Section -->
     <section id="contact" class="py-20 relative">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-on-scroll visible">
+            <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
                     Chart Your Course
                 </h2>
@@ -389,7 +447,7 @@
 
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
                 <!-- Contact Form -->
-                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20 animate-on-scroll">
                     <h3 class="text-2xl font-cinzel text-yellow-400 mb-6">Send a Message in a Bottle</h3>
                     <form class="space-y-6">
                         <div>
@@ -411,7 +469,7 @@
                 </div>
 
                 <!-- Contact Info -->
-                <div class="space-y-8 animate-on-scroll animation-delay-200 visible">
+                <div class="space-y-8 animate-on-scroll animation-delay-200">
                     <div>
                         <h3 class="text-2xl font-cinzel text-purple-400 mb-6">Your Free Consultation!</h3>
                         <p class="text-gray-300 font-crimson mb-8">
@@ -544,182 +602,13 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40 opacity-0 invisible" aria-label="Back to top" title="Back to top">
+    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40 opacity-0 invisible">
         <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
     </button>
 
-    <script>
-        // Loading overlay
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loadingOverlay').classList.add('hidden');
-            }, 1500);
-        });
-
-        // Throttle function for performance optimization
-        function throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            }
-        }
-
-        // Optimized navbar scroll effect with throttling
-        const handleScroll = throttle(() => {
-            const navbar = document.getElementById('mainNav');
-            const backToTop = document.getElementById('backToTop');
-            const scrollY = window.scrollY;
-            
-            if (scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-            
-            if (scrollY > 500) {
-                backToTop.classList.remove('opacity-0', 'invisible');
-                backToTop.classList.add('opacity-100', 'visible');
-            } else {
-                backToTop.classList.add('opacity-0', 'invisible');
-                backToTop.classList.remove('opacity-100', 'visible');
-            }
-        }, 16); // ~60fps
-
-        window.addEventListener('scroll', handleScroll);
-
-        // Mobile menu toggle with enhanced animation
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        let menuOpen = false;
-
-        mobileMenuBtn.addEventListener('click', () => {
-            menuOpen = !menuOpen;
-            if (menuOpen) {
-                mobileMenu.classList.add('mobile-menu-open');
-                mobileMenuBtn.classList.add('menu-open');
-                mobileMenuBtn.setAttribute('aria-label', 'Close mobile menu');
-                mobileMenuBtn.setAttribute('title', 'Close mobile menu');
-            } else {
-                mobileMenu.classList.remove('mobile-menu-open');
-                mobileMenuBtn.classList.remove('menu-open');
-                mobileMenuBtn.setAttribute('aria-label', 'Open mobile menu');
-                mobileMenuBtn.setAttribute('title', 'Open mobile menu');
-            }
-        });
-
-        // Close mobile menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuOpen = false;
-                mobileMenu.classList.remove('mobile-menu-open');
-                mobileMenuBtn.classList.remove('menu-open');
-                mobileMenuBtn.setAttribute('aria-label', 'Open mobile menu');
-                mobileMenuBtn.setAttribute('title', 'Open mobile menu');
-            });
-        });
-
-        // Close mobile menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && menuOpen) {
-                menuOpen = false;
-                mobileMenu.classList.remove('mobile-menu-open');
-                mobileMenuBtn.classList.remove('menu-open');
-                mobileMenuBtn.setAttribute('aria-label', 'Open mobile menu');
-                mobileMenuBtn.setAttribute('title', 'Open mobile menu');
-            }
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (menuOpen && !mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                menuOpen = false;
-                mobileMenu.classList.remove('mobile-menu-open');
-                mobileMenuBtn.classList.remove('menu-open');
-                mobileMenuBtn.setAttribute('aria-label', 'Open mobile menu');
-                mobileMenuBtn.setAttribute('title', 'Open mobile menu');
-            }
-        });
-
-        // Enhanced smooth scroll for navigation links with offset for fixed header
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
-                
-                if (target) {
-                    const navbar = document.getElementById('mainNav');
-                    const navbarHeight = navbar.offsetHeight;
-                    const targetPosition = target.offsetTop - navbarHeight - 20; // 20px additional offset
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (menuOpen) {
-                        menuOpen = false;
-                        mobileMenu.classList.remove('mobile-menu-open');
-                        mobileMenuBtn.classList.remove('menu-open');
-                        mobileMenuBtn.setAttribute('aria-label', 'Open mobile menu');
-                        mobileMenuBtn.setAttribute('title', 'Open mobile menu');
-                    }
-                }
-            });
-        });
-
-        // Back to top
-        document.getElementById('backToTop').addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Play button animations
-        document.querySelectorAll('.audio-player button').forEach(button => {
-            button.addEventListener('click', function() {
-                const soundwaveBars = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
-                soundwaveBars.forEach((bar, index) => {
-                    bar.style.animationDelay = `${index * 0.1}s`;
-                });
-            });
-        });
-
-        // Form submission
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Ahoy! Your message has been sent to Captain Hook!');
-            });
-        });
-    </script>
-
-</body></html>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
