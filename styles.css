@@ -15,7 +15,7 @@
     --dark-gold: #F59E0B;
 }
 
-/* Beautiful Green to Purple Gradient Background */
+/* Beautiful Darker Green to Purple Gradient Background */
 .hero-gradient-background {
     position: absolute;
     top: 0;
@@ -24,10 +24,10 @@
     bottom: 0;
     background: linear-gradient(
         135deg,
-        #10B981 0%,
-        #059669 25%,
-        #7C3AED 75%,
-        #5B21B6 100%
+        #065F46 0%,     /* Darker green */
+        #047857 25%,    /* Dark emerald */
+        #581C87 75%,    /* Darker purple */
+        #3B0764 100%    /* Very dark purple */
     );
     z-index: 1;
 }
@@ -35,10 +35,10 @@
 .hero-gradient-overlay {
     background: linear-gradient(
         135deg,
-        rgba(16, 185, 129, 0.3) 0%,
-        rgba(5, 150, 105, 0.2) 25%,
-        rgba(124, 58, 237, 0.2) 75%,
-        rgba(91, 33, 182, 0.3) 100%
+        rgba(6, 95, 70, 0.4) 0%,      /* Darker green overlay */
+        rgba(4, 120, 87, 0.3) 25%,    /* Dark emerald overlay */
+        rgba(88, 28, 135, 0.3) 75%,   /* Darker purple overlay */
+        rgba(59, 7, 100, 0.4) 100%    /* Very dark purple overlay */
     );
     z-index: 2;
 }
@@ -101,14 +101,14 @@
     }
 }
 
-/* Ensure body has the gradient background */
+/* Ensure body has the darker gradient background */
 body {
     background: linear-gradient(
         135deg,
-        #10B981 0%,
-        #059669 25%,
-        #7C3AED 75%,
-        #5B21B6 100%
+        #065F46 0%,     /* Darker green */
+        #047857 25%,    /* Dark emerald */
+        #581C87 75%,    /* Darker purple */
+        #3B0764 100%    /* Very dark purple */
     );
     background-attachment: fixed;
     min-height: 100vh;
@@ -512,11 +512,13 @@ img, video, canvas, embed, iframe, object, svg, audio {
     pointer-events: none;
 }
 
-/* Mobile Menu Lines */
+/* Mobile Menu Lines with Enhanced Animation */
 .menu-line {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    transform-origin: center;
+    transition: all 0.3s ease;
 }
 
 .menu-line-1 {
@@ -529,6 +531,20 @@ img, video, canvas, embed, iframe, object, svg, audio {
 
 .menu-line-3 {
     top: 24px;
+}
+
+/* Mobile Menu Animation States */
+#mobileMenuBtn.menu-open .menu-line-1 {
+    transform: translateX(-50%) rotate(45deg) translate(6px, 6px);
+}
+
+#mobileMenuBtn.menu-open .menu-line-2 {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+}
+
+#mobileMenuBtn.menu-open .menu-line-3 {
+    transform: translateX(-50%) rotate(-45deg) translate(6px, -6px);
 }
 
 /* Pulse Glow Animation */
@@ -600,8 +616,12 @@ img, video, canvas, embed, iframe, object, svg, audio {
     .floating-hook,
     .dangling-hook,
     .chook-centerpiece,
-    .hook {
+    .hook,
+    .nav-link,
+    .mobile-menu-open,
+    .menu-line {
         animation: none;
+        transition: none;
     }
     
     .particle-container {
@@ -611,5 +631,14 @@ img, video, canvas, embed, iframe, object, svg, audio {
     .soundwave-bar {
         animation: none;
         height: 20px;
+    }
+    
+    /* Ensure navigation transitions still work for functionality */
+    .nav-backdrop {
+        transition: opacity 0.1s ease;
+    }
+    
+    #mainNav {
+        transition: all 0.1s ease;
     }
 }
