@@ -1,0 +1,77 @@
+<section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
+                    Chart Your Course
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Ready to set sail on your audio adventure?</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                    <h3 class="text-2xl font-cinzel text-yellow-400 mb-6">Send a Message in a Bottle</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Subject" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <textarea placeholder="Your Message" rows="5" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold uppercase rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8 animate-on-scroll animation-delay-200 visible">
+                    <div>
+                        <h3 class="text-2xl font-cinzel text-purple-400 mb-6">Your Free Consultation!</h3>
+                        <p class="text-gray-300 font-crimson mb-8">
+                            Book a free 30-minute treasure hunt to discover how we can create the perfect jingle for your brand.
+                        </p>
+                        <button class="px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300">
+                            Book Consultation
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-yellow-400">📧</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Email Port</div>
+                                <div class="text-yellow-400">ahoy@captainhooksjingles.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-purple-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-purple-400">📞</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Signal Flags</div>
+                                <div class="text-purple-400">+1 (555) HOOK-123</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-green-400">📍</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Harbor Location</div>
+                                <div class="text-green-400">Treasure Island Studios, Nashville, TN</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

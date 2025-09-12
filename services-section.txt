@@ -1,0 +1,71 @@
+<section id="services" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4">
+                    Our Legendary Services
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Navigate through our treasure trove of audio services</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card p-8 rounded-2xl animate-on-scroll visible">
+                    <div class="text-yellow-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-yellow-400">Lightning Fast Creation</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Custom jingles crafted in record time without compromising quality. Your brand's sound, delivered when you need it.</p>
+                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> 24-hour rush delivery</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Unlimited revisions</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Real-time collaboration</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-yellow-400/30 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-200 visible">
+                    <div class="text-purple-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-purple-400">Premium Production</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">State-of-the-art studio quality with world-class musicians and producers. Every note perfected for maximum impact.</p>
+                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> 4K audio quality</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Live orchestration</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Multi-format delivery</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-purple-400/30 text-purple-400 rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-400 visible">
+                    <div class="text-green-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-green-400">Global Reach</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Jingles that transcend borders and languages. We create universal hooks that resonate with audiences worldwide.</p>
+                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> 50+ languages</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> Cultural adaptation</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> International licensing</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-green-400/30 text-green-400 rounded-full hover:bg-green-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>

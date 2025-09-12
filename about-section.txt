@@ -1,0 +1,51 @@
+<section id="about" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/30 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600 mb-8">
+                    The Legend Begins
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson leading-relaxed mb-8">
+                    From the depths of creativity emerges Captain Hook's Jingle Factory - where musical treasures are forged with passion, precision, and a touch of pirate magic.
+                </p>
+                <p class="text-lg text-gray-400 font-crimson leading-relaxed">
+                    Our crew of legendary composers and sound engineers have sailed the seven seas of audio, collecting the finest melodies and hooks that capture hearts and minds.
+                </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                    <div class="text-4xl font-bold text-yellow-400 mb-2">1000+</div>
+                    <div class="text-gray-400">Jingles Created</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-purple-400/20 animate-on-scroll animation-delay-200 visible">
+                    <div class="text-4xl font-bold text-purple-400 mb-2">99%</div>
+                    <div class="text-gray-400">Client Satisfaction</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-400 visible">
+                    <div class="text-4xl font-bold text-green-400 mb-2">15+</div>
+                    <div class="text-gray-400">Years at Sea</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll animation-delay-600 visible">
+                    <div class="text-4xl font-bold text-yellow-400 mb-2">24/7</div>
+                    <div class="text-gray-400">Support Crew</div>
+                </div>
+            </div>
+
+            <!-- Achievement Cards -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-purple-900/20 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                    <div class="text-3xl mb-4">🏆</div>
+                    <h3 class="text-2xl font-cinzel text-yellow-400 mb-4">Award Winning</h3>
+                    <p class="text-gray-300 font-crimson">Industry Recognition for Excellence in Audio Production</p>
+                </div>
+                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-green-900/20 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-200 visible">
+                    <div class="text-3xl mb-4">🎧</div>
+                    <h3 class="text-2xl font-cinzel text-green-400 mb-4">Premium Quality</h3>
+                    <p class="text-gray-300 font-crimson">Studio Grade Audio with Cutting-Edge Technology</p>
+                </div>
+            </div>
+        </div>
+    </section>

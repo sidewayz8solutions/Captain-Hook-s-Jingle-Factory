@@ -1,0 +1,55 @@
+<nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 scrolled">
+        <div class="nav-backdrop absolute inset-0"></div>
+        <div class="relative container mx-auto px-6">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="relative w-12 h-12">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-full h-full flex items-center justify-center">
+                            <span class="text-2xl">⚓</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Captain Hook's</h1>
+                        <p class="text-xs text-purple-300 font-cinzel uppercase tracking-wider -mt-1">Jingle Factory</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Home</a>
+                    <a href="#services" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Services</a>
+                    <a href="#gallery" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="#about" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Our Legend</a>
+                    <a href="#contact" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
+                    <button class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel text-sm uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300">
+                        Set Sail
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
+                    <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-yellow-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-purple-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-green-400 transform transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl">
+            <div class="container mx-auto px-6 py-8">
+                <div class="space-y-4">
+                    <a href="#home" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="#services" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
+                    <a href="#gallery" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="#about" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
+                    <a href="#contact" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transition-all duration-300">
+                        Set Sail Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>

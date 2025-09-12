@@ -1,0 +1,108 @@
+<section id="gallery" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-purple-600 mb-4">
+                    Treasure Gallery
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Each jingle a masterpiece, each client a success story</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Audio Player 1 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll visible">
+                    <div class="text-yellow-400 text-sm font-cinzel mb-2">Technology</div>
+                    <h3 class="text-xl font-bold mb-4">Tech Titan Anthem</h3>
+                    <p class="text-gray-400 text-sm mb-4">CyberCore Systems</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">2.3M plays</span>
+                    </div>
+                </div>
+
+                <!-- Audio Player 2 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-200 visible">
+                    <div class="text-purple-400 text-sm font-cinzel mb-2">Broadcasting</div>
+                    <h3 class="text-xl font-bold mb-4">Morning Wave ID</h3>
+                    <p class="text-gray-400 text-sm mb-4">Ocean FM 101.5</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">5.1M plays</span>
+                    </div>
+                </div>
+
+                <!-- Audio Player 3 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-400 visible">
+                    <div class="text-green-400 text-sm font-cinzel mb-2">Media</div>
+                    <h3 class="text-xl font-bold mb-4">Podcast Treasure</h3>
+                    <p class="text-gray-400 text-sm mb-4">Pirates of Business</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">3.2M plays</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

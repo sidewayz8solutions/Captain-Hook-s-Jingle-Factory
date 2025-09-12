@@ -1,0 +1,45 @@
+<section id="home" class="min-h-screen relative flex items-center justify-center overflow-hidden">
+        <!-- Background Effects -->
+        <div class="hero-gradient-background"></div>
+        <div class="absolute inset-0 hero-gradient-overlay"></div>
+        <div class="absolute inset-0 particle-container"></div>
+        
+        <!-- Floating Hook Images -->
+        <div class="hooks-container absolute inset-0">
+            <img src="./public/hook.png" alt="Hook" class="floating-hook floating-hook-1">
+            <img src="./public/hook.png" alt="Hook" class="floating-hook floating-hook-2">
+            <img src="./public/hook.png" alt="Hook" class="floating-hook floating-hook-3">
+            <img src="./public/hook.png" alt="Hook" class="floating-hook floating-hook-4">
+            <img src="./public/hook.png" alt="Hook" class="floating-hook floating-hook-5">
+            <img src="./public/hook.png" alt="Hook" class="floating-hook floating-hook-6">
+        </div>
+  
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
+            <!-- Captain Hook Centerpiece -->
+            <div class="captain-container animate-fade-in">
+                <img src="./public/chook.PNG" class="captain-image enhanced-captain-glow" alt="Captain Hook">
+            </div>
+
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-pirata mb-4 animate-slide-up">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
+                    Captain Hook's
+                </span>
+            </h1>
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-cinzel text-purple-300 mb-8 animate-slide-up animation-delay-200">
+                Jingle Factory
+            </h2>
+
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 font-crimson animate-fade-in animation-delay-400 max-w-3xl mx-auto">
+                Where musical treasures are forged with passion, precision, and a touch of pirate magic
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in animation-delay-600">
+                <button class="px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                    Chart Your Course
+                </button>
+                <button class="px-10 py-4 bg-transparent border-2 border-yellow-500 text-yellow-500 font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-yellow-500 hover:text-gray-900 transform hover:scale-105 transition-all duration-300">
+                    View Our Treasures
+                </button>
+            </div>
+        </div>
+    </section>

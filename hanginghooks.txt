@@ -1,0 +1,53 @@
+  /* Hanging hooks at the top */
+        .hooks-top-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10%;
+        }
+
+        .hook-group-left {
+            display: flex;
+            gap: 40px;
+        }
+
+        .hook-group-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .hanging-hook {
+            position: relative;
+            animation: gentleSwing 4s ease-in-out infinite;
+        }
+
+        .hanging-hook:nth-child(even) {
+            animation-delay: 2s;
+        }
+
+        .hook-string {
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, 
+                transparent, 
+                rgba(212, 175, 55, 0.6),
+                #D4AF37);
+            margin: 0 auto;
+        }
+
+        .hook-element {
+            width: 50px;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 60"><defs><linearGradient id="gold" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" style="stop-color:%23F4E4BC"/><stop offset="50%25" style="stop-color:%23D4AF37"/><stop offset="100%25" style="stop-color:%23B8941F"/></linearGradient></defs><circle cx="25" cy="8" r="8" fill="url(%23gold)"/><rect x="20" y="12" width="10" height="3" fill="url(%23gold)"/><rect x="18" y="15" width="14" height="3" fill="url(%23gold)"/><rect x="20" y="18" width="10" height="8" fill="url(%23gold)"/><path d="M25 26 Q25 42 16 42 Q8 42 8 34 Q8 30 12 30 Q16 30 16 34 Q16 38 20 38 Q24 38 24 34 L24 26" stroke="url(%23gold)" stroke-width="3" fill="none"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        @keyframes gentleSwing {
+            0%, 100% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+        }
