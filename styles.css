@@ -100,7 +100,7 @@
     animation: float 4s ease-in-out infinite, shimmer 3s linear infinite;
 }
 
-.floating-hook-1 { top: 10%; left: 5%; animation-delay: 0s; }
+.floating-hook-1 { top: 10%; left: 70%; animation-delay: 0s; }
 .floating-hook-2 { top: 20%; right: 10%; animation-delay: 0.5s; }
 .floating-hook-3 { top: 15%; left: 25%; animation-delay: 1s; }
 .floating-hook-4 { top: 25%; right: 30%; animation-delay: 1.5s; }
@@ -110,7 +110,7 @@
 .floating-hook-8 { top: 8%; right: 25%; animation-delay: 3.5s; }
 .floating-hook-9 { top: 40%; left: 70%; animation-delay: 4s; }
 .floating-hook-10 { top: 12%; left: 80%; animation-delay: 4.5s; }
-.floating-hook-11 { top: 45%; right: 15%; animation-delay: 5s; }
+.floating-hook-11 { top: 45%; right: 80%; animation-delay: 5s; }
 
 /* Particle Effects */
 
@@ -309,6 +309,7 @@
     justify-content: center;
     gap: 2px;
     height: 40px;
+    animation
 }
 
 .soundwave-bar {
