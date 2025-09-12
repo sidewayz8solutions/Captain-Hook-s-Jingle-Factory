@@ -2,7 +2,22 @@
 
 ## Overview
 
-This design document outlines the implementation of floating pirate hooks using the actual hook.png image file and adding dangling hooks from the top of the screen. The current CSS-only implementation creates large blocks instead of proper hook visuals, so we need to replace it with image-based floating animations and add top-hanging hooks for enhanced pirate theming.
+This design document provides a solution for implementing floating hook decorations using the actual hook.png image file and adding dangling hooks from the screen top. While the project typically prefers CSS-only implementations for performance, this specific request requires using the existing hook.png asset to replace the current CSS block-based decorations that appear as large golden rectangles.
+
+## Design Decision: Image vs CSS Approach
+
+### Project Memory Conflict Resolution
+- **Memory guideline**: Prefer CSS-only for floating decorative elements (performance)
+- **User requirement**: Use actual hook.png image file for visual quality
+- **Current problem**: CSS blocks create poor visual appearance
+- **Solution**: Justified image-based approach with performance optimizations
+
+### Rationale for Image-Based Implementation
+1. **Visual Quality**: hook.png provides authentic pirate hook appearance vs geometric CSS shapes
+2. **Current CSS Failure**: Existing implementation creates blocky, unrealistic 60x80px rectangles
+3. **Asset Utilization**: hook.png exists but is currently unused
+4. **User Experience**: Specifically requested authentic hook visuals
+5. **Performance Mitigation**: Optimized with preloading, lazy loading, and responsive sizing
 
 ## Current Issues Analysis
 
