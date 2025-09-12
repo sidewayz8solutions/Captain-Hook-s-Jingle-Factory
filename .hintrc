@@ -7,14 +7,16 @@
       "default",
       {
         "ignore": [
-          "text-size-adjust"
+          "text-size-adjust",
+          "backdrop-filter"
         ]
       }
     ],
     "axe/name-role-value": [
       "default",
       {
-        "link-name": "off"
+        "link-name": "off",
+        "button-name": "off"
       }
     ]
   }

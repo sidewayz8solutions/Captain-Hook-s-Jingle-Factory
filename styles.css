@@ -7,9 +7,9 @@
 }
 
 :root {
-    --purple: #7B2CBF;
+    --purple: #7c14d7;
     --gold: #FFD700;
-    --green: #10B981;
+    --green: #007b1d;
     --dark-purple: #4C1D95;
     --dark-gold: #F59E0B;
 }
@@ -54,7 +54,7 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, 
-        #0F172A 0%, 
+        #fff30b 15%, 
         #581C87 25%, 
         #0F172A 50%, 
         #10B981 75%, 
@@ -75,8 +75,8 @@
 }
 
 .captain-image {
-    width: 280px;
-    height: 280px;
+    width: 400px;
+    height: 400px;
     object-fit: contain;
     margin: 0 auto;
     display: block;
@@ -92,8 +92,8 @@
 /* Floating Hooks */
 .floating-hook {
     position: absolute;
-    width: 60px;
-    height: 80px;
+    width: 100px;
+    height: 120px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
     animation: float 4s ease-in-out infinite;
