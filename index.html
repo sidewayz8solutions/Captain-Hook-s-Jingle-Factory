@@ -1,0 +1,972 @@
+<html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Captain Hook's Jingle Factory - Louisiana's Premier Audio
+            Production</title>
+        <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Pirata+One&amp;family=Cinzel:wght@400;600;700&amp;family=Crimson+Text:wght@400;600;700&amp;display=swap"
+            rel="stylesheet">
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple: #7B2CBF;
+            --gold: #FFD700;
+            --green: #10B981;
+            --dark-purple: #4C1D95;
+            --dark-gold: #F59E0B;
+        }
+
+        /* Custom Font Classes */
+        .font-pirata {
+            font-family: 'Pirata One', cursive;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .font-crimson {
+            font-family: 'Crimson Text', serif;
+        }
+
+        /* Navigation Styles */
+        .nav-backdrop {
+            background: linear-gradient(180deg, 
+                rgba(15, 23, 42, 0.98) 0%, 
+                rgba(88, 28, 135, 0.95) 50%,
+                rgba(15, 23, 42, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #mainNav.scrolled .nav-backdrop {
+            opacity: 1;
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--purple), var(--green));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
+                           0 0 40px rgba(123, 44, 191, 0.3),
+                           0 0 60px rgba(16, 185, 129, 0.2);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+                           0 0 60px rgba(123, 44, 191, 0.5),
+                           0 0 80px rgba(16, 185, 129, 0.3);
+            }
+        }
+
+        /* Hook Decorations */
+        .hook {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700, #F59E0B);
+            border-radius: 8px 8px 30px 8px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .hook::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 10px;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, #FFD700, #F59E0B);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(45deg);
+        }
+        
+        .hook::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 50px;
+            height: 10px;
+            background: linear-gradient(90deg, #F59E0B, #FFD700);
+            border-radius: 5px;
+        }
+
+        .hook-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .hook-2 { top: 20%; right: 10%; animation-delay: 0.5s; }
+        .hook-3 { top: 15%; left: 25%; animation-delay: 1s; }
+        .hook-4 { top: 25%; right: 30%; animation-delay: 1.5s; }
+        .hook-5 { top: 5%; left: 45%; animation-delay: 2s; }
+        .hook-6 { top: 30%; right: 5%; animation-delay: 2.5s; }
+
+        /* Particle Effects */
+        .particle-container {
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, #FFD700, transparent),
+                radial-gradient(2px 2px at 60% 70%, #7B2CBF, transparent),
+                radial-gradient(1px 1px at 50% 50%, #10B981, transparent);
+            background-size: 200% 200%;
+            animation: particleFloat 20s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* Service Cards */
+        .service-card {
+            background: linear-gradient(135deg, 
+                rgba(28, 46, 88, 0.9) 0%, 
+                rgba(88, 28, 135, 0.2) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Audio Player Styles */
+        .audio-player {
+            background: linear-gradient(135deg, 
+                rgba(123, 44, 191, 0.1) 0%, 
+                rgba(16, 185, 129, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .audio-player::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, var(--gold), var(--purple), var(--green), var(--gold));
+            border-radius: 1rem;
+            z-index: -1;
+            opacity: 0.5;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .soundwave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            height: 40px;
+        }
+
+        .soundwave-bar {
+            width: 3px;
+            background: linear-gradient(180deg, var(--gold), var(--purple), var(--green));
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 30px; }
+        }
+
+        .soundwave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .soundwave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .soundwave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .soundwave-bar:nth-child(5) { animation-delay: 0.4s; }
+
+        /* Animation Classes */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animation-delay-200 { animation-delay: 0.2s; }
+        .animation-delay-400 { animation-delay: 0.4s; }
+        .animation-delay-600 { animation-delay: 0.6s; }
+
+        /* Mobile Menu */
+        .mobile-menu-open {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0F172A 0%, #581C87 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Mobile Menu Lines */
+        .menu-line-1 {
+            top: 8px;
+        }
+
+        .menu-line-2 {
+            top: 16px;
+        }
+
+        .menu-line-3 {
+            top: 24px;
+        }
+
+        /* Pulse Glow Animation */
+        .pulse-glow-animation {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        /* CSS Compatibility Fixes */
+        :host, html {
+            text-size-adjust: 100% !important;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        button, input[type="button"], input[type="reset"], input[type="submit"] {
+            appearance: button !important;
+            -webkit-appearance: button;
+        }
+
+        [type="search"] {
+            appearance: textfield !important;
+            -webkit-appearance: textfield;
+        }
+
+        ::-webkit-search-decoration {
+            appearance: none !important;
+            -webkit-appearance: none;
+        }
+
+        ::-webkit-file-upload-button {
+            appearance: button !important;
+            -webkit-appearance: button;
+        }
+
+        /* Fix vertical-align on block elements */
+        img, video, canvas, embed, iframe, object, svg, audio {
+            vertical-align: unset;
+        }
+        </style>
+    </head>
+<body class="bg-gray-900 text-gray-100 overflow-x-hidden">
+
+
+    <!-- Loading Overlay -->;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.visible{visibility:visible}.invisible{visibility:hidden}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.inset-x-0{left:0px;right:0px}.bottom-8{bottom:2rem}.left-0{left:0px}.right-0{right:0px}.right-8{right:2rem}.top-0{top:0px}.top-full{top:100%}.z-10{z-index:10}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.-mt-1{margin-top:-0.25rem}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mr-2{margin-right:0.5rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-0\.5{height:0.125rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-6{height:1.5rem}.h-64{height:16rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-2{width:0.5rem}.w-6{width:1.5rem}.w-64{width:16rem}.w-full{width:100%}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.-translate-y-full{--tw-translate-y:-100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-hidden{overflow-x:hidden}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.border{border-width:1px}.border-2{border-width:2px}.border-4{border-width:4px}.border-t{border-top-width:1px}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.border-green-400\/20{border-color:rgb(74 222 128 / 0.2)}.border-green-400\/30{border-color:rgb(74 222 128 / 0.3)}.border-purple-400\/20{border-color:rgb(192 132 252 / 0.2)}.border-purple-400\/30{border-color:rgb(192 132 252 / 0.3)}.border-yellow-400\/20{border-color:rgb(250 204 21 / 0.2)}.border-yellow-400\/30{border-color:rgb(250 204 21 / 0.3)}.border-yellow-500{--tw-border-opacity:1;border-color:rgb(234 179 8 / var(--tw-border-opacity, 1))}.bg-gray-800\/50{background-color:rgb(31 41 55 / 0.5)}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.bg-gray-900\/50{background-color:rgb(17 24 39 / 0.5)}.bg-gray-900\/95{background-color:rgb(17 24 39 / 0.95)}.bg-gray-950{--tw-bg-opacity:1;background-color:rgb(3 7 18 / var(--tw-bg-opacity, 1))}.bg-green-400{--tw-bg-opacity:1;background-color:rgb(74 222 128 / var(--tw-bg-opacity, 1))}.bg-green-400\/10{background-color:rgb(74 222 128 / 0.1)}.bg-purple-400{--tw-bg-opacity:1;background-color:rgb(192 132 252 / var(--tw-bg-opacity, 1))}.bg-purple-400\/10{background-color:rgb(192 132 252 / 0.1)}.bg-transparent{background-color:transparent}.bg-yellow-400{--tw-bg-opacity:1;background-color:rgb(250 204 21 / var(--tw-bg-opacity, 1))}.bg-yellow-400\/10{background-color:rgb(250 204 21 / 0.1)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-gray-800\/50{--tw-gradient-from:rgb(31 41 55 / 0.5) var(--tw-gradient-from-position);--tw-gradient-to:rgb(31 41 55 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-gray-900{--tw-gradient-from:#111827 var(--tw-gradient-from-position);--tw-gradient-to:rgb(17 24 39 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-green-400{--tw-gradient-from:#4ade80 var(--tw-gradient-from-position);--tw-gradient-to:rgb(74 222 128 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-400{--tw-gradient-from:#c084fc var(--tw-gradient-from-position);--tw-gradient-to:rgb(192 132 252 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-600{--tw-gradient-from:#9333ea var(--tw-gradient-from-position);--tw-gradient-to:rgb(147 51 234 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-900{--tw-gradient-from:#581c87 var(--tw-gradient-from-position);--tw-gradient-to:rgb(88 28 135 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-yellow-400{--tw-gradient-from:#facc15 var(--tw-gradient-from-position);--tw-gradient-to:rgb(250 204 21 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-gray-900{--tw-gradient-to:rgb(17 24 39 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #111827 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-purple-900\/20{--tw-gradient-to:rgb(88 28 135 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(88 28 135 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-purple-900\/30{--tw-gradient-to:rgb(88 28 135 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(88 28 135 / 0.3) var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-yellow-500{--tw-gradient-to:rgb(234 179 8 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #eab308 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-gray-900{--tw-gradient-to:#111827 var(--tw-gradient-to-position)}.to-green-600{--tw-gradient-to:#16a34a var(--tw-gradient-to-position)}.to-green-900{--tw-gradient-to:#14532d var(--tw-gradient-to-position)}.to-green-900\/20{--tw-gradient-to:rgb(20 83 45 / 0.2) var(--tw-gradient-to-position)}.to-purple-600{--tw-gradient-to:#9333ea var(--tw-gradient-to-position)}.to-purple-700{--tw-gradient-to:#7e22ce var(--tw-gradient-to-position)}.to-purple-900\/20{--tw-gradient-to:rgb(88 28 135 / 0.2) var(--tw-gradient-to-position)}.to-yellow-600{--tw-gradient-to:#ca8a04 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-8{padding-bottom:2rem}.pt-16{padding-top:4rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-7xl{font-size:4.5rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.text-gray-100{--tw-text-opacity:1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-purple-300{--tw-text-opacity:1;color:rgb(216 180 254 / var(--tw-text-opacity, 1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.text-yellow-500{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.opacity-0{opacity:0}.opacity-20{opacity:0.2}.opacity-30{opacity:0.3}.opacity-50{opacity:0.5}.opacity-100{opacity:1}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-green-400:hover{--tw-bg-opacity:1;background-color:rgb(74 222 128 / var(--tw-bg-opacity, 1))}.hover\:bg-purple-400:hover{--tw-bg-opacity:1;background-color:rgb(192 132 252 / var(--tw-bg-opacity, 1))}.hover\:bg-purple-900\/20:hover{background-color:rgb(88 28 135 / 0.2)}.hover\:bg-yellow-400:hover{--tw-bg-opacity:1;background-color:rgb(250 204 21 / var(--tw-bg-opacity, 1))}.hover\:bg-yellow-500:hover{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1))}.hover\:from-purple-700:hover{--tw-gradient-from:#7e22ce var(--tw-gradient-from-position);--tw-gradient-to:rgb(126 34 206 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:from-yellow-400:hover{--tw-gradient-from:#facc15 var(--tw-gradient-from-position);--tw-gradient-to:rgb(250 204 21 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:from-yellow-500:hover{--tw-gradient-from:#eab308 var(--tw-gradient-from-position);--tw-gradient-to:rgb(234 179 8 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-purple-800:hover{--tw-gradient-to:#6b21a8 var(--tw-gradient-to-position)}.hover\:to-yellow-600:hover{--tw-gradient-to:#ca8a04 var(--tw-gradient-to-position)}.hover\:to-yellow-700:hover{--tw-gradient-to:#a16207 var(--tw-gradient-to-position)}.hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.hover\:text-green-400:hover{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.hover\:text-purple-400:hover{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.hover\:text-yellow-400:hover{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.focus\:border-yellow-400:focus{--tw-border-opacity:1;border-color:rgb(250 204 21 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:opacity-40{opacity:0.4}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:mb-0{margin-bottom:0px}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-9xl{font-size:8rem;line-height:1}}
+
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="text-center">
+            <div class="text-6xl mb-4 animate-bounce">⚓</div>
+            <h2 class="font-pirata text-4xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600">
+                Setting Sail...
+            </h2>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="nav-backdrop absolute inset-0"></div>
+        <div class="relative container mx-auto px-6">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="relative w-12 h-12">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-full h-full flex items-center justify-center">
+                            <span class="text-2xl">⚓</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Captain Hook's</h1>
+                        <p class="text-xs text-purple-300 font-cinzel uppercase tracking-wider -mt-1">Jingle Factory</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Home</a>
+                    <a href="#services" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Services</a>
+                    <a href="#gallery" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="#about" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Our Legend</a>
+                    <a href="#contact" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
+                    <button class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel text-sm uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300">
+                        Set Sail
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
+                    <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-yellow-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-purple-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-green-400 transform transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl">
+            <div class="container mx-auto px-6 py-8">
+                <div class="space-y-4">
+                    <a href="#home" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="#services" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
+                    <a href="#gallery" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="#about" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
+                    <a href="#contact" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transition-all duration-300">
+                        Set Sail Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen relative flex items-center justify-center overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-gray-900 to-green-900 opacity-50"></div>
+        <div class="absolute inset-0 particle-container"></div>
+        
+        <!-- Animated Hooks -->
+        <div class="hooks-container absolute inset-0">
+            <div class="hook hook-1"></div>
+            <div class="hook hook-2"></div>
+            <div class="hook hook-3"></div>
+            <div class="hook hook-4"></div>
+            <div class="hook hook-5"></div>
+            <div class="hook hook-6"></div>
+        </div>
+  
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
+            <!-- Captain Hook Centerpiece -->
+            <div class="mb-12 relative inline-block animate-fade-in">
+                <img src="./public/chook.PNG" 
+                     class="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto pulse-glow-animation" 
+                     alt="Captain Hook">
+            </div>
+
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-pirata mb-4 animate-slide-up">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
+                    Captain Hook's
+                </span>
+            </h1>
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-cinzel text-purple-300 mb-8 animate-slide-up animation-delay-200">
+                Jingle Factory
+            </h2>
+
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 font-crimson animate-fade-in animation-delay-400 max-w-3xl mx-auto">
+                Where musical treasures are forged with passion, precision, and a touch of pirate magic
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in animation-delay-600">
+                <button class="px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                    Chart Your Course
+                </button>
+                <button class="px-10 py-4 bg-transparent border-2 border-yellow-500 text-yellow-500 font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-yellow-500 hover:text-gray-900 transform hover:scale-105 transition-all duration-300">
+                    View Our Treasures
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4">
+                    Our Legendary Services
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Navigate through our treasure trove of audio services</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card p-8 rounded-2xl animate-on-scroll visible">
+                    <div class="text-yellow-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-yellow-400">Lightning Fast Creation</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Custom jingles crafted in record time without compromising quality. Your brand's sound, delivered when you need it.</p>
+                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> 24-hour rush delivery</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Unlimited revisions</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Real-time collaboration</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-yellow-400/30 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-200 visible">
+                    <div class="text-purple-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-purple-400">Premium Production</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">State-of-the-art studio quality with world-class musicians and producers. Every note perfected for maximum impact.</p>
+                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> 4K audio quality</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Live orchestration</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Multi-format delivery</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-purple-400/30 text-purple-400 rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-400 visible">
+                    <div class="text-green-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-green-400">Global Reach</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Jingles that transcend borders and languages. We create universal hooks that resonate with audiences worldwide.</p>
+                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> 50+ languages</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> Cultural adaptation</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> International licensing</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-green-400/30 text-green-400 rounded-full hover:bg-green-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treasure Gallery Section -->
+    <section id="gallery" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-purple-600 mb-4">
+                    Treasure Gallery
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Each jingle a masterpiece, each client a success story</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Audio Player 1 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll visible">
+                    <div class="text-yellow-400 text-sm font-cinzel mb-2">Technology</div>
+                    <h3 class="text-xl font-bold mb-4">Tech Titan Anthem</h3>
+                    <p class="text-gray-400 text-sm mb-4">CyberCore Systems</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">2.3M plays</span>
+                    </div>
+                </div>
+
+                <!-- Audio Player 2 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-200 visible">
+                    <div class="text-purple-400 text-sm font-cinzel mb-2">Broadcasting</div>
+                    <h3 class="text-xl font-bold mb-4">Morning Wave ID</h3>
+                    <p class="text-gray-400 text-sm mb-4">Ocean FM 101.5</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">5.1M plays</span>
+                    </div>
+                </div>
+
+                <!-- Audio Player 3 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-400 visible">
+                    <div class="text-green-400 text-sm font-cinzel mb-2">Media</div>
+                    <h3 class="text-xl font-bold mb-4">Podcast Treasure</h3>
+                    <p class="text-gray-400 text-sm mb-4">Pirates of Business</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">3.2M plays</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Legend Begins Section -->
+    <section id="about" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/30 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600 mb-8">
+                    The Legend Begins
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson leading-relaxed mb-8">
+                    From the depths of creativity emerges Captain Hook's Jingle Factory - where musical treasures are forged with passion, precision, and a touch of pirate magic.
+                </p>
+                <p class="text-lg text-gray-400 font-crimson leading-relaxed">
+                    Our crew of legendary composers and sound engineers have sailed the seven seas of audio, collecting the finest melodies and hooks that capture hearts and minds.
+                </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                    <div class="text-4xl font-bold text-yellow-400 mb-2">1000+</div>
+                    <div class="text-gray-400">Jingles Created</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-purple-400/20 animate-on-scroll animation-delay-200 visible">
+                    <div class="text-4xl font-bold text-purple-400 mb-2">99%</div>
+                    <div class="text-gray-400">Client Satisfaction</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-400 visible">
+                    <div class="text-4xl font-bold text-green-400 mb-2">15+</div>
+                    <div class="text-gray-400">Years at Sea</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll animation-delay-600 visible">
+                    <div class="text-4xl font-bold text-yellow-400 mb-2">24/7</div>
+                    <div class="text-gray-400">Support Crew</div>
+                </div>
+            </div>
+
+            <!-- Achievement Cards -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-purple-900/20 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                    <div class="text-3xl mb-4">🏆</div>
+                    <h3 class="text-2xl font-cinzel text-yellow-400 mb-4">Award Winning</h3>
+                    <p class="text-gray-300 font-crimson">Industry Recognition for Excellence in Audio Production</p>
+                </div>
+                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-green-900/20 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-200 visible">
+                    <div class="text-3xl mb-4">🎧</div>
+                    <h3 class="text-2xl font-cinzel text-green-400 mb-4">Premium Quality</h3>
+                    <p class="text-gray-300 font-crimson">Studio Grade Audio with Cutting-Edge Technology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chart Your Course (Contact) Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll visible">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
+                    Chart Your Course
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Ready to set sail on your audio adventure?</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20 animate-on-scroll visible">
+                    <h3 class="text-2xl font-cinzel text-yellow-400 mb-6">Send a Message in a Bottle</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Subject" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <textarea placeholder="Your Message" rows="5" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold uppercase rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8 animate-on-scroll animation-delay-200 visible">
+                    <div>
+                        <h3 class="text-2xl font-cinzel text-purple-400 mb-6">Your Free Consultation!</h3>
+                        <p class="text-gray-300 font-crimson mb-8">
+                            Book a free 30-minute treasure hunt to discover how we can create the perfect jingle for your brand.
+                        </p>
+                        <button class="px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300">
+                            Book Consultation
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-yellow-400">📧</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Email Port</div>
+                                <div class="text-yellow-400">ahoy@captainhooksjingles.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-purple-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-purple-400">📞</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Signal Flags</div>
+                                <div class="text-purple-400">+1 (555) HOOK-123</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-green-400">📍</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Harbor Location</div>
+                                <div class="text-green-400">Treasure Island Studios, Nashville, TN</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-3xl">⚓</span>
+                        <h3 class="font-pirata text-2xl text-yellow-400">Captain Hook's</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm font-crimson">
+                        Crafting legendary jingles from the heart of Louisiana since 2009. Where music meets magic.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-purple-400 mb-4">Quick Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-yellow-400 transition-colors">Home Port</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-yellow-400 transition-colors">Services</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-yellow-400 transition-colors">Treasure Gallery</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-yellow-400 transition-colors">Our Legend</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-yellow-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-green-400 mb-4">Our Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Custom Jingles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Radio IDs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Podcast Intros</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Voice Overs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Sound Design</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-yellow-400 mb-4">Join Our Crew</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get exclusive offers and audio production tips delivered to your inbox.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email address" class="w-full px-4 py-2 bg-gray-900 border border-gray-800 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        <button type="submit" class="w-full py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2024 Captain Hook's Jingle Factory. All treasures reserved.
+                </p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-yellow-400">⚜️</span>
+                    <span class="text-purple-400">⚜️</span>
+                    <span class="text-green-400">⚜️</span>
+                    <span class="text-gray-400 font-cinzel text-sm">Louisiana Proud</span>
+                    <span class="text-yellow-400">⚜️</span>
+                    <span class="text-purple-400">⚜️</span>
+                    <span class="text-green-400">⚜️</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40 opacity-0 invisible">
+        <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <script>
+        // Loading overlay
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('mainNav');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.add('mobile-menu-open');
+            } else {
+                mobileMenu.classList.remove('mobile-menu-open');
+            }
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('mobile-menu-open');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to top
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Play button animations
+        document.querySelectorAll('.audio-player button').forEach(button => {
+            button.addEventListener('click', function() {
+                const soundwaveBars = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
+                soundwaveBars.forEach((bar, index) => {
+                    bar.style.animationDelay = `${index * 0.1}s`;
+                });
+            });
+        });
+
+        // Form submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Ahoy! Your message has been sent to Captain Hook!');
+            });
+        });
+    </script>
+
+</body></html>
