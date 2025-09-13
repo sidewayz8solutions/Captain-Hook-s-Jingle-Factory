@@ -137,14 +137,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 
                 // Animate soundwave bars
-                const soundwaveBars = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
-                soundwaveBars.forEach(bar => {
+                const soundwave = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
+                soundbarsBars.forEach(bar => {
                     bar.style.animationPlayState = 'running';
                 });
             } else {
                 // Change pause to play icon
                 this.innerHTML = `
-                    <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="2 8 24 32">
                         <path d="M8 5v14l11-7z"></path>
                     </svg>
                 `;
