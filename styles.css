@@ -55,11 +55,11 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(135deg, 
-        #fff30b 15%, 
-        #581C87 25%, 
+        #fff30b 30%, 
+        #581C87 60%, 
         #0F172A 50%, 
         #145f0c 75%, 
-        #0F172A 100%);
+        #0F172A 40%);
     opacity: 0.8;
 }
 
@@ -77,8 +77,8 @@
 }
 
 .captain-image {
-    width: 700px;
-    height: 700px;
+    width: 900px;
+    height: 900px;
     object-fit: contain;
     margin: 0 auto;
     display: block;
@@ -91,30 +91,6 @@
     animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* Floating Hooks */
-.floating-hook {
-    position: absolute;
-    width: 180px;
-    height: 200px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9))
-            drop-shadow(0 0 30px rgba(255, 255, 0, 0.6))
-            drop-shadow(0 0 45px rgba(255, 193, 7, 0.4))
-            sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.3);
-    animation: float 4s ease-in-out infinite, goldenShimmer 2s linear infinite;
-}
-
-.floating-hook-1 { top: 10%; left: 5%; animation-delay: 0s; }
-.floating-hook-2 { top: 20%; right: 5%; animation-delay: 0.5s; }
-.floating-hook-3 { top: 30%; left: 8%; animation-delay: 1s; }
-.floating-hook-4 { top: 35%; right: 8%; animation-delay: 1.5s; }
-.floating-hook-5 { top: 45%; left: 3%; animation-delay: 2s; }
-.floating-hook-6 { top: 50%; right: 3%; animation-delay: 2.5s; }
-.floating-hook-7 { top: 15%; left: 12%; animation-delay: 3s; }
-.floating-hook-8 { top: 25%; right: 12%; animation-delay: 3.5s; }
-.floating-hook-9 { top: 40%; left: 10%; animation-delay: 4s; }
-.floating-hook-10 { top: 42%; right: 10%; animation-delay: 4.5s; }
-.floating-hook-11 { top: 55%; left: 6%; animation-delay: 5s; }
 
 /* Particle Effects */
 
