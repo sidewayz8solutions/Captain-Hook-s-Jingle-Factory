@@ -79,7 +79,7 @@
 .captain-image {
     width: 900px;
     height: 900px;
-    object-fit: contain;
+    object-fit: cover;
     margin: 0 auto;
     display: block;
     filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5))
