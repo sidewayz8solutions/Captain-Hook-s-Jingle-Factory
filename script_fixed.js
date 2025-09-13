@@ -34,12 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Back to top button visibility
         const backToTop = document.getElementById('backToTop');
-        if (currentScrollY > 300) {
-            backToTop.classList.remove('opacity-0', 'invisible');
-            backToTop.classList.add('opacity-100', 'visible');
-        } else {
-            backToTop.classList.add('opacity-0', 'invisible');
-            backToTop.classList.remove('opacity-100', 'visible');
+        if (backToTop) {
+            if (currentScrollY > 300) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
         }
     });
 
@@ -121,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Audio player mock functionality
     const playButtons = document.querySelectorAll('.audio-player button');
     playButtons.forEach(button => {
-        let playing = true;
+        let playing = false;
         
         button.addEventListener('click', function() {
             playing = !playing;
@@ -282,6 +284,124 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial check
     initAnimations();
 
+    // Enhanced features: Hanging hooks animation
+    const hangingHooksContainer = document.createElement('div');
+    hangingHooksContainer.classList.add('hanging-hooks-container');
+    let hooksHTML = '';
+    for (let i = 1; i <= 7; i++) {
+        hooksHTML += `
+            <div class="hanging-hook hanging-hook-top-${i}" data-delay="${i * 150}">
+                <div class="hook-chain"></div>
+                <img src="hook.png" alt="Hook" class="top-hook" />
+            </div>`;
+    }
+    hangingHooksContainer.innerHTML = hooksHTML;
+    document.body.appendChild(hangingHooksContainer);
+    
+    let hooksShown = false;
+    window.addEventListener('scroll', function() {
+        const heroSection = document.getElementById('home');
+        if (!heroSection) return;
+
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+        
+        if (scrollPosition > heroBottom && !hooksShown) {
+            hooksShown = true;
+            const hooks = document.querySelectorAll('.hanging-hook');
+            hooks.forEach(hook => {
+                setTimeout(() => hook.classList.add('hook-dropped'), parseInt(hook.dataset.delay));
+            });
+        } else if (scrollPosition <= heroBottom && hooksShown) {
+            hooksShown = false;
+            document.querySelectorAll('.hanging-hook').forEach(hook => {
+                hook.classList.remove('hook-dropped');
+            });
+        }
+    });
+    
+    // Enhanced treasure chest contact form
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        const contactContent = contactSection.querySelector('.max-w-5xl');
+        if (contactContent) {
+            const originalFormHTML = `
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20">
+                        <h3 class="text-2xl font-cinzel text-yellow-400 mb-6">Send a Message</h3>
+                        <form class="space-y-6">
+                            <div><input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors" /></div>
+                            <div><input type="email" placeholder="Your Email" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors" /></div>
+                            <div><textarea placeholder="Your Message" rows="5" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"></textarea></div>
+                            <button type="submit" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold uppercase rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-2xl font-cinzel text-purple-400 mb-6">Contact Info</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center"><span class="text-yellow-400 text-2xl">📧</span></div><div><div class="text-sm text-gray-400">Email Port</div><div class="text-yellow-400">ahoy@captainhooksjingles.com</div></div></div>
+                                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-purple-400/10 rounded-full flex items-center justify-center"><span class="text-purple-400 text-2xl">📞</span></div><div><div class="text-sm text-gray-400">Signal Flags</div><div class="text-purple-400">+1 (504) 555-HOOK</div></div></div>
+                                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-green-400/10 rounded-full flex items-center justify-center"><span class="text-green-400 text-2xl">📍</span></div><div><div class="text-sm text-gray-400">Harbor Location</div><div class="text-green-400">French Quarter, New Orleans, LA</div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            
+            const treasureChestWrapper = document.createElement('div');
+            treasureChestWrapper.classList.add('treasure-chest-wrapper');
+            treasureChestWrapper.innerHTML = `
+                <div class="treasure-chest-container">
+                    <div class="treasure-chest" id="treasureChest">
+                        <div class="chest-lid"><div class="chest-lock"></div></div>
+                        <div class="chest-base"></div>
+                    </div>
+                    <div class="chest-label">
+                        <span class="text-2xl font-pirata text-yellow-400 glow-text">Click the Chest to Send a Message!</span>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper" id="contactFormWrapper" style="display: none;">${originalFormHTML}</div>`;
+            
+            contactContent.innerHTML = '';
+            contactContent.appendChild(treasureChestWrapper);
+            
+            const treasureChest = document.getElementById('treasureChest');
+            const contactFormWrapper = document.getElementById('contactFormWrapper');
+            const chestLabel = document.querySelector('.chest-label');
+            
+            if (treasureChest && contactFormWrapper && chestLabel) {
+                treasureChest.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                    if (this.classList.contains('open')) {
+                        setTimeout(() => {
+                            contactFormWrapper.style.display = 'block';
+                            contactFormWrapper.classList.add('form-revealed');
+                            chestLabel.style.opacity = '0';
+                        }, 600);
+                        createSparkles(this);
+                    } else {
+                        contactFormWrapper.classList.remove('form-revealed');
+                        setTimeout(() => {
+                            contactFormWrapper.style.display = 'none';
+                            chestLabel.style.opacity = '1';
+                        }, 300);
+                    }
+                });
+            }
+        }
+    }
+    
+    function createSparkles(element) {
+        for (let i = 0; i < 20; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = `${Math.random() * 100}%`;
+            sparkle.style.animationDelay = `${Math.random()}s`;
+            element.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2000);
+        }
+    }
+
     console.log('⚓ Captain Hook\'s Jingle Factory - All systems ready!');
 });
 
@@ -315,7 +435,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// CSS for shake animation
+// CSS for shake animation and loading states
 const style = document.createElement('style');
 style.textContent = `
     @keyframes shake {

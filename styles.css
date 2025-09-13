@@ -96,8 +96,11 @@
     width: 180px;
     height: 200px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
-    animation: float 4s ease-in-out infinite, shimmer 3s linear infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9))
+            drop-shadow(0 0 30px rgba(255, 255, 0, 0.6))
+            drop-shadow(0 0 45px rgba(255, 193, 7, 0.4))
+            sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.3);
+    animation: float 4s ease-in-out infinite, goldenShimmer 2s linear infinite;
 }
 
 .floating-hook-1 { top: 10%; left: 70%; animation-delay: 0s; }
@@ -309,7 +312,7 @@
     justify-content: center;
     gap: 2px;
     height: 40px;
-    animation
+    animation: shimmer 3s linear infinite;
 }
 
 .soundwave-bar {
@@ -533,5 +536,313 @@ textarea::placeholder {
     50% {
         opacity: 0.3;
         transform: rotate(1deg) scaleY(1.1);
+    }
+}
+
+@keyframes goldenShimmer {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9))
+                drop-shadow(0 0 30px rgba(255, 255, 0, 0.6))
+                drop-shadow(0 0 45px rgba(255, 193, 7, 0.4))
+                brightness(1) hue-rotate(0deg);
+    }
+    25% {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 0, 1.0))
+                drop-shadow(0 0 40px rgba(255, 215, 0, 0.8))
+                drop-shadow(0 0 60px rgba(255, 193, 7, 0.6))
+                brightness(1.3) hue-rotate(15deg);
+    }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(255, 255, 0, 1.2))
+                drop-shadow(0 0 50px rgba(255, 215, 0, 1.0))
+                drop-shadow(0 0 75px rgba(255, 193, 7, 0.8))
+                brightness(1.5) hue-rotate(30deg);
+    }
+    75% {
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1.0))
+                drop-shadow(0 0 40px rgba(255, 255, 0, 0.8))
+                drop-shadow(0 0 60px rgba(255, 193, 7, 0.6))
+                brightness(1.2) hue-rotate(15deg);
+    }
+    100% {
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9))
+                drop-shadow(0 0 30px rgba(255, 255, 0, 0.6))
+                drop-shadow(0 0 45px rgba(255, 193, 7, 0.4))
+                brightness(1) hue-rotate(0deg);
+    }
+}
+
+/* HANGING HOOKS FROM TOP */
+  
+.hanging-hooks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.hanging-hook {
+    position: absolute;
+    top: -200px;
+    transition: top 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hanging-hook.hook-dropped {
+    top: 0;
+}
+
+.hook-chain {
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(180deg, 
+        rgba(139, 69, 19, 0.8), 
+        rgba(160, 82, 45, 0.6), 
+        rgba(139, 69, 19, 0.8));
+    margin: 0 auto 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.top-hook {
+    width: 60px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6))
+            drop-shadow(0 0 20px rgba(255, 215, 0, 0.4))
+            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    animation: gentleSwing 4s ease-in-out infinite;
+}
+
+.hanging-hook-top-1 { left: 10%; }
+.hanging-hook-top-2 { left: 25%; animation-delay: 0.5s; }
+.hanging-hook-top-3 { left: 40%; animation-delay: 1s; }
+.hanging-hook-top-4 { left: 50%; animation-delay: 0.3s; }
+.hanging-hook-top-5 { left: 60%; animation-delay: 0.7s; }
+.hanging-hook-top-6 { left: 75%; animation-delay: 1.2s; }
+.hanging-hook-top-7 { left: 90%; animation-delay: 0.2s; }
+
+@keyframes gentleSwing {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* ========================================
+   TREASURE CHEST CONTACT FORM
+   ======================================== */
+
+.treasure-chest-wrapper {
+    position: relative;
+    min-height: 500px;
+}
+
+.treasure-chest-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+}
+
+.treasure-chest {
+    width: 200px;
+    height: 150px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.treasure-chest:hover {
+    transform: scale(1.05);
+}
+
+.chest-lid {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #8B4513 100%);
+    border: 3px solid #654321;
+    border-radius: 80px 80px 10px 10px;
+    transform-origin: center bottom;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 2;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.chest-lid::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        transparent 30%, 
+        rgba(255, 215, 0, 0.3) 50%, 
+        transparent 70%);
+    border-radius: inherit;
+}
+
+.chest-lock {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, #FFD700, #B8860B);
+    border: 2px solid #8B4513;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.chest-lock::after {
+    content: '⚓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #654321;
+}
+
+.chest-base {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(180deg, #654321 0%, #8B4513 50%, #654321 100%);
+    border: 3px solid #4A2C17;
+    border-radius: 10px;
+    bottom: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.chest-base::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 10px;
+    background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+    top: 20px;
+    left: 5%;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+}
+
+.chest-base::after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 10px;
+    background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+    bottom: 20px;
+    left: 5%;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+}
+
+.treasure-chest.open .chest-lid {
+    transform: rotateX(-110deg);
+}
+
+.chest-label {
+    margin-top: 2rem;
+    transition: opacity 0.3s ease;
+}
+
+.glow-text {
+    animation: textGlow 2s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6); }
+}
+
+.contact-form-wrapper {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.contact-form-wrapper.form-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    animation: sparkleFloat 2s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes sparkleFloat {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-50px) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   ANIMATED SOUNDWAVES ENHANCEMENT
+   ======================================== */
+
+.soundwave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    height: 40px;
+}
+
+.soundwave-bar {
+    width: 3px;
+    min-height: 10px;
+    max-height: 40px;
+    background: linear-gradient(180deg, #FFD700, #7B2CBF, #10B981);
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.soundwave.playing .soundwave-bar {
+    animation: none !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6),
+                0 0 20px rgba(123, 44, 191, 0.4),
+                0 0 30px rgba(16, 185, 129, 0.3);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .hanging-hook {
+        display: none;
+    }
+    
+    .hanging-hook:nth-child(odd) {
+        display: block;
+    }
+    
+    .top-hook {
+        width: 40px;
+        height: 60px;
+    }
+    
+    .treasure-chest {
+        width: 150px;
+        height: 120px;
     }
 }

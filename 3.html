@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain Hook's Jingle Factory - Louisiana's Premier Audio Production</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mardi-purple': '#7B2CBF',
+                        'mardi-purple-dark': '#4C1D95',
+                        'mardi-gold': '#FFD700',
+                        'mardi-gold-dark': '#F59E0B',
+                        'mardi-green': '#10B981',
+                    },
+                    fontFamily: {
+                        'pirata': ['Pirata One', 'cursive'],
+                        'cinzel': ['Cinzel', 'serif'],
+                        'crimson': ['Crimson Text', 'serif'],
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <div class="loading-overlay fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-gray-900 to-mardi-purple-dark z-[9999] flex items-center justify-center transition-opacity duration-500">
+        <div class="text-center">
+            <div class="text-6xl mb-4 animate-bounce">⚓</div>
+            <div class="text-2xl font-pirata text-mardi-gold animate-pulse">Loading Treasures...</div>
+        </div>
+    </div>
+
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="nav-backdrop absolute inset-0"></div>
+        <div class="relative container mx-auto px-6">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="relative w-12 h-12">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-full h-full flex items-center justify-center">
+                            <span class="text-2xl">⚓</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Captain Hook's</h1>
+                        <p class="text-xs text-purple-300 font-cinzel uppercase tracking-wider -mt-1">Jingle Factory</p>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Home</a>
+                    <a href="#services" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Services</a>
+                    <a href="#gallery" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="#about" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Our Legend</a>
+                    <a href="#contact" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
+                    <button class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel text-sm uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300">
+                        Set Sail
+                    </button>
+                </div>
+
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
+                    <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-yellow-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-purple-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-green-400 transform transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl">
+            <div class="container mx-auto px-6 py-8">
+                <div class="space-y-4">
+                    <a href="#home" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="#services" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
+                    <a href="#gallery" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="#about" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
+                    <a href="#contact" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transition-all duration-300">
+                        Set Sail Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen relative flex items-center justify-center overflow-hidden">
+        <div class="hero-gradient-background"></div>
+        <div class="absolute inset-0 hero-gradient-overlay"></div>
+        <div class="absolute inset-0 particle-container">
+            <div class="water-particles">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+            </div>
+            <div class="underwater-distortion"></div>
+            <div class="light-rays"></div>
+        </div>
+        
+        <div class="hooks-container absolute inset-0">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-1">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-2">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-3">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-4">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-5">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-6">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-7">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-8">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-9">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-10">
+            <img src="hook.png" alt="Hook" class="floating-hook floating-hook-11">
+        </div>
+  
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
+            <div class="captain-container animate-on-scroll">
+                <img src="chook.jpg" class="captain-image enhanced-captain-glow" alt="Captain Hook">
+            </div>
+
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-pirata mb-4 animate-on-scroll animation-delay-200">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
+                    Captain Hook's
+                </span>
+            </h1>
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-cinzel text-purple-300 mb-8 animate-on-scroll animation-delay-400">
+                Jingle Factory
+            </h2>
+
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 font-crimson animate-on-scroll animation-delay-600 max-w-3xl mx-auto">
+                Where musical treasures are forged with passion, precision, and a touch of pirate magic
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center animate-on-scroll animation-delay-600">
+                <button class="px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                    Chart Your Course
+                </button>
+                <button class="px-10 py-4 bg-transparent border-2 border-yellow-500 text-yellow-500 font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-yellow-500 hover:text-gray-900 transform hover:scale-105 transition-all duration-300">
+                    View Our Treasures
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4">
+                    Our Legendary Services
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Navigate through our treasure trove of audio services</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="service-card p-8 rounded-2xl animate-on-scroll">
+                    <div class="text-yellow-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-yellow-400">Lightning Fast Creation</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Custom jingles crafted in record time without compromising quality. Your brand's sound, delivered when you need it.</p>
+                    <button class="w-full py-3 border-2 border-yellow-400/30 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-200">
+                    <div class="text-purple-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-purple-400">Premium Production</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">State-of-the-art studio quality with world-class musicians and producers. Every note perfected for maximum impact.</p>
+                    <button class="w-full py-3 border-2 border-purple-400/30 text-purple-400 rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+
+                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-400">
+                    <div class="text-green-400 mb-6">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-green-400">Global Reach</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Jingles that transcend borders and languages. We create universal hooks that resonate with audiences worldwide.</p>
+                    <button class="w-full py-3 border-2 border-green-400/30 text-green-400 rounded-full hover:bg-green-400 hover:text-gray-900 transition-all duration-300">
+                        Explore Service
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-purple-600 mb-4">
+                    Treasure Gallery
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Each jingle a masterpiece, each client a success story</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/30 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+             <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600 mb-8">
+                    The Legend Begins
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson leading-relaxed">
+                    From the depths of creativity emerges Captain Hook's Jingle Factory - where musical treasures are forged with passion, precision, and a touch of pirate magic.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
+                    Chart Your Course
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Ready to set sail on your audio adventure?</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-500 text-sm mb-4">
+                © 2025 Captain Hook's Jingle Factory. All treasures reserved.
+            </p>
+            <div class="flex items-center justify-center space-x-2">
+                <span class="text-yellow-400">⚜️</span>
+                <span class="text-gray-400 font-cinzel text-sm">Louisiana Proud</span>
+                <span class="text-purple-400">⚜️</span>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40 opacity-0 invisible">
+        <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

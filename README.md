@@ -27,15 +27,18 @@ You need to add the following images to the `/public` folder:
 ## Features Implemented
 
 ✅ **Modern Louisiana/Mardi Gras Theme**
+
 - Purple (#7B2CBF), Gold (#FFD700), and Green (#10B981) color scheme
 - Gradient effects throughout
 
 ✅ **Pirate-Themed Typography**
+
 - Pirata One font for headings
 - Cinzel for subheadings
 - Crimson Text for body text
 
 ✅ **Interactive Elements**
+
 - Floating animated hooks in hero section
 - Animated soundwave visualizers in Mardi Gras colors
 - Smooth scroll navigation
@@ -45,6 +48,7 @@ You need to add the following images to the `/public` folder:
 - Hover effects on all interactive elements
 
 ✅ **Sections**
+
 - Hero with Captain Hook mascot and floating hooks
 - Services (3 cards with icons)
 - Treasure Gallery (audio players with soundwaves)
@@ -53,6 +57,7 @@ You need to add the following images to the `/public` folder:
 - Footer with newsletter signup
 
 ✅ **Advanced Features**
+
 - Loading overlay with anchor animation
 - Parallax scrolling effects
 - Particle background animation
