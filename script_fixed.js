@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (isHook) {
                 const hookImg = document.createElement('img');
-                hookImg.src = 'hook.png';
+                hookImg.src = './public/hook.png';
                 hookImg.alt = 'Golden Hook';
                 hookImg.style.width = '30px';
                 hookImg.style.height = '35px';
@@ -557,7 +557,7 @@ function createTreasureExplosion(chest) {
         
         if (isHook) {
             const hookImg = document.createElement('img');
-            hookImg.src = 'hook.png';
+            hookImg.src = './public/hook.png';
             hookImg.alt = 'Golden Hook';
             hookImg.style.width = '30px';
             hookImg.style.height = '35px';
