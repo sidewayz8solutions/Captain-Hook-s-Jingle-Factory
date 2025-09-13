@@ -824,58 +824,6 @@ textarea::placeholder {
     }
 }
 
-/* Treasure Hook Animation */
-.treasure-hook {
-    position: absolute;
-    animation: treasureExplosion 2s ease-out forwards;
-    opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.treasure-hook img {
-    transform-origin: center;
-    animation: hookSpin 2s ease-out forwards;
-}
-
-.treasure-note {
-    position: absolute;
-    font-size: 24px;
-    font-weight: bold;
-    animation: treasureExplosion 2s ease-out forwards;
-    opacity: 0;
-    color: #10B981;
-    text-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
-}
-
-@keyframes hookSpin {
-    0% {
-        transform: rotate(0deg) scale(0.5);
-    }
-    50% {
-        transform: rotate(180deg) scale(1.2);
-    }
-    100% {
-        transform: rotate(360deg) scale(0.8);
-    }
-}
-
-@keyframes treasureExplosion {
-    0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(0.5);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(calc(var(--x) * 0.7), calc(var(--y) * 0.7)) scale(1.2);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(var(--x), var(--y)) scale(0.8);
-    }
-}
-
 /* Bottom Treasure Chest Styles */
 .treasure-section {
     min-height: 400px;
@@ -959,13 +907,12 @@ textarea::placeholder {
 }
 
 .chest-lock-bottom::after {
-    content: '⚓';
+    content: '🔒';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: #654321;
+    font-size: 16px;
 }
 
 .treasure-chest-bottom.opened .chest-lid-bottom {
@@ -980,37 +927,54 @@ textarea::placeholder {
     pointer-events: none;
 }
 
-.treasure-hook,
+.treasure-hook {
+    position: absolute;
+    animation: treasureExplosion 2s ease-out forwards;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.treasure-hook img {
+    transform-origin: center;
+    animation: hookSpin 2s ease-out forwards;
+}
+
 .treasure-note {
     position: absolute;
     font-size: 24px;
     font-weight: bold;
     animation: treasureExplosion 2s ease-out forwards;
     opacity: 0;
-}
-
-.treasure-hook {
-    color: #FFD700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-}
-
-.treasure-note {
     color: #10B981;
     text-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+}
+
+@keyframes hookSpin {
+    0% {
+        transform: rotate(0deg) scale(0.5);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(0.8);
+    }
 }
 
 @keyframes treasureExplosion {
     0% {
         opacity: 1;
-        transform: translate(0, 0) scale(0.5) rotate(0deg);
+        transform: translate(0, 0) scale(0.5);
     }
     50% {
         opacity: 1;
-        transform: translate(calc(var(--x) * 0.7), calc(var(--y) * 0.7)) scale(1.2) rotate(180deg);
+        transform: translate(calc(var(--x) * 0.7), calc(var(--y) * 0.7)) scale(1.2);
     }
     100% {
         opacity: 0;
-        transform: translate(var(--x), var(--y)) scale(0.8) rotate(360deg);
+        transform: translate(var(--x), var(--y)) scale(0.8);
     }
 }
 
