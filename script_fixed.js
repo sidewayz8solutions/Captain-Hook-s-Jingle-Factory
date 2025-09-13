@@ -402,6 +402,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Create explosion of hooks and music notes
+    function createTreasureExplosion(chest) {
+        const container = document.getElementById('chestSparkles');
+        
+        // Create hooks and music notes
+        for (let i = 0; i < 12; i++) {
+            const isHook = i % 2 === 0;
+            const element = document.createElement('div');
+            element.className = isHook ? 'treasure-hook' : 'treasure-note';
+            
+            if (isHook) {
+                const hookImg = document.createElement('img');
+                hookImg.src = 'hook.png';
+                hookImg.alt = 'Golden Hook';
+                hookImg.style.width = '30px';
+                hookImg.style.height = '35px';
+                hookImg.style.filter = 'sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.5) drop-shadow(0 0 8px rgba(255, 215, 0, 0.8))';
+                element.appendChild(hookImg);
+            } else {
+                element.innerHTML = '♪';
+            }
+            
+            // Random positioning
+            const angle = (i / 12) * 360 + Math.random() * 30;
+            const distance = 100 + Math.random() * 50;
+            const x = Math.cos(angle * Math.PI / 180) * distance;
+            const y = Math.sin(angle * Math.PI / 180) * distance;
+            
+            element.style.setProperty('--x', `${x}px`);
+            element.style.setProperty('--y', `${y}px`);
+            element.style.animationDelay = `${i * 0.1}s`;
+            
+            container.appendChild(element);
+            
+            // Remove after animation
+            setTimeout(() => element.remove(), 2000);
+        }
+    }
+
     console.log('⚓ Captain Hook\'s Jingle Factory - All systems ready!');
 });
 
@@ -469,3 +508,81 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Add treasure chest at bottom of page
+function createBottomTreasureChest() {
+    const treasureSection = document.createElement('section');
+    treasureSection.className = 'treasure-section py-20 bg-gradient-to-b from-purple-900 to-purple-950 relative overflow-hidden';
+    treasureSection.innerHTML = `
+        <div class="container mx-auto text-center">
+            <div class="treasure-chest-bottom" id="bottomTreasureChest">
+                <div class="chest-lid-bottom">
+                    <div class="chest-lock-bottom"></div>
+                </div>
+                <div class="chest-base-bottom"></div>
+                <div class="chest-sparkles" id="chestSparkles"></div>
+            </div>
+            <div class="treasure-text mt-8 opacity-0" id="treasureText">
+                <h3 class="text-4xl font-pirata text-yellow-400 glow-text">A Treasure Trove of Hooks</h3>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(treasureSection);
+    
+    // Add click handler
+    const chest = document.getElementById('bottomTreasureChest');
+    const text = document.getElementById('treasureText');
+    
+    chest.addEventListener('click', function() {
+        this.classList.add('opened');
+        createTreasureExplosion(this);
+        
+        setTimeout(() => {
+            text.style.opacity = '1';
+            text.style.transform = 'translateY(-20px)';
+        }, 800);
+    });
+}
+
+// Create explosion of hooks and music notes
+function createTreasureExplosion(chest) {
+    const container = document.getElementById('chestSparkles');
+    
+    // Create hooks and music notes
+    for (let i = 0; i < 12; i++) {
+        const isHook = i % 2 === 0;
+        const element = document.createElement('div');
+        element.className = isHook ? 'treasure-hook' : 'treasure-note';
+        
+        if (isHook) {
+            const hookImg = document.createElement('img');
+            hookImg.src = 'hook.png';
+            hookImg.alt = 'Golden Hook';
+            hookImg.style.width = '30px';
+            hookImg.style.height = '35px';
+            hookImg.style.filter = 'sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.5) drop-shadow(0 0 8px rgba(255, 215, 0, 0.8))';
+            element.appendChild(hookImg);
+        } else {
+            element.innerHTML = '♪';
+        }
+        
+        // Random positioning
+        const angle = (i / 12) * 360 + Math.random() * 30;
+        const distance = 100 + Math.random() * 50;
+        const x = Math.cos(angle * Math.PI / 180) * distance;
+        const y = Math.sin(angle * Math.PI / 180) * distance;
+        
+        element.style.setProperty('--x', `${x}px`);
+        element.style.setProperty('--y', `${y}px`);
+        element.style.animationDelay = `${i * 0.1}s`;
+        
+        container.appendChild(element);
+        
+        // Remove after animation
+        setTimeout(() => element.remove(), 2000);
+    }
+}
+
+// Initialize bottom treasure chest
+document.addEventListener('DOMContentLoaded', createBottomTreasureChest);

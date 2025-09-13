@@ -57,9 +57,9 @@
     background: radial-gradient(135deg, 
         #fff30b 30%, 
         #581C87 60%, 
-        #0F172A 50%, 
+        #0F172A 100%, 
         #145f0c 75%, 
-        #0F172A 40%);
+        #0F172A 60%);
     opacity: 0.8;
 }
 
