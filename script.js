@@ -282,6 +282,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial check
     initAnimations();
 
+    // Enhanced features: Hanging hooks animation
+    const hangingHooksContainer = document.createElement('div');
+    hangingHooksContainer.classList.add('hanging-hooks-container');
+    let hooksHTML = '';
+    for (let i = 1; i <= 7; i++) {
+        hooksHTML += `
+            <div class="hanging-hook hanging-hook-top-${i}" data-delay="${i * 150}">
+                <div class="hook-chain"></div>
+                <img src="hook.png" alt="Hook" class="top-hook" />
+            </div>`;
+    }
+    hangingHooksContainer.innerHTML = hooksHTML;
+    document.body.appendChild(hangingHooksContainer);
+    
+    let hooksShown = false;
+    window.addEventListener('scroll', function() {
+        const heroSection = document.getElementById('home');
+        if (!heroSection) return;
+
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+        
+        if (scrollPosition > heroBottom && !hooksShown) {
+            hooksShown = true;
+            const hooks = document.querySelectorAll('.hanging-hook');
+            hooks.forEach(hook => {
+                setTimeout(() => hook.classList.add('hook-dropped'), parseInt(hook.dataset.delay));
+            });
+        } else if (scrollPosition <= heroBottom && hooksShown) {
+            hooksShown = false;
+            document.querySelectorAll('.hanging-hook').forEach(hook => {
+                hook.classList.remove('hook-dropped');
+            });
+        }
+    });
+
     console.log('⚓ Captain Hook\'s Jingle Factory - All systems ready!');
 });
 
