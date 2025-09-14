@@ -8,12 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (loadingOverlay) {
             loadingOverlay.classList.add('hidden');
         }
-        // Pop-in the captain image after overlay hides
-        const captainImage = document.querySelector('.captain-image');
-        if (captainImage) {
-            captainImage.classList.add('captain-pop-in');
-            captainImage.classList.add('captain-glow-burst');
-        }
+        // Removed pop-in and glow burst animations per user request
     }, 1500);
 
     // Navigation scroll effect
