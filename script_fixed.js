@@ -199,20 +199,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Parallax effect for hero section
     const heroSection = document.getElementById('home');
     const captain = document.querySelector('.captain-image');
-    const floatingHooks = document.querySelectorAll('.floating-hook');
     
     if (heroSection && captain) {
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
-            const rate = scrolled * -0.5;
-            
+            const rate = scrolled * -0.3;
             if (scrolled < window.innerHeight) {
                 captain.style.transform = `translateY(${rate * 0.3}px)`;
-                
-                floatingHooks.forEach((hook, index) => {
-                    const hookRate = rate * (0.1 + (index * 0.10));
-                    hook.style.transform = `translateY(${hookRate}px) rotate(${scrolled * 0.06}deg)`;
-                });
             }
         });
     }
@@ -287,23 +280,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced features: Hanging hooks animation
     // Prefer the user's absolute image path for all hanging hooks, with safe fallbacks
     const HANGING_HOOK_SOURCES = [
-        'file:///Users/sidewayz8/Desktop/Captn/public/hook.png', // user-specified absolute path
+        'file:///Users/sidewayz8/Desktop/Captn/public/hook.png',
         'public/hook.png',
         './public/hook.png',
         'hook.png'
     ];
+    // Create the container but keep it visually collapsed at the very top; we'll only drop hooks after hero is off-screen
     const hangingHooksContainer = document.createElement('div');
     hangingHooksContainer.classList.add('hanging-hooks-container');
-    let hooksHTML = '';
-    for (let i = 1; i <= 7; i++) {
-        hooksHTML += `
-            <div class="hanging-hook hanging-hook-top-${i}" data-delay="${i * 150}">
-                <div class="hook-chain"></div>
-                <img src="public/hook.png" alt="Hook" class="top-hook" />
-            </div>`;
-    }
-    hangingHooksContainer.innerHTML = hooksHTML;
     document.body.appendChild(hangingHooksContainer);
+    
+    // Build hooks only when needed (after hero)
+    function ensureHooksBuilt() {
+        if (hangingHooksContainer.childElementCount > 0) return;
+        let hooksHTML = '';
+        for (let i = 1; i <= 7; i++) {
+            hooksHTML += `
+                <div class="hanging-hook hanging-hook-top-${i}" data-delay="${i * 150}">
+                    <div class="hook-chain"></div>
+                    <img src="public/hook.png" alt="Hook" class="top-hook" />
+                </div>`;
+        }
+        hangingHooksContainer.innerHTML = hooksHTML;
+        document.querySelectorAll('.hanging-hooks-container .top-hook').forEach(img => {
+            setHookSrcWithFallback(img, [...HANGING_HOOK_SOURCES]);
+        });
+    }
     // Ensure all hanging hook images point to the requested asset path (with fallbacks)
     const setHookSrcWithFallback = (img, sources) => {
         if (!sources || sources.length === 0) return;
@@ -313,10 +315,6 @@ document.addEventListener('DOMContentLoaded', function() {
         testImg.onerror = () => setHookSrcWithFallback(img, rest);
         testImg.src = first;
     };
-    document.querySelectorAll('.hanging-hooks-container .top-hook').forEach(img => {
-        setHookSrcWithFallback(img, [...HANGING_HOOK_SOURCES]);
-    });
-    
     let hooksShown = false;
     window.addEventListener('scroll', function() {
         const heroSection = document.getElementById('home');
@@ -327,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (scrollPosition > heroBottom && !hooksShown) {
             hooksShown = true;
+            ensureHooksBuilt();
             const hooks = document.querySelectorAll('.hanging-hook');
             hooks.forEach(hook => {
                 setTimeout(() => hook.classList.add('hook-dropped'), parseInt(hook.dataset.delay));
