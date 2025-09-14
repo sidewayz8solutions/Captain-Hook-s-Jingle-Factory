@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!heroSection) return;
 
         const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+    const scrollPosition = window.scrollY + window.innerHeight * 0.15; // trigger slightly sooner
         
         if (scrollPosition > heroBottom && !hooksShown) {
             hooksShown = true;

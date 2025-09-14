@@ -555,11 +555,11 @@ textarea::placeholder {
   
 .hanging-hooks-container {
     position: fixed;
-    top: 0;
+    top: 64px; /* leave room for fixed nav; adjust if header height changes */
     left: 0;
     right: 0;
-    height: 0; /* hidden at top so nav is unobstructed */
-    z-index: 1; /* keep behind nav */
+    height: 320px; /* provide space for hooks to be visible */
+    z-index: 40; /* below nav (z-50) but above page */
     pointer-events: none;
     overflow: hidden;
 }
@@ -856,13 +856,9 @@ textarea::placeholder {
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
-    .hanging-hook {
-        display: none;
-    }
-    
-    .hanging-hook:nth-child(odd) {
-        display: block;
-    }
+    .hanging-hooks-container { top: 56px; height: 240px; }
+    .hanging-hook { display: none; }
+    .hanging-hook:nth-child(odd) { display: block; }
     
     .top-hook {
         width: 64px;
