@@ -421,44 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Create explosion of hooks and music notes
-    function createTreasureExplosion(chest) {
-        const container = document.getElementById('chestSparkles');
-        
-        // Create hooks and music notes
-        for (let i = 0; i < 12; i++) {
-            const isHook = i % 2 === 0;
-            const element = document.createElement('div');
-            element.className = isHook ? 'treasure-hook' : 'treasure-note';
-            
-            if (isHook) {
-                const hookImg = document.createElement('img');
-                hookImg.src = './public/hook.png';
-                hookImg.alt = 'Golden Hook';
-                hookImg.style.width = '30px';
-                hookImg.style.height = '35px';
-                hookImg.style.filter = 'sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.5) drop-shadow(0 0 8px rgba(255, 215, 0, 0.8))';
-                element.appendChild(hookImg);
-            } else {
-                element.innerHTML = '♪';
-            }
-            
-            // Random positioning
-            const angle = (i / 12) * 360 + Math.random() * 30;
-            const distance = 100 + Math.random() * 50;
-            const x = Math.cos(angle * Math.PI / 180) * distance;
-            const y = Math.sin(angle * Math.PI / 180) * distance;
-            
-            element.style.setProperty('--x', `${x}px`);
-            element.style.setProperty('--y', `${y}px`);
-            element.style.animationDelay = `${i * 0.1}s`;
-            
-            container.appendChild(element);
-            
-            // Remove after animation
-            setTimeout(() => element.remove(), 2000);
-        }
-    }
+    // (Removed duplicate createTreasureExplosion - global version is used)
 
     console.log('⚓ Captain Hook\'s Jingle Factory - All systems ready!');
 });
