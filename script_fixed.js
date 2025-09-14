@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 
                 // Animate soundwave bars
-                const soundwave = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
-                soundbarsBars.forEach(bar => {
+                const soundwaveBars = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
+                soundwaveBars.forEach(bar => {
                     bar.style.animationPlayState = 'running';
                 });
             } else {

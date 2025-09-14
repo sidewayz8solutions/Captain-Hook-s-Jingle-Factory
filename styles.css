@@ -77,9 +77,10 @@
 }
 
 .captain-image {
-    width: 850px;
-    height: 850px;
-    object-fit: cover;
+    width: min(900px, 90vw);
+    height: auto;
+    max-height: min(80vh, 900px);
+    object-fit: contain;
     margin: 0 auto;
     display: block;
     filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5))
@@ -376,8 +377,9 @@ textarea::placeholder {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .captain-image {
-        width: 200px;
-        height: 150px;
+        width: min(85vw, 480px);
+        height: auto;
+        max-height: 60vh;
     }
     
     .floating-hook {
@@ -556,7 +558,7 @@ textarea::placeholder {
     top: 0;
     left: 0;
     right: 0;
-    height: 200px;
+    height: 320px;
     z-index: 100;
     pointer-events: none;
 }
@@ -573,7 +575,7 @@ textarea::placeholder {
 
 .hook-chain {
     width: 3px;
-    height: 120px;
+    height: 180px;
     background: linear-gradient(180deg, 
         rgba(139, 69, 19, 0.8), 
         rgba(160, 82, 45, 0.6), 
@@ -601,11 +603,13 @@ textarea::placeholder {
 }
 
 .top-hook {
-    width: 72px;
-    height: 108px;
+    width: 84px;
+    height: 126px;
     object-fit: contain;
     display: block;
-    margin: -6px auto 0;
+    margin: -8px auto 0; /* overlap ring a little more to look connected */
+    position: relative;
+    z-index: 2;
     filter: brightness(1.25) saturate(1.35)
             drop-shadow(0 0 14px rgba(255, 215, 0, 0.85))
             drop-shadow(0 0 28px rgba(255, 215, 0, 0.55))
@@ -862,9 +866,9 @@ textarea::placeholder {
     }
     
     .top-hook {
-        width: 56px;
-        height: 84px;
-        margin-top: -4px;
+        width: 64px;
+        height: 96px;
+        margin-top: -6px;
     }
     
     .treasure-chest {
