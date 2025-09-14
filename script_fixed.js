@@ -285,6 +285,13 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
 
     // Enhanced features: Hanging hooks animation
+    // Prefer the user's absolute image path for all hanging hooks, with safe fallbacks
+    const HANGING_HOOK_SOURCES = [
+        'file:///Users/sidewayz8/Desktop/Captn/public/hook.png', // user-specified absolute path
+        'public/hook.png',
+        './public/hook.png',
+        'hook.png'
+    ];
     const hangingHooksContainer = document.createElement('div');
     hangingHooksContainer.classList.add('hanging-hooks-container');
     let hooksHTML = '';
@@ -292,11 +299,23 @@ document.addEventListener('DOMContentLoaded', function() {
         hooksHTML += `
             <div class="hanging-hook hanging-hook-top-${i}" data-delay="${i * 150}">
                 <div class="hook-chain"></div>
-                <img src="hook.png" alt="Hook" class="top-hook" />
+                <img src="public/hook.png" alt="Hook" class="top-hook" />
             </div>`;
     }
     hangingHooksContainer.innerHTML = hooksHTML;
     document.body.appendChild(hangingHooksContainer);
+    // Ensure all hanging hook images point to the requested asset path (with fallbacks)
+    const setHookSrcWithFallback = (img, sources) => {
+        if (!sources || sources.length === 0) return;
+        const [first, ...rest] = sources;
+        const testImg = new Image();
+        testImg.onload = () => { img.src = first; };
+        testImg.onerror = () => setHookSrcWithFallback(img, rest);
+        testImg.src = first;
+    };
+    document.querySelectorAll('.hanging-hooks-container .top-hook').forEach(img => {
+        setHookSrcWithFallback(img, [...HANGING_HOOK_SOURCES]);
+    });
     
     let hooksShown = false;
     window.addEventListener('scroll', function() {
@@ -550,15 +569,27 @@ function createTreasureExplosion(chest) {
     const container = document.getElementById('chestSparkles');
     
     // Create hooks and music notes
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 16; i++) {
         const isHook = i % 2 === 0;
         const element = document.createElement('div');
         element.className = isHook ? 'treasure-hook' : 'treasure-note';
-        element.innerHTML = isHook ? '⚓' : '♪';
+        
+        if (isHook) {
+            const hookImg = document.createElement('img');
+            // Reuse hanging hook source preference if available
+            hookImg.src = 'public/hook.png';
+            hookImg.alt = 'Golden Hook';
+            hookImg.style.width = '40px';
+            hookImg.style.height = '48px';
+            hookImg.style.filter = 'sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.6) drop-shadow(0 0 10px rgba(255, 215, 0, 0.9))';
+            element.appendChild(hookImg);
+        } else {
+            element.innerHTML = '♪';
+        }
         
         // Random positioning
-        const angle = (i / 12) * 360 + Math.random() * 30;
-        const distance = 100 + Math.random() * 50;
+        const angle = (i / 16) * 360 + Math.random() * 30;
+        const distance = 110 + Math.random() * 70;
         const x = Math.cos(angle * Math.PI / 180) * distance;
         const y = Math.sin(angle * Math.PI / 180) * distance;
         
@@ -569,7 +600,7 @@ function createTreasureExplosion(chest) {
         container.appendChild(element);
         
         // Remove after animation
-        setTimeout(() => element.remove(), 2000);
+        setTimeout(() => element.remove(), 2200);
     }
 }
 

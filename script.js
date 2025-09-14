@@ -283,6 +283,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
 
     // Enhanced features: Hanging hooks animation
+    // Use the project asset for all hanging hooks (works with file:// and dev server)
+    const HOOK_SRC = 'public/hook.png';
     const hangingHooksContainer = document.createElement('div');
     hangingHooksContainer.classList.add('hanging-hooks-container');
     let hooksHTML = '';
@@ -290,11 +292,15 @@ document.addEventListener('DOMContentLoaded', function() {
         hooksHTML += `
             <div class="hanging-hook hanging-hook-top-${i}" data-delay="${i * 150}">
                 <div class="hook-chain"></div>
-                <img src="hook.png" alt="Hook" class="top-hook" />
+                <img src="public/hook.png" alt="Hook" class="top-hook" />
             </div>`;
     }
     hangingHooksContainer.innerHTML = hooksHTML;
     document.body.appendChild(hangingHooksContainer);
+    // Ensure all hanging hook images point to the correct asset path
+    document.querySelectorAll('.top-hook').forEach(img => {
+        img.src = HOOK_SRC;
+    });
     
     let hooksShown = false;
     window.addEventListener('scroll', function() {
@@ -334,22 +340,6 @@ function throttle(func, wait) {
     };
 }
 
-// Add some pirate Easter eggs
-let konamiCode = [];
-const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.key);
-    konamiCode = konamiCode.slice(-10);
-    
-    if (konamiCode.join(',') === konamiPattern.join(',')) {
-        document.body.style.animation = 'shake 0.5s';
-        setTimeout(() => {
-            document.body.style.animation = '';
-            alert('⚓ Ahoy! You\'ve found the secret treasure! Use code PIRATE20 for 20% off your first jingle!');
-        }, 500);
-    }
-});
 
 // CSS for shake animation
 const style = document.createElement('style');

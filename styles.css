@@ -77,8 +77,8 @@
 }
 
 .captain-image {
-    width: 900px;
-    height: 900px;
+    width: 850px;
+    height: 850px;
     object-fit: cover;
     margin: 0 auto;
     display: block;
@@ -572,8 +572,8 @@ textarea::placeholder {
 }
 
 .hook-chain {
-    width: 2px;
-    height: 100px;
+    width: 3px;
+    height: 120px;
     background: linear-gradient(180deg, 
         rgba(139, 69, 19, 0.8), 
         rgba(160, 82, 45, 0.6), 
@@ -583,16 +583,36 @@ textarea::placeholder {
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform-origin: top center;
+}
+
+.hook-chain::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #c9a227, #8a6f15 60%, #4a3b0b 100%);
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+    z-index: 1;
 }
 
 .top-hook {
-    width: 40px;
-    height: 60px;
+    width: 72px;
+    height: 108px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6))
-            drop-shadow(0 0 20px rgba(255, 215, 0, 0.4))
-            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
-    animation: gentleSwing 4s ease-in-out infinite;
+    display: block;
+    margin: -6px auto 0;
+    filter: brightness(1.25) saturate(1.35)
+            drop-shadow(0 0 14px rgba(255, 215, 0, 0.85))
+            drop-shadow(0 0 28px rgba(255, 215, 0, 0.55))
+            drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+    animation: gentleSwing 5s ease-in-out infinite;
+    transform-origin: top center;
+    will-change: transform, filter;
 }
 
 .hanging-hook-top-1 { left: 10%; }
@@ -606,6 +626,34 @@ textarea::placeholder {
 @keyframes gentleSwing {
     0%, 100% { transform: rotate(-5deg); }
     50% { transform: rotate(5deg); }
+}
+
+/* Pronounced swing and sway right after the drop, then settle */
+@keyframes swingDrop {
+    0%   { transform: rotate(0deg); }
+    20%  { transform: rotate(18deg); }
+    40%  { transform: rotate(-14deg); }
+    60%  { transform: rotate(10deg); }
+    80%  { transform: rotate(-6deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes chainSway {
+    0%   { transform: rotate(0deg); }
+    20%  { transform: rotate(12deg); }
+    40%  { transform: rotate(-8deg); }
+    60%  { transform: rotate(6deg); }
+    80%  { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* On drop: big sway, then loop gentle swing */
+.hanging-hook.hook-dropped .top-hook {
+    animation: swingDrop 1.6s ease-out 1, gentleSwing 5s ease-in-out infinite 1.6s;
+}
+
+.hanging-hook.hook-dropped .hook-chain {
+    animation: chainSway 1.6s ease-out 1, gentleSwing 5s ease-in-out infinite 1.6s;
 }
 
 /* ========================================
@@ -814,14 +862,45 @@ textarea::placeholder {
     }
     
     .top-hook {
-        width: 40px;
-        height: 60px;
+        width: 56px;
+        height: 84px;
+        margin-top: -4px;
     }
     
     .treasure-chest {
         width: 150px;
         height: 120px;
     }
+}
+
+/* Lower hero so captain image isn’t cut off */
+#home {
+    padding-top: 6rem;
+}
+
+@media (min-width: 1024px) {
+    #home { padding-top: 10rem; }
+}
+
+/* Make bottom treasure chest more realistic and add glow when opened */
+.chest-base-bottom {
+    background: 
+        linear-gradient(180deg, #4a2c17 0%, #8B4513 50%, #4a2c17 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+    background-blend-mode: overlay;
+}
+
+.treasure-chest-bottom.opened .chest-sparkles::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    height: 120px;
+    background: radial-gradient(ellipse at top, rgba(255,215,0,0.35), rgba(255,215,0,0) 70%);
+    filter: blur(8px);
+    pointer-events: none;
 }
 
 /* Bottom Treasure Chest Styles */
