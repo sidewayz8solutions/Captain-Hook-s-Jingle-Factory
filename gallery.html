@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain Hook's Jingle Factory - Treasure Gallery</title>
+    
+    <!-- Latest Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mardi-purple': '#7B2CBF',
+                        'mardi-purple-dark': '#4C1D95',
+                        'mardi-gold': '#FFD700',
+                        'mardi-gold-dark': '#F59E0B',
+                        'mardi-green': '#004F18FF',
+                    },
+                    fontFamily: {
+                        'pirata': ['Pirata One', 'cursive'],
+                        'cinzel': ['Cinzel', 'serif'],
+                        'crimson': ['Crimson Text', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'swing': 'swing 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'wave': 'wave 1s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'particle-float': 'particleFloat 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+                        },
+                        swing: {
+                            '0%, 100%': { transform: 'rotate(-15deg)' },
+                            '50%': { transform: 'rotate(15deg)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% center' },
+                            '100%': { backgroundPosition: '200% center' },
+                        },
+                        wave: {
+                            '0%, 100%': { height: '10px' },
+                            '50%': { height: '30px' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { 
+                                boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(123, 44, 191, 0.3), 0 0 60px rgba(16, 185, 129, 0.2)'
+                            },
+                            '50%': { 
+                                boxShadow: '0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(123, 44, 191, 0.5), 0 0 80px rgba(16, 185, 129, 0.3)'
+                            },
+                        },
+                        fadeIn: {
+                            'from': { opacity: '0', transform: 'translateY(20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            'from': { opacity: '0', transform: 'translateY(40px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        particleFloat: {
+                            '0%': { backgroundPosition: '0% 0%' },
+                            '100%': { backgroundPosition: '100% 100%' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-gray-900 to-mardi-purple-dark z-[9999] flex items-center justify-center transition-opacity duration-500">
+        <div class="text-center">
+            <div class="text-6xl mb-4 animate-bounce">⚓</div>
+            <div class="text-2xl font-pirata text-mardi-gold animate-pulse">Loading Treasures...</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="nav-backdrop absolute inset-0"></div>
+        <div class="relative container mx-auto px-6">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="relative w-12 h-12">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-full h-full flex items-center justify-center">
+                            <span class="text-2xl">⚓</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Captain Hook's</h1>
+                        <p class="text-xs text-purple-300 font-cinzel uppercase tracking-wider -mt-1">Jingle Factory</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html#home" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Home</a>
+                    <a href="services.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Services</a>
+                    <a href="gallery.html" class="nav-link py-2 text-yellow-400 font-bold font-cinzel text-sm uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="our-legend.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Our Legend</a>
+                    <a href="index.html#contact" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
+                    <button class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel text-sm uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300">
+                        Set Sail
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
+                    <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-yellow-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-purple-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-green-400 transform transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl">
+            <div class="container mx-auto px-6 py-8">
+                <div class="space-y-4">
+                    <a href="index.html#home" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="services.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
+                    <a href="gallery.html" class="block py-3 px-6 text-yellow-400 font-bold hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="our-legend.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
+                    <a href="index.html#contact" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transition-all duration-300">
+                        Set Sail Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero Section -->
+    <section id="gallery-hero" class="min-h-screen relative flex items-center justify-center overflow-hidden">
+        <!-- Background Effects -->
+        <div class="hero-gradient-background"></div>
+        <div class="absolute inset-0 hero-gradient-overlay"></div>
+        <div class="absolute inset-0 particle-container">
+            <!-- Water bubble effects -->
+            <div class="water-particles">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+            </div>
+            <!-- Underwater distortion -->
+            <div class="underwater-distortion"></div>
+            <!-- Light rays from above -->
+            <div class="light-rays"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-purple-400 to-green-400 mb-6 animate-fade-in">
+                Treasure Gallery
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 font-crimson animate-fade-in animation-delay-200 max-w-3xl mx-auto">
+                Discover our collection of legendary jingles that have set sail across the airwaves. Each one a masterpiece forged in the fires of creativity.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in animation-delay-400">
+                <button class="px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                    Explore Jingles
+                </button>
+                <a href="index.html#contact" class="px-10 py-4 bg-transparent border-2 border-yellow-500 text-yellow-500 font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-yellow-500 hover:text-gray-900 transform hover:scale-105 transition-all duration-300">
+                    Commission Yours
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Treasure Gallery Section -->
+    <section id="gallery" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-purple-600 mb-4">
+                    Our Jingles Collection
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson">Browse through categories of audio treasures. Click to listen and relive the magic.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Audio Player 1 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll">
+                    <div class="text-yellow-400 text-sm font-cinzel mb-2">Technology</div>
+                    <h3 class="text-xl font-bold mb-4">Tech Titan Anthem</h3>
+                    <p class="text-gray-400 text-sm mb-4">CyberCore Systems</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">2.3M plays</span>
+                    </div>
+                </div>
+
+                <!-- Audio Player 2 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-200">
+                    <div class="text-purple-400 text-sm font-cinzel mb-2">Broadcasting</div>
+                    <h3 class="text-xl font-bold mb-4">Morning Wave ID</h3>
+                    <p class="text-gray-400 text-sm mb-4">Ocean FM 101.5</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">5.1M plays</span>
+                    </div>
+                </div>
+
+                <!-- Audio Player 3 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-400">
+                    <div class="text-green-400 text-sm font-cinzel mb-2">Media</div>
+                    <h3 class="text-xl font-bold mb-4">Podcast Treasure</h3>
+                    <p class="text-gray-400 text-sm mb-4">Pirates of Business</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">3.2M plays</span>
+                    </div>
+                </div>
+
+                <!-- Additional Audio Player 4 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-600">
+                    <div class="text-yellow-400 text-sm font-cinzel mb-2">Automotive</div>
+                    <h3 class="text-xl font-bold mb-4">Speed Demon Jingle</h3>
+                    <p class="text-gray-400 text-sm mb-4">Thunder Road Motors</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">1.8M plays</span>
+                    </div>
+                </div>
+
+                <!-- Additional Audio Player 5 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-800">
+                    <div class="text-purple-400 text-sm font-cinzel mb-2">Retail</div>
+                    <h3 class="text-xl font-bold mb-4">Shopping Spree Hook</h3>
+                    <p class="text-gray-400 text-sm mb-4">Bayou Bargains</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">4.5M plays</span>
+                    </div>
+                </div>
+
+                <!-- Additional Audio Player 6 -->
+                <div class="audio-player p-6 rounded-2xl animate-on-scroll animation-delay-1000">
+                    <div class="text-green-400 text-sm font-cinzel mb-2">Food & Beverage</div>
+                    <h3 class="text-xl font-bold mb-4">Spicy Bayou Tune</h3>
+                    <p class="text-gray-400 text-sm mb-4">Cajun Spice Co.</p>
+                    <div class="soundwave mb-4">
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                        <div class="soundwave-bar"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-sm text-gray-400">2.9M plays</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treasure Chest Section -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
+                    Treasure Trove of Hooks
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson mb-8">Click the chest to reveal our collection of musical treasures!</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <div class="treasure-chest-wrapper">
+                    <div class="treasure-chest-container">
+                        <div class="treasure-chest-realistic" id="realisticTreasureChest">
+                            <div class="chest-lid-realistic">
+                                <div class="chest-lock-realistic"></div>
+                                <div class="chest-hinge-left"></div>
+                                <div class="chest-hinge-right"></div>
+                            </div>
+                            <div class="chest-base-realistic">
+                                <div class="chest-detail-top"></div>
+                                <div class="chest-detail-bottom"></div>
+                            </div>
+                        </div>
+                        <div class="chest-sparkles-realistic" id="chestSparklesRealistic"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-3xl">⚓</span>
+                        <h3 class="font-pirata text-2xl text-yellow-400">Captain Hook's</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm font-crimson">
+                        Crafting legendary jingles from the heart of Louisiana since 2009. Where music meets magic.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-purple-400 mb-4">Quick Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-400 hover:text-yellow-400 transition-colors">Home Port</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Treasure Gallery</a></li>
+                        <li><a href="our-legend.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Our Legend</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-yellow-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-green-400 mb-4">Our Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Custom Jingles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Radio IDs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Podcast Intros</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Voice Overs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Sound Design</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-yellow-400 mb-4">Join Our Crew</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get exclusive offers and audio production tips delivered to your inbox.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email address" class="w-full px-4 py-2 bg-gray-900 border border-gray-800 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
+                        <button type="submit" class="w-full py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2024 Captain Hook's Jingle Factory. All treasures reserved.
+                </p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-yellow-400">⚜️</span>
+                    <span class="text-purple-400">⚜️</span>
+                    <span class="text-green-400">⚜️</span>
+                    <span class="text-gray-400 font-cinzel text-sm">Louisiana Proud</span>
+                    <span class="text-yellow-400">⚜️</span>
+                    <span class="text-purple-400">⚜️</span>
+                    <span class="text-green-400">⚜️</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40 opacity-0 invisible">
+        <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="script_fixed.js"></script>
+    <script>
+        // Add click handler for realistic treasure chest
+        document.addEventListener('DOMContentLoaded', function() {
+            const chest = document.getElementById('realisticTreasureChest');
+            
+            if (chest) {
+                chest.addEventListener('click', function() {
+                    this.classList.toggle('opened');
+                    createRealisticTreasureExplosion(this);
+                });
+            }
+            
+            // Create explosion of hooks and music notes for realistic chest
+            function createRealisticTreasureExplosion(chest) {
+                const container = document.getElementById('chestSparklesRealistic');
+                if (!container) return;
+                
+                // Clear previous sparkles
+                container.innerHTML = '';
+                
+                // Create hooks and music notes
+                for (let i = 0; i < 20; i++) {
+                    const isHook = i % 2 === 0;
+                    const element = document.createElement('div');
+                    element.className = isHook ? 'treasure-hook-realistic' : 'treasure-note-realistic';
+                    
+                    if (isHook) {
+                        const hookImg = document.createElement('img');
+                        hookImg.src = 'public/hook.png';
+                        hookImg.alt = 'Golden Hook';
+                        hookImg.style.width = '40px';
+                        hookImg.style.height = '48px';
+                        hookImg.style.filter = 'sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.6) drop-shadow(0 0 10px rgba(255, 215, 0, 0.9))';
+                        element.appendChild(hookImg);
+                    } else {
+                        element.innerHTML = '♪';
+                    }
+                    
+                    // Random positioning
+                    const angle = (i / 20) * 360 + Math.random() * 30;
+                    const distance = 120 + Math.random() * 80;
+                    const x = Math.cos(angle * Math.PI / 180) * distance;
+                    const y = Math.sin(angle * Math.PI / 180) * distance;
+                    
+                    element.style.setProperty('--x', `${x}px`);
+                    element.style.setProperty('--y', `${y}px`);
+                    element.style.animationDelay = `${i * 0.1}s`;
+                    
+                    container.appendChild(element);
+                    
+                    // Remove after animation
+                    setTimeout(() => element.remove(), 2200);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

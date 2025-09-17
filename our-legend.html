@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captain Hook's Jingle Factory - Louisiana's Premier Audio Production</title>
+    <title>Captain Hook's Jingle Factory - Our Legend</title>
     
     <!-- Latest Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -91,7 +91,7 @@
     <div class="loading-overlay fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-gray-900 to-mardi-purple-dark z-[9999] flex items-center justify-center transition-opacity duration-500">
         <div class="text-center">
             <div class="text-6xl mb-4 animate-bounce">⚓</div>
-            <div class="text-2xl font-pirata text-mardi-gold animate-pulse">Loading Treasures...</div>
+            <div class="text-2xl font-pirata text-mardi-gold animate-pulse">Loading Legend...</div>
         </div>
     </div>
 
@@ -116,11 +116,11 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="#home" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Home</a>
+                    <a href="index.html#home" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Home</a>
                     <a href="services.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Services</a>
                     <a href="gallery.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Treasure Gallery</a>
-                    <a href="our-legend.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Our Legend</a>
-                    <a href="#contact" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
+                    <a href="our-legend.html" class="nav-link py-2 text-yellow-400 font-bold font-cinzel text-sm uppercase tracking-wide">Our Legend</a>
+                    <a href="index.html#contact" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
                     <button class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel text-sm uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300">
                         Set Sail
                     </button>
@@ -139,11 +139,11 @@
         <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl">
             <div class="container mx-auto px-6 py-8">
                 <div class="space-y-4">
-                    <a href="#home" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="index.html#home" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
                     <a href="services.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
                     <a href="gallery.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
-                    <a href="our-legend.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
-                    <a href="#contact" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <a href="our-legend.html" class="block py-3 px-6 text-yellow-400 font-bold hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
+                    <a href="index.html#contact" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
                     <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transition-all duration-300">
                         Set Sail Now
                     </button>
@@ -153,7 +153,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen relative flex items-center justify-center overflow-hidden">
+    <section id="legend-hero" class="min-h-screen relative flex items-center justify-center overflow-hidden">
         <!-- Background Effects -->
         <div class="hero-gradient-background"></div>
         <div class="absolute inset-0 hero-gradient-overlay"></div>
@@ -177,118 +177,38 @@
             <div class="light-rays"></div>
         </div>
         
-        <!-- Floating Hook Images removed per request -->
-  
         <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
-            <!-- Captain Hook Centerpiece -->
-            <div class="captain-container">
-                <img src="public/chook.png" class="captain-image enhanced-captain-glow" alt="Captain Hook">
-            </div>
-            <!-- Removed H1/H2 per request -->
-
-            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 font-crimson animate-fade-in animation-delay-400 max-w-3xl mx-auto">
-                Where musical treasures are forged with passion, precision, and a touch of pirate magic
+            <h1 class="text-5xl md:text-7xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-purple-400 to-green-400 mb-6 animate-fade-in">
+                Our Legend
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 font-crimson animate-fade-in animation-delay-200 max-w-3xl mx-auto">
+                Meet the talented musician and visionary behind Captain Hook's Jingle Factory
             </p>
-
-            <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in animation-delay-600">
-                <button class="px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-2xl">
-                    Chart Your Course
-                </button>
-                <button class="px-10 py-4 bg-transparent border-2 border-yellow-500 text-yellow-500 font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-yellow-500 hover:text-gray-900 transform hover:scale-105 transition-all duration-300">
-                    View Our Treasures
-                </button>
-            </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 relative overflow-hidden">
+    <!-- Grace Darling Section -->
+    <section id="grace-darling" class="py-20 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4">
-                    Our Legendary Services
-                </h2>
-                <p class="text-xl text-gray-300 font-crimson">Navigate through our treasure trove of audio services</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service Card 1 -->
-                <div class="service-card p-8 rounded-2xl animate-on-scroll">
-                    <div class="text-yellow-400 mb-6">
-                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-yellow-400">Lightning Fast Creation</h3>
-                    <p class="text-gray-300 mb-6 font-crimson">Custom jingles crafted in record time without compromising quality. Your brand's sound, delivered when you need it.</p>
-                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> 24-hour rush delivery</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Unlimited revisions</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Real-time collaboration</li>
-                    </ul>
-                    <a href="services.html" class="block w-full py-3 border-2 border-yellow-400/30 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 text-center">
-                        Explore Service
-                    </a>
-                </div>
-
-                <!-- Service Card 2 -->
-                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-200">
-                    <div class="text-purple-400 mb-6">
-                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-purple-400">Premium Production</h3>
-                    <p class="text-gray-300 mb-6 font-crimson">State-of-the-art studio quality with world-class musicians and producers. Every note perfected for maximum impact.</p>
-                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> 4K audio quality</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Live orchestration</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Multi-format delivery</li>
-                    </ul>
-                    <a href="services.html" class="block w-full py-3 border-2 border-purple-400/30 text-purple-400 rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 text-center">
-                        Explore Service
-                    </a>
-                </div>
-
-                <!-- Service Card 3 -->
-                <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-400">
-                    <div class="text-green-400 mb-6">
-                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-green-400">Global Reach</h3>
-                    <p class="text-gray-300 mb-6 font-crimson">Jingles that transcend borders and languages. We create universal hooks that resonate with audiences worldwide.</p>
-                    <ul class="space-y-2 mb-8 text-sm text-gray-400">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> 50+ languages</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> Cultural adaptation</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> International licensing</li>
-                    </ul>
-                    <a href="services.html" class="block w-full py-3 border-2 border-green-400/30 text-green-400 rounded-full hover:bg-green-400 hover:text-gray-900 transition-all duration-300 text-center">
-                        Explore Service
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/30 to-gray-900"></div>
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
                 <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600 mb-8">
-                    The Legend Begins
+                    Grace Darling
                 </h2>
                 <p class="text-xl text-gray-300 font-crimson leading-relaxed mb-8">
-                    From the depths of creativity emerges Captain Hook's Jingle Factory - where musical treasures are forged with passion, precision, and a touch of pirate magic.
+                    The Captain Behind the Jingle Factory
                 </p>
                 <p class="text-lg text-gray-400 font-crimson leading-relaxed">
-                    Our crew of legendary composers and sound engineers have sailed the seven seas of audio, collecting the finest melodies and hooks that capture hearts and minds.
+                    Grace Darling, singer/songwriter and saxophone virtuoso, is the creative force behind Captain Hook's Jingle Factory. With over 15 years of experience in the music industry, Grace brings her exceptional talent and passion for catchy melodies to every jingle crafted in our Louisiana studio.
                 </p>
+            </div>
+
+            <!-- Captain Image -->
+            <div class="flex justify-center mb-16">
+                <div class="captain-container animate-on-scroll animation-delay-400">
+                    <img src="public/chook.png" class="captain-image enhanced-captain-glow" alt="Captain Grace Darling">
+                </div>
             </div>
 
             <!-- Stats Grid -->
@@ -307,7 +227,7 @@
                 </div>
                 <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll animation-delay-600">
                     <div class="text-4xl font-bold text-yellow-400 mb-2">24/7</div>
-                    <div class="text-gray-400">Support Crew</div>
+                    <div class="text-gray-400">Creative Inspiration</div>
                 </div>
             </div>
 
@@ -315,29 +235,81 @@
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="p-8 bg-gradient-to-br from-gray-800/50 to-purple-900/20 rounded-2xl border border-yellow-400/20 animate-on-scroll">
                     <div class="text-3xl mb-4">🏆</div>
-                    <h3 class="text-2xl font-cinzel text-yellow-400 mb-4">Award Winning</h3>
-                    <p class="text-gray-300 font-crimson">Industry Recognition for Excellence in Audio Production</p>
+                    <h3 class="text-2xl font-cinzel text-yellow-400 mb-4">Award Winning Composer</h3>
+                    <p class="text-gray-300 font-crimson">Multiple industry awards for excellence in audio production and jingle composition</p>
                 </div>
                 <div class="p-8 bg-gradient-to-br from-gray-800/50 to-green-900/20 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-200">
-                    <div class="text-3xl mb-4">🎧</div>
-                    <h3 class="text-2xl font-cinzel text-green-400 mb-4">Premium Quality</h3>
-                    <p class="text-gray-300 font-crimson">Studio Grade Audio with Cutting-Edge Technology</p>
+                    <div class="text-3xl mb-4">🎷</div>
+                    <h3 class="text-2xl font-cinzel text-green-400 mb-4">Saxophone Virtuoso</h3>
+                    <p class="text-gray-300 font-crimson">Professional saxophonist with a distinctive sound that defines our jingles</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 relative">
-        <div class="container mx-auto px-6">
+    <!-- Musical Journey Section -->
+    <section id="musical-journey" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-green-900/20 to-gray-900"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
-                    Chart Your Course
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-600 mb-4">
+                    Musical Journey
                 </h2>
-                <p class="text-xl text-gray-300 font-crimson">Ready to set sail on your audio adventure?</p>
+                <p class="text-xl text-gray-300 font-crimson">From humble beginnings to legendary status</p>
             </div>
 
-            <div class="max-w-5xl mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-12">
+                    <!-- Journey Item 1 -->
+                    <div class="flex flex-col md:flex-row gap-8 items-center animate-on-scroll">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-cinzel text-yellow-400 mb-4">Early Years</h3>
+                            <p class="text-gray-300 font-crimson">
+                                Grace began her musical journey in the heart of Louisiana, where she developed a deep appreciation for jazz, blues, and folk music. Her natural talent for melody and rhythm was evident from a young age.
+                            </p>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <div class="inline-block p-4 bg-gray-800/50 rounded-full">
+                                <span class="text-4xl">🎵</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Journey Item 2 -->
+                    <div class="flex flex-col md:flex-row gap-8 items-center animate-on-scroll animation-delay-200">
+                        <div class="flex-1 text-center">
+                            <div class="inline-block p-4 bg-gray-800/50 rounded-full">
+                                <span class="text-4xl">🎷</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-cinzel text-purple-400 mb-4">Saxophone Mastery</h3>
+                            <p class="text-gray-300 font-crimson">
+                                Grace's expertise with the saxophone became her signature sound. She mastered both traditional and contemporary styles, bringing a unique flair to every composition.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Journey Item 3 -->
+                    <div class="flex flex-col md:flex-row gap-8 items-center animate-on-scroll animation-delay-400">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-cinzel text-green-400 mb-4">The Birth of Captain Hook's</h3>
+                            <p class="text-gray-300 font-crimson">
+                                In 2009, Grace founded Captain Hook's Jingle Factory to bring her musical talents to the world of commercial jingles. Her vision was to create unforgettable audio experiences that capture the essence of every brand.
+                            </p>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <div class="inline-block p-4 bg-gray-800/50 rounded-full">
+                                <span class="text-4xl">⚓</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
         <div class="container mx-auto px-6">
@@ -374,11 +346,11 @@
                 <div>
                     <h3 class="font-cinzel text-lg text-purple-400 mb-4">Quick Navigation</h3>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-yellow-400 transition-colors">Home Port</a></li>
+                        <li><a href="index.html#home" class="text-gray-400 hover:text-yellow-400 transition-colors">Home Port</a></li>
                         <li><a href="services.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Services</a></li>
                         <li><a href="gallery.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Treasure Gallery</a></li>
                         <li><a href="our-legend.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Our Legend</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-yellow-400 transition-colors">Contact</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-yellow-400 transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
@@ -386,11 +358,11 @@
                 <div>
                     <h3 class="font-cinzel text-lg text-green-400 mb-4">Our Services</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Custom Jingles</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Radio IDs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Podcast Intros</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Voice Overs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Sound Design</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-green-400 transition-colors">Custom Jingles</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-green-400 transition-colors">Radio IDs</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-green-400 transition-colors">Podcast Intros</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-green-400 transition-colors">Voice Overs</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-green-400 transition-colors">Sound Design</a></li>
                     </ul>
                 </div>
 

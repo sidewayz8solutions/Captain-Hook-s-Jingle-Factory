@@ -359,11 +359,14 @@
 .soundwave-bar:nth-child(13) { animation-delay: 1.2s; }
 .soundwave-bar:nth-child(14) { animation-delay: 1.3s; }
 .soundwave-bar:nth-child(15) { animation-delay: 1.4s; }
+.soundwave-bar:nth-child(16) { animation-delay: 1.5s; }
 
 /* Animation Classes */
 .animation-delay-200 { animation-delay: 0.2s; }
 .animation-delay-400 { animation-delay: 0.4s; }
 .animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-800 { animation-delay: 0.8s; }
+.animation-delay-1000 { animation-delay: 1s; }
 
 /* Mobile Menu */
 .mobile-menu-open {
@@ -873,104 +876,24 @@ textarea::placeholder {
 }
 
 /* ========================================
-   ANIMATED SOUNDWAVES ENHANCEMENT
+   REALISTIC TREASURE CHEST
    ======================================== */
 
-.soundwave {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    height: 40px;
-}
-
-.soundwave-bar {
-    width: 3px;
-    min-height: 10px;
-    max-height: 40px;
-    background: linear-gradient(180deg, #065f46, #4C1D95, #FFD700);
-    border-radius: 2px;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
-    animation: wave 1.2s ease-in-out infinite;
-    animation-play-state: running;
-}
-
-.soundwave.playing .soundwave-bar {
-    box-shadow: 0 0 12px rgba(255, 215, 0, 0.7),
-                0 0 24px rgba(123, 44, 191, 0.5),
-                0 0 36px rgba(16, 185, 129, 0.4);
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-    .hanging-hooks-container { top: 56px; height: 240px; }
-    .hanging-hook { display: none; }
-    .hanging-hook:nth-child(odd) { display: block; }
-    
-    .top-hook {
-        width: 64px;
-        height: 96px;
-        margin-top: -6px;
-    }
-    
-    .treasure-chest {
-        width: 150px;
-        height: 120px;
-    }
-}
-
-/* Lower hero so captain image isn’t cut off */
-#home {
-    padding-top: 6rem;
-}
-
-@media (min-width: 1024px) {
-    #home { padding-top: 10rem; }
-}
-
-/* Make bottom treasure chest more realistic and add glow when opened */
-.chest-base-bottom {
-    background: 
-        linear-gradient(180deg, #4a2c17 0%, #8B4513 50%, #4a2c17 100%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
-    background-blend-mode: overlay;
-}
-
-.treasure-chest-bottom.opened .chest-sparkles::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 240px;
-    height: 120px;
-    background: radial-gradient(ellipse at top, rgba(255,215,0,0.35), rgba(255,215,0,0) 70%);
-    filter: blur(8px);
-    pointer-events: none;
-}
-
-/* Bottom Treasure Chest Styles */
-.treasure-section {
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.treasure-chest-bottom {
+.treasure-chest-realistic {
     width: 300px;
     height: 200px;
     position: relative;
     cursor: pointer;
-    margin: 0 auto;
+    transform-style: preserve-3d;
     transition: transform 0.3s ease;
+    margin: 0 auto;
 }
 
-.treasure-chest-bottom:hover {
+.treasure-chest-realistic:hover {
     transform: scale(1.05);
 }
 
-.chest-lid-bottom {
+.chest-lid-realistic {
     position: absolute;
     width: 100%;
     height: 80px;
@@ -981,9 +904,66 @@ textarea::placeholder {
     transform-origin: bottom center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    z-index: 2;
 }
 
-.chest-base-bottom {
+.chest-lid-realistic::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        transparent 30%, 
+        rgba(255, 215, 0, 0.2) 50%, 
+        transparent 70%);
+    border-radius: inherit;
+}
+
+.chest-lock-realistic {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #FFD700, #B8860B);
+    border: 3px solid #8B4513;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    z-index: 3;
+}
+
+.chest-lock-realistic::after {
+    content: '🔒';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #654321;
+}
+
+.chest-hinge-left,
+.chest-hinge-right {
+    position: absolute;
+    width: 8px;
+    height: 20px;
+    background: linear-gradient(180deg, #FFD700, #B8860B, #FFD700);
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.chest-hinge-left {
+    left: 20px;
+}
+
+.chest-hinge-right {
+    right: 20px;
+}
+
+.chest-base-realistic {
     position: absolute;
     width: 100%;
     height: 140px;
@@ -994,7 +974,7 @@ textarea::placeholder {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
 }
 
-.chest-base-bottom::before {
+.chest-base-realistic::before {
     content: '';
     position: absolute;
     width: 85%;
@@ -1006,7 +986,7 @@ textarea::placeholder {
     box-shadow: 0 3px 8px rgba(255, 215, 0, 0.6);
 }
 
-.chest-base-bottom::after {
+.chest-base-realistic::after {
     content: '';
     position: absolute;
     width: 85%;
@@ -1018,96 +998,11 @@ textarea::placeholder {
     box-shadow: 0 3px 8px rgba(255, 215, 0, 0.6);
 }
 
-.chest-lock-bottom {
+.chest-detail-top,
+.chest-detail-bottom {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background: radial-gradient(circle, #FFD700, #B8860B);
-    border: 3px solid #8B4513;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-.chest-lock-bottom::after {
-    content: '🔒';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-}
-
-.treasure-chest-bottom.opened .chest-lid-bottom {
-    transform: rotateX(-120deg);
-}
-
-.chest-sparkles {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.treasure-hook {
-    position: absolute;
-    animation: treasureExplosion 2s ease-out forwards;
-    opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.treasure-hook img {
-    transform-origin: center;
-    animation: hookSpin 2s ease-out forwards;
-}
-
-.treasure-note {
-    position: absolute;
-    font-size: 24px;
-    font-weight: bold;
-    animation: treasureExplosion 2s ease-out forwards;
-    opacity: 0;
-    color: #10B981;
-    text-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
-}
-
-@keyframes hookSpin {
-    0% {
-        transform: rotate(0deg) scale(0.5);
-    }
-    50% {
-        transform: rotate(180deg) scale(1.2);
-    }
-    100% {
-        transform: rotate(360deg) scale(0.8);
-    }
-}
-
-@keyframes treasureExplosion {
-    0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(0.5);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(calc(var(--x) * 0.7), calc(var(--y) * 0.7)) scale(1.2);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(var(--x), var(--y)) scale(0.8);
-    }
-}
-
-.treasure-text {
-    transition: all 0.8s ease;
-    transform: translateY(0);
-}
-
-.treasure-text h3 {
-    animation: textGlow 2s ease-in-out infinite;
+    width: 70%;
+    height: 8px;
+    background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+    /* Add any additional styles as needed */
 }
