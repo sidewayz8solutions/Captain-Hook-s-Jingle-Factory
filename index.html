@@ -338,6 +338,70 @@
             </div>
 
             <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Message in a Bottle Section -->
+                    <div class="message-in-bottle-container">
+                        <div class="message-bottle">
+                            <div class="bottle-neck"></div>
+                            <div class="bottle-body">
+                                <div class="bottle-label">
+                                    <span class="text-lg font-pirata text-yellow-400">Message in a Bottle</span>
+                                </div>
+                                <div class="bottle-message">
+                                    <textarea
+                                        id="messageTextarea"
+                                        placeholder="Write your message here to reach out to Captain Hook's Jingle Factory..."
+                                        class="w-full h-32 p-4 bg-transparent text-white placeholder-gray-400 border-none outline-none resize-none font-crimson text-sm"
+                                        maxlength="500"
+                                    ></textarea>
+                                    <div class="text-right">
+                                        <span id="charCount" class="text-xs text-gray-400">0/500</span>
+                                    </div>
+                                </div>
+                                <button id="sendMessageBtn" class="mt-4 px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300 text-sm">
+                                    Send Message
+                                </button>
+                            </div>
+                            <div class="bottle-cork"></div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info Section -->
+                    <div class="contact-info-section">
+                        <h3 class="text-2xl font-cinzel text-purple-400 mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-purple-400/20">
+                                <div class="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center">
+                                    <span class="text-yellow-400 text-2xl">📧</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400 font-cinzel">Email Port</div>
+                                    <div class="text-yellow-400 font-crimson">ahoy@captainhooksjingles.com</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-purple-400/20">
+                                <div class="w-12 h-12 bg-purple-400/10 rounded-full flex items-center justify-center">
+                                    <span class="text-purple-400 text-2xl">📞</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400 font-cinzel">Signal Flags</div>
+                                    <div class="text-purple-400 font-crimson">+1 (504) 555-HOOK</div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-green-400/20">
+                                <div class="w-12 h-12 bg-green-400/10 rounded-full flex items-center justify-center">
+                                    <span class="text-green-400 text-2xl">📍</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-400 font-cinzel">Harbor Location</div>
+                                    <div class="text-green-400 font-crimson">French Quarter, New Orleans, LA</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     <!-- Footer -->
     <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
         <div class="container mx-auto px-6">

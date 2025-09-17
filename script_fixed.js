@@ -339,87 +339,72 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Enhanced treasure chest contact form
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-        const contactContent = contactSection.querySelector('.max-w-5xl');
-        if (contactContent) {
-            const originalFormHTML = `
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20">
-                        <h3 class="text-2xl font-cinzel text-yellow-400 mb-6">Send a Message</h3>
-                        <form class="space-y-6">
-                            <div><input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors" /></div>
-                            <div><input type="email" placeholder="Your Email" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors" /></div>
-                            <div><textarea placeholder="Your Message" rows="5" class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"></textarea></div>
-                            <button type="submit" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold uppercase rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300">Send Message</button>
-                        </form>
-                    </div>
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-2xl font-cinzel text-purple-400 mb-6">Contact Info</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center"><span class="text-yellow-400 text-2xl">📧</span></div><div><div class="text-sm text-gray-400">Email Port</div><div class="text-yellow-400">ahoy@captainhooksjingles.com</div></div></div>
-                                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-purple-400/10 rounded-full flex items-center justify-center"><span class="text-purple-400 text-2xl">📞</span></div><div><div class="text-sm text-gray-400">Signal Flags</div><div class="text-purple-400">+1 (504) 555-HOOK</div></div></div>
-                                <div class="flex items-center space-x-4"><div class="w-12 h-12 bg-green-400/10 rounded-full flex items-center justify-center"><span class="text-green-400 text-2xl">📍</span></div><div><div class="text-sm text-gray-400">Harbor Location</div><div class="text-green-400">French Quarter, New Orleans, LA</div></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-            
-            const treasureChestWrapper = document.createElement('div');
-            treasureChestWrapper.classList.add('treasure-chest-wrapper');
-            treasureChestWrapper.innerHTML = `
-                <div class="treasure-chest-container">
-                    <div class="treasure-chest" id="treasureChest">
-                        <div class="chest-lid"><div class="chest-lock"></div></div>
-                        <div class="chest-base"></div>
-                    </div>
-                    <div class="chest-label">
-                        <span class="text-2xl font-pirata text-yellow-400 glow-text">Click the Chest to Send a Message!</span>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper" id="contactFormWrapper" style="display: none;">${originalFormHTML}</div>`;
-            
-            contactContent.innerHTML = '';
-            contactContent.appendChild(treasureChestWrapper);
-            
-            const treasureChest = document.getElementById('treasureChest');
-            const contactFormWrapper = document.getElementById('contactFormWrapper');
-            const chestLabel = document.querySelector('.chest-label');
-            
-            if (treasureChest && contactFormWrapper && chestLabel) {
-                treasureChest.addEventListener('click', function() {
-                    this.classList.toggle('open');
-                    if (this.classList.contains('open')) {
-                        setTimeout(() => {
-                            contactFormWrapper.style.display = 'block';
-                            contactFormWrapper.classList.add('form-revealed');
-                            chestLabel.style.opacity = '0';
-                        }, 600);
-                        createSparkles(this);
-                    } else {
-                        contactFormWrapper.classList.remove('form-revealed');
-                        setTimeout(() => {
-                            contactFormWrapper.style.display = 'none';
-                            chestLabel.style.opacity = '1';
-                        }, 300);
-                    }
-                });
-            }
+
+    // Message in a Bottle functionality
+    function initMessageInBottle() {
+        const messageTextarea = document.getElementById('messageTextarea');
+        const charCount = document.getElementById('charCount');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+        if (messageTextarea && charCount) {
+            // Character counter
+            messageTextarea.addEventListener('input', function() {
+                const remaining = 500 - this.value.length;
+                charCount.textContent = `${this.value.length}/500`;
+
+                if (remaining < 50) {
+                    charCount.style.color = remaining < 0 ? '#ef4444' : '#f59e0b';
+                } else {
+                    charCount.style.color = '#9ca3af';
+                }
+            });
+
+            // Initial count
+            charCount.textContent = '0/500';
+        }
+
+        if (sendMessageBtn) {
+            sendMessageBtn.addEventListener('click', function() {
+                const message = messageTextarea ? messageTextarea.value.trim() : '';
+
+                if (!message) {
+                    alert('⚓ Ahoy! Please write a message before sending!');
+                    return;
+                }
+
+                if (message.length > 500) {
+                    alert('⚓ Shiver me timbers! Your message is too long! Please keep it under 500 characters.');
+                    return;
+                }
+
+                // Show success message
+                const originalText = this.textContent;
+                this.textContent = 'Message Sent!';
+                this.classList.add('bg-green-500');
+                this.disabled = true;
+
+                // Clear the message
+                if (messageTextarea) {
+                    messageTextarea.value = '';
+                    charCount.textContent = '0/500';
+                    charCount.style.color = '#9ca3af';
+                }
+
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.classList.remove('bg-green-500');
+                    this.disabled = false;
+                }, 3000);
+
+                // Log the message (in a real app, this would be sent to a server)
+                console.log('📧 Message in a bottle sent:', message);
+            });
         }
     }
-    
-    function createSparkles(element) {
-        for (let i = 0; i < 20; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            sparkle.style.left = `${Math.random() * 100}%`;
-            sparkle.style.animationDelay = `${Math.random()}s`;
-            element.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 2000);
-        }
-    }
+
+    // Initialize message in a bottle functionality
+    initMessageInBottle();
 
     // (Removed duplicate createTreasureExplosion - global version is used)
 
@@ -491,81 +476,3 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Add treasure chest at bottom of page
-function createBottomTreasureChest() {
-    const treasureSection = document.createElement('section');
-    treasureSection.className = 'treasure-section py-20 bg-gradient-to-b from-purple-900 to-purple-950 relative overflow-hidden';
-    treasureSection.innerHTML = `
-        <div class="container mx-auto text-center">
-            <div class="treasure-chest-bottom" id="bottomTreasureChest">
-                <div class="chest-lid-bottom">
-                    <div class="chest-lock-bottom"></div>
-                </div>
-                <div class="chest-base-bottom"></div>
-                <div class="chest-sparkles" id="chestSparkles"></div>
-            </div>
-            <div class="treasure-text mt-8 opacity-0" id="treasureText">
-                <h3 class="text-4xl font-pirata text-yellow-400 glow-text">A Treasure Trove of Hooks</h3>
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(treasureSection);
-    
-    // Add click handler
-    const chest = document.getElementById('bottomTreasureChest');
-    const text = document.getElementById('treasureText');
-    
-    chest.addEventListener('click', function() {
-        this.classList.add('opened');
-        createTreasureExplosion(this);
-        
-        setTimeout(() => {
-            text.style.opacity = '1';
-            text.style.transform = 'translateY(-20px)';
-        }, 800);
-    });
-}
-
-// Create explosion of hooks and music notes
-function createTreasureExplosion(chest) {
-    const container = document.getElementById('chestSparkles');
-    
-    // Create hooks and music notes
-    for (let i = 0; i < 16; i++) {
-        const isHook = i % 2 === 0;
-        const element = document.createElement('div');
-        element.className = isHook ? 'treasure-hook' : 'treasure-note';
-        
-        if (isHook) {
-            const hookImg = document.createElement('img');
-            // Reuse hanging hook source preference if available
-            hookImg.src = 'public/hook.png';
-            hookImg.alt = 'Golden Hook';
-            hookImg.style.width = '40px';
-            hookImg.style.height = '48px';
-            hookImg.style.filter = 'sepia(100%) saturate(200%) hue-rotate(30deg) brightness(1.6) drop-shadow(0 0 10px rgba(255, 215, 0, 0.9))';
-            element.appendChild(hookImg);
-        } else {
-            element.innerHTML = '♪';
-        }
-        
-        // Random positioning
-        const angle = (i / 16) * 360 + Math.random() * 30;
-        const distance = 110 + Math.random() * 70;
-        const x = Math.cos(angle * Math.PI / 180) * distance;
-        const y = Math.sin(angle * Math.PI / 180) * distance;
-        
-        element.style.setProperty('--x', `${x}px`);
-        element.style.setProperty('--y', `${y}px`);
-        element.style.animationDelay = `${i * 0.1}s`;
-        
-        container.appendChild(element);
-        
-        // Remove after animation
-        setTimeout(() => element.remove(), 2200);
-    }
-}
-
-// Call createBottomTreasureChest when DOM is loaded
-createBottomTreasureChest();
