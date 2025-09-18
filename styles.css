@@ -710,11 +710,28 @@ textarea::placeholder {
     }
 }
 
-/* Reveal animation for hooks with chain drop */
+/* Reveal animation for hooks - appears when chain is fully extended */
 @keyframes hookReveal {
-    0%   { opacity: 0; transform: scale(0.8) rotate(-10deg); }
-    50%  { opacity: 0.7; transform: scale(1.1) rotate(5deg); }
-    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    0%   {
+        opacity: 0;
+        transform: scale(0.3) rotate(-45deg) translateY(-20px);
+        filter: brightness(0.5);
+    }
+    30%  {
+        opacity: 0.8;
+        transform: scale(1.2) rotate(10deg) translateY(-5px);
+        filter: brightness(1.2);
+    }
+    70%  {
+        opacity: 1;
+        transform: scale(0.95) rotate(-2deg) translateY(2px);
+        filter: brightness(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg) translateY(0px);
+        filter: brightness(1);
+    }
 }
 
 @keyframes chainDrop {
@@ -723,13 +740,13 @@ textarea::placeholder {
     100% { transform: translateX(-50%) scaleY(1); }
 }
 
-/* On reveal: animate both hook and chain, then loop gentle swing */
+/* On reveal: animate chain first, then hook, then both swing together */
 .hanging-hook.hook-dropped .top-hook {
-    animation: hookReveal 1.2s ease-out 1, gentleSwing 6s ease-in-out infinite 1.2s;
+    animation: hookReveal 0.8s ease-out 1.2s, gentleSwing 6s ease-in-out infinite 2s;
 }
 
 .hanging-hook.hook-dropped .hook-chain {
-    animation: chainDrop 1.2s ease-out 1, chainSwing 6s ease-in-out infinite 1.2s;
+    animation: chainDrop 1.2s ease-out 1, chainSwing 6s ease-in-out infinite 2s;
 }
 
 /* Chain swing animation - more subtle than hook swing */
