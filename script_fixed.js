@@ -277,6 +277,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial check
     initAnimations();
 
+    // Initialize hanging hooks system
+    setTimeout(() => {
+        initHookSystem();
+    }, 500);
+});
+
    // Enhanced Hook System Script
 let hooksContainer = null;
 let hooksShown = false;
@@ -442,8 +448,8 @@ function updateHookAttachment() {
     }
 }
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', initHookSystem);
+// Initialize when DOM is ready (already called above)
+// document.addEventListener('DOMContentLoaded', initHookSystem);
 
 
 // Export functions for external use
@@ -457,9 +463,12 @@ window.hookSystem = {
 
     // Message in a Bottle functionality
     function initMessageInBottle() {
+        const messageForm = document.getElementById('messageBottleForm');
         const messageTextarea = document.getElementById('messageTextarea');
         const charCount = document.getElementById('charCount');
         const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const senderName = document.getElementById('senderName');
+        const senderEmail = document.getElementById('senderEmail');
 
         if (messageTextarea && charCount) {
             // Character counter
@@ -478,53 +487,51 @@ window.hookSystem = {
             charCount.textContent = '0/500';
         }
 
-        if (sendMessageBtn) {
-            sendMessageBtn.addEventListener('click', function() {
+        if (messageForm) {
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = senderName ? senderName.value.trim() : '';
+                const email = senderEmail ? senderEmail.value.trim() : '';
                 const message = messageTextarea ? messageTextarea.value.trim() : '';
 
-                if (!message) {
-                    alert('⚓ Ahoy! Please write a message before sending!');
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields before sending your message!');
                     return;
                 }
 
-                if (message.length > 500) {
-                    alert('⚓ Shiver me timbers! Your message is too long! Please keep it under 500 characters.');
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address!');
                     return;
                 }
 
-                // Show success message
-                const originalText = this.textContent;
-                this.textContent = 'Message Sent!';
-                this.classList.add('bg-green-500');
-                this.disabled = true;
+                // Add loading state
+                sendMessageBtn.classList.add('loading');
+                sendMessageBtn.textContent = 'Sending...';
 
-                // Clear the message
-                if (messageTextarea) {
-                    messageTextarea.value = '';
+                // Simulate sending (replace with actual form submission)
+                setTimeout(() => {
+                    alert(`Ahoy ${name}! Your message has been cast into the digital seas! We'll reply to ${email} soon!`);
+                    messageForm.reset();
                     charCount.textContent = '0/500';
                     charCount.style.color = '#9ca3af';
-                }
-
-                // Reset button after 3 seconds
-                setTimeout(() => {
-                    this.textContent = originalText;
-                    this.classList.remove('bg-green-500');
-                    this.disabled = false;
-                }, 3000);
-
-                // Log the message (in a real app, this would be sent to a server)
-                console.log('📧 Message in a bottle sent:', message);
+                    
+                    sendMessageBtn.classList.remove('loading');
+                    sendMessageBtn.textContent = 'Send Message';
+                }, 2000);
             });
         }
     }
 
-    // Initialize message in a bottle functionality
+    // Initialize message in bottle functionality
     initMessageInBottle();
 
     // (Removed duplicate createTreasureExplosion - global version is used)
 
     console.log('⚓ Captain Hook\'s Jingle Factory - All systems ready!');
-});
+;
 
 // Utility function for throttling
 function throttle(func, wait) {
