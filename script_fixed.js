@@ -323,6 +323,7 @@ function ensureHooksBuilt() {
     hookPositions.forEach((position, index) => {
         const hookElement = document.createElement('div');
         hookElement.className = `hanging-hook hanging-hook-top-${index + 1}`;
+        hookElement.style.left = position;
         
         // Create the hook image element
         const hookImage = document.createElement('img');
@@ -528,7 +529,66 @@ window.hookSystem = {
     // Initialize message in bottle functionality
     initMessageInBottle();
 
+    // Initialize contact page functionality if on contact page
+    initContactPage();
+
     // (Removed duplicate createTreasureExplosion - global version is used)
+
+    // Contact page specific functionality
+    function initContactPage() {
+        // Only run on contact page
+        if (!window.location.pathname.includes('contact.html')) return;
+
+        const messageForm = document.getElementById('messageBottleForm');
+        const messageTextarea = document.getElementById('messageTextarea');
+        const charCount = document.getElementById('charCount');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+        if (messageForm && messageTextarea && charCount && sendMessageBtn) {
+            // Character count functionality
+            messageTextarea.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                charCount.textContent = `${currentLength}/500`;
+
+                if (currentLength > 450) {
+                    charCount.style.color = '#ef4444'; // red
+                } else if (currentLength > 350) {
+                    charCount.style.color = '#f59e0b'; // yellow
+                } else {
+                    charCount.style.color = '#9ca3af'; // gray
+                }
+            });
+
+            // Form submission
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('senderName').value.trim();
+                const email = document.getElementById('senderEmail').value.trim();
+                const message = messageTextarea.value.trim();
+
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields before sending your message!');
+                    return;
+                }
+
+                // Add loading state
+                sendMessageBtn.classList.add('loading');
+                sendMessageBtn.textContent = 'Sending...';
+
+                // Simulate sending (replace with actual form submission)
+                setTimeout(() => {
+                    alert(`Ahoy ${name}! Your message has been cast into the digital seas! We'll reply to ${email} soon!`);
+                    messageForm.reset();
+                    charCount.textContent = '0/500';
+                    charCount.style.color = '#9ca3af';
+
+                    sendMessageBtn.classList.remove('loading');
+                    sendMessageBtn.textContent = 'Send Message';
+                }, 2000);
+            });
+        }
+    }
 
     console.log('⚓ Captain Hook\'s Jingle Factory - All systems ready!');
 ;
@@ -564,19 +624,19 @@ document.addEventListener('keydown', (e) => {
 });
 
 // CSS for shake animation and loading states
-const style = document.createElement('style');
-style.textContent = `
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `
     @keyframes shake {
         0%, 100% { transform: translateX(0); }
         10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
         20%, 40%, 60%, 80% { transform: translateX(10px); }
     }
-    
+
     button.loading {
         position: relative;
         pointer-events: none;
     }
-    
+
     button.loading::after {
         content: '';
         position: absolute;
@@ -591,10 +651,12 @@ style.textContent = `
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    
+
     @keyframes spin {
         to { transform: translate(-50%, -50%) rotate(360deg); }
     }
+`;
+document.head.appendChild(shakeStyle);
 
 // Mardi Gras Fairy Dust Cursor Trail
 class FairyDustCursor {
@@ -792,9 +854,4 @@ window.fairyDustCursor = {
         }
     }
 };
-    }
-};
-
-`;
-document.head.appendChild(style);
 

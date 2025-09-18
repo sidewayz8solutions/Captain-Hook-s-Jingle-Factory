@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Captain Hook's Jingle Factory</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'pirata': ['Pirata One', 'cursive'],
+                        'cinzel': ['Cinzel', 'serif'],
+                        'crimson': ['Crimson Text', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bottle-background {
+            background-image: url('public/bottlereal.png');
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-position: left center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .bottle-form-area {
+            position: absolute;
+            left: 18%;
+            top: 35%;
+            width: 20%;
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .contact-boxes-area {
+            position: absolute;
+            right: 8%;
+            top: 25%;
+            width: 30%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .bottle-form-area h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .bottle-form-area input,
+        .bottle-form-area textarea {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 8px;
+            backdrop-filter: blur(8px);
+            font-size: 0.85rem;
+        }
+
+        .bottle-form-area input::placeholder,
+        .bottle-form-area textarea::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .bottle-form-area input:focus,
+        .bottle-form-area textarea:focus {
+            outline: none;
+            border-color: rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .bottle-form-area button {
+            font-size: 0.8rem;
+            padding: 8px 16px;
+        }
+
+        .bottle-form-area .flex {
+            margin-top: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            .bottle-background {
+                background-position: center top;
+                background-size: 80%;
+                min-height: 120vh;
+            }
+
+            .bottle-form-area {
+                position: static;
+                width: 100%;
+                margin: 20px 0;
+                background: rgba(0, 0, 0, 0.8);
+                border-radius: 15px;
+                padding: 30px;
+            }
+
+            .bottle-form-area h3 {
+                font-size: 1.5rem;
+            }
+
+            .bottle-form-area input,
+            .bottle-form-area textarea {
+                font-size: 1rem;
+                padding: 12px;
+            }
+
+            .bottle-form-area button {
+                font-size: 1rem;
+                padding: 12px 24px;
+            }
+
+            .contact-boxes-area {
+                position: static;
+                width: 100%;
+                margin: 20px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bottle-background {
+                background-size: 90%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen overflow-x-hidden">
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <span class="text-4xl">⚓</span>
+                    <div>
+                        <h1 class="font-pirata text-2xl text-yellow-400">Captain Hook's</h1>
+                        <p class="font-cinzel text-sm text-gray-300 -mt-1">Jingle Factory</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Home</a>
+                    <a href="services.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Services</a>
+                    <a href="gallery.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Gallery</a>
+                    <a href="our-legend.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Our Legend</a>
+                    <a href="contact.html" class="font-cinzel text-yellow-400">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Home</a>
+                    <a href="services.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Services</a>
+                    <a href="gallery.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Gallery</a>
+                    <a href="our-legend.html" class="font-cinzel text-gray-300 hover:text-yellow-400 transition-colors">Our Legend</a>
+                    <a href="contact.html" class="font-cinzel text-yellow-400">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24">
+        <!-- Header -->
+        <section class="py-16 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
+                    Chart Your Course
+                </h1>
+                <p class="text-xl text-gray-300 font-crimson">Ready to set sail on your audio adventure?</p>
+            </div>
+        </section>
+
+        <!-- Contact Section with Bottle Background -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="bottle-background">
+                    <!-- Message in Bottle Form -->
+                    <div class="bottle-form-area">
+                        <h3 class="text-2xl font-cinzel text-yellow-400 mb-6 text-center">Send us a message in a bottle</h3>
+                        <form id="messageBottleForm" class="space-y-4">
+                            <input
+                                type="text"
+                                id="senderName"
+                                placeholder="Your name..."
+                                class="w-full font-crimson text-sm"
+                                required
+                            />
+                            <input
+                                type="email"
+                                id="senderEmail"
+                                placeholder="Your email..."
+                                class="w-full font-crimson text-sm"
+                                required
+                            />
+                            <textarea
+                                id="messageTextarea"
+                                placeholder="Write your message to Captain Hook..."
+                                class="w-full h-32 font-crimson text-sm resize-none"
+                                maxlength="500"
+                                required
+                            ></textarea>
+                            <div class="flex justify-between items-center">
+                                <span id="charCount" class="text-xs text-gray-300">0/500</span>
+                                <button 
+                                    type="submit" 
+                                    id="sendMessageBtn" 
+                                    class="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300 text-sm"
+                                >
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info Boxes -->
+                    <div class="contact-boxes-area">
+                        <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-purple-400/20">
+                            <div class="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-yellow-400 text-2xl">📧</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400 font-cinzel">Email Port</div>
+                                <div class="text-yellow-400 font-crimson">ahoy@captainhooksjingles.com</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-purple-400/20">
+                            <div class="w-12 h-12 bg-purple-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-purple-400 text-2xl">📞</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400 font-cinzel">Signal Flags</div>
+                                <div class="text-purple-400 font-crimson">+1 (504) 555-HOOK</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-green-400/20">
+                            <div class="w-12 h-12 bg-green-400/10 rounded-full flex items-center justify-center">
+                                <span class="text-green-400 text-2xl">📍</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400 font-cinzel">Harbor Location</div>
+                                <div class="text-green-400 font-crimson">French Quarter, New Orleans, LA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <span class="text-3xl">⚓</span>
+                    <h3 class="font-pirata text-2xl text-yellow-400">Captain Hook's Jingle Factory</h3>
+                </div>
+                <p class="text-gray-400 text-sm font-crimson mb-8">
+                    Crafting legendary jingles from the heart of Louisiana since 2009. Where music meets magic.
+                </p>
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-500 text-sm font-crimson">
+                        © 2024 Captain Hook's Jingle Factory. All rights reserved. | Ahoy from New Orleans!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script_fixed.js"></script>
+</body>
+</html>
