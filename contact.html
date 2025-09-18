@@ -23,7 +23,7 @@
     <style>
         .bottle-background {
             background-image: url('public/bottlereal.png');
-            background-size: 120%;
+            background-size: 180%;
             background-repeat: no-repeat;
             background-position: left center;
             min-height: 100vh;
@@ -32,22 +32,22 @@
 
         .bottle-form-area {
             position: absolute;
-            left: 28%;
-            top: 30%;
-            width: 30%;
+            left: 40%;
+            top: 38%;
+            width: 20%;
             height: 45%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding: 15px;
+            padding: 15px 10px;
             overflow-y: auto;
         }
 
         .contact-boxes-area {
             position: absolute;
-            right: 2%;
+            right: 5%;
             top: 25%;
-            width: 28%;
+            width: 25%;
             height: 50%;
             display: flex;
             flex-direction: column;
@@ -56,28 +56,31 @@
         }
 
         .bottle-form-area h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
+            font-size: 1rem;
+            margin-bottom: 10px;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .bottle-form-area input,
         .bottle-form-area textarea {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             color: white;
             border-radius: 4px;
             padding: 6px;
             margin-bottom: 6px;
-            backdrop-filter: blur(8px);
-            font-size: 0.75rem;
+            backdrop-filter: blur(10px);
+            font-size: 0.8rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .bottle-form-area textarea {
-            height: 60px;
+            height: 80px;
             resize: none;
+            min-height: 80px;
         }
 
         .bottle-form-area input::placeholder,
@@ -94,22 +97,42 @@
         }
 
         .bottle-form-area button {
-            font-size: 0.7rem;
-            padding: 6px 12px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #2C3E50;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            padding: 8px 16px;
+            width: 100%;
+            margin-top: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .bottle-form-area button:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
         }
 
         .bottle-form-area .flex {
-            margin-top: 3px;
+            margin-top: 5px;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
 
         .bottle-form-area #charCount {
-            font-size: 0.65rem;
+            font-size: 0.75rem;
+            text-align: center;
         }
 
         @media (max-width: 1024px) {
             .bottle-background {
                 background-position: center top;
-                background-size: 110%;
+                background-size: 150%;
                 min-height: 120vh;
             }
 
@@ -146,7 +169,7 @@
 
         @media (max-width: 768px) {
             .bottle-background {
-                background-size: 120%;
+                background-size: 160%;
             }
         }
     </style>
@@ -236,7 +259,7 @@
                                 maxlength="500"
                                 required
                             ></textarea>
-                            <div class="flex justify-between items-center">
+                            <div class="flex">
                                 <span id="charCount" class="text-gray-300">0/500</span>
                                 <button
                                     type="submit"
