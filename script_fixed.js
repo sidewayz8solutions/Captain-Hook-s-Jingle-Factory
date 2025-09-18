@@ -327,12 +327,12 @@ function ensureHooksBuilt() {
         // Create the hook image element
         const hookImage = document.createElement('img');
         hookImage.className = 'top-hook';
-        hookImage.src = '/Users/sidewayz8/Desktop/Captn/public/hook.png';
+        hookImage.src = 'public/hook.png';
         hookImage.alt = 'Pirate Hook';
         
-        // Fallback to local path if absolute path fails
+        // Fallback to root hook image if public folder fails
         hookImage.onerror = function() {
-            console.log('Hook image failed to load from absolute path, trying local path');
+            console.log('Hook image failed to load from public folder, trying root');
             this.src = 'hook.png';
         };
         
