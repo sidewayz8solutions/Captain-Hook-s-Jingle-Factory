@@ -30,6 +30,10 @@
     opacity: 1;
 }
 
+#mainNav.nav-hidden {
+    pointer-events: none;
+}
+
 .nav-link {
     position: relative;
     overflow: hidden;
@@ -604,13 +608,14 @@ textarea::placeholder {
 
 .hanging-hooks-container {
     position: fixed;
-    top: 64px; /* Below the navigation */
+    top: 64px; /* Initially below nav */
     left: 0;
     right: 0;
-    height: 200px; /* increased for longer chains */
-    z-index: 10;
+    height: 300px; /* increased for longer chains that can reach below nav */
+    z-index: 5; /* Below nav but above content */
     pointer-events: none;
     overflow: hidden;
+    transition: top 0.3s ease;
 }
 
 .hanging-hook {
@@ -625,7 +630,7 @@ textarea::placeholder {
 
 .hook-chain {
     width: 4px;
-    height: 140px; /* much longer chain for proper hanging effect */
+    height: 200px; /* even longer chain to reach below nav */
     background: repeating-linear-gradient(
         180deg,
         #E0E0E0 0px,

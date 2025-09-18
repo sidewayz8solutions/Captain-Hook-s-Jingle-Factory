@@ -317,14 +317,15 @@ document.addEventListener('DOMContentLoaded', function() {
         testImg.src = first;
     };
     let hooksShown = false;
+    let navHidden = false;
+
     window.addEventListener('scroll', function() {
-        const heroSection = document.getElementById('home');
-        if (!heroSection) return;
+        const scrollY = window.scrollY;
+        const mainNav = document.getElementById('mainNav');
+        const hooksContainer = document.querySelector('.hanging-hooks-container');
 
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        const scrollPosition = window.scrollY + window.innerHeight * 0.3; // trigger earlier for better visibility
-
-        if (scrollPosition > heroBottom && !hooksShown) {
+        // Show hooks immediately when scrolling down
+        if (scrollY > 50 && !hooksShown) {
             hooksShown = true;
             ensureHooksBuilt();
             const hooks = document.querySelectorAll('.hanging-hook');
@@ -333,7 +334,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 const delay = parseInt(hook.dataset.delay) + (index * 200);
                 setTimeout(() => hook.classList.add('hook-dropped'), delay);
             });
-        } else if (scrollPosition <= heroBottom - 100 && hooksShown) { // hide earlier
+        }
+
+        // Handle nav visibility and hooks positioning
+        if (scrollY > 100) {
+            // Hide nav and move hooks to top
+            if (!navHidden) {
+                navHidden = true;
+                if (mainNav) {
+                    mainNav.classList.add('nav-hidden');
+                    mainNav.style.transform = 'translateY(-100%)';
+                }
+                if (hooksContainer) hooksContainer.style.top = '0px';
+            }
+        } else {
+            // Show nav and move hooks below nav
+            if (navHidden) {
+                navHidden = false;
+                if (mainNav) {
+                    mainNav.classList.remove('nav-hidden');
+                    mainNav.style.transform = 'translateY(0)';
+                }
+                if (hooksContainer) hooksContainer.style.top = '64px';
+            }
+        }
+
+        // Hide hooks when at very top
+        if (scrollY < 20 && hooksShown) {
             hooksShown = false;
             document.querySelectorAll('.hanging-hook').forEach(hook => {
                 hook.classList.remove('hook-dropped');
