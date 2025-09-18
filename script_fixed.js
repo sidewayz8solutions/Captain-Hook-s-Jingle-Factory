@@ -285,9 +285,11 @@ let hookLastScrollY = 0;
 
 // Initialize the hook system
 function initHookSystem() {
+    console.log('Initializing hook system...');
     createHooksContainer();
     ensureHooksBuilt();
     setupScrollListener();
+    console.log('Hook system initialized');
 }
 
 // Create the container initially hidden above the screen
@@ -296,17 +298,6 @@ function createHooksContainer() {
     
     hooksContainer = document.createElement('div');
     hooksContainer.className = 'hanging-hooks-container';
-    hooksContainer.style.cssText = `
-        position: fixed;
-        top: -120px;
-        left: 0;
-        right: 0;
-        height: 120px;
-        z-index: 1000;
-        pointer-events: none;
-        overflow: hidden;
-        transition: top 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    `;
     
     document.body.appendChild(hooksContainer);
 }
@@ -314,6 +305,8 @@ function createHooksContainer() {
 // Build hooks immediately but keep container hidden
 function ensureHooksBuilt() {
     if (!hooksContainer) return;
+    
+    console.log('Building hooks...');
     
     // Clear existing hooks
     hooksContainer.innerHTML = '';
@@ -324,39 +317,28 @@ function ensureHooksBuilt() {
     hookPositions.forEach((position, index) => {
         const hookElement = document.createElement('div');
         hookElement.className = `hanging-hook hanging-hook-top-${index + 1}`;
-        hookElement.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: ${position};
-            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            transform-origin: top center;
-        `;
         
         // Create the hook image element
-        const hookImage = document.createElement('div');
+        const hookImage = document.createElement('img');
         hookImage.className = 'top-hook';
-        hookImage.style.cssText = `
-            width: 84px;
-            height: 126px;
-            background-image: url('hook.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: brightness(1.3) saturate(1.4) contrast(1.1)
-                    drop-shadow(0 0 16px rgba(255, 215, 0, 0.9))
-                    drop-shadow(0 0 32px rgba(255, 215, 0, 0.6))
-                    drop-shadow(0 12px 20px rgba(0, 0, 0, 0.4));
-            animation: gentleSwing 6s ease-in-out infinite;
-            transform-origin: top center;
-            will-change: transform, filter;
-            opacity: 0;
-            transform: scale(0.7) translateY(-30px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        `;
+        hookImage.src = '/Users/sidewayz8/Desktop/Captn/public/hook.png';
+        hookImage.alt = 'Pirate Hook';
+        
+        // Fallback to local path if absolute path fails
+        hookImage.onerror = function() {
+            console.log('Hook image failed to load from absolute path, trying local path');
+            this.src = 'hook.png';
+        };
+        
+        hookImage.onload = function() {
+            console.log(`Hook ${index + 1} image loaded successfully`);
+        };
         
         hookElement.appendChild(hookImage);
         hooksContainer.appendChild(hookElement);
     });
+    
+    console.log('Hooks built:', hooksContainer.children.length);
 }
 
 // Setup scroll listener for hook behavior
@@ -413,6 +395,7 @@ function handleScroll() {
 function showHooks() {
     if (!hooksContainer || hooksShown) return;
     
+    console.log('Showing hooks...');
     hooksShown = true;
     
     // Add visible state to container
@@ -420,9 +403,11 @@ function showHooks() {
     
     // Add pop-out animation to each hook with stagger
     const hooks = hooksContainer.querySelectorAll('.hanging-hook');
+    console.log('Found hooks to animate:', hooks.length);
     hooks.forEach((hook, index) => {
         setTimeout(() => {
             hook.classList.add('hook-popped-out');
+            console.log(`Hook ${index + 1} popped out`);
         }, index * 100); // Staggered appearance
     });
 }

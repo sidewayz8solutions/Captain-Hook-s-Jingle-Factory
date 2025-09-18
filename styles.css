@@ -634,12 +634,6 @@ textarea::placeholder {
     transform-origin: top center;
 }
 
-.hanging-hook.hook-popped-out .top-hook {
-    opacity: 1;
-    transform: scale(1) translateY(0px);
-    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
 .top-hook {
     width: 84px;
     height: 126px;
@@ -648,10 +642,6 @@ textarea::placeholder {
     margin: 0 auto;
     position: relative;
     z-index: 2;
-    background-image: url('hook.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
     filter: brightness(1.3) saturate(1.4) contrast(1.1)
             drop-shadow(0 0 16px rgba(255, 215, 0, 0.9))
             drop-shadow(0 0 32px rgba(255, 215, 0, 0.6))
@@ -732,6 +722,8 @@ textarea::placeholder {
 }
 
 .hanging-hook.hook-popped-out .top-hook {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
     animation: hookPopOut 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards, 
                gentleSwing 8s ease-in-out infinite 1.4s;
 }
