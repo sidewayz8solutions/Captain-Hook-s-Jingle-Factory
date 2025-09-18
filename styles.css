@@ -612,7 +612,7 @@ textarea::placeholder {
     left: 0;
     right: 0;
     height: 120px; /* just enough for hooks */
-    z-index: 1000; /* Above everything when popped out */
+    z-index: 1; /* Behind everything - decorative background element */
     pointer-events: none;
     overflow: hidden;
     transition: top 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -624,7 +624,7 @@ textarea::placeholder {
 
 .hanging-hooks-container.hooks-attached {
     top: 64px; /* Hooks attach to bottom of nav when nav is visible */
-    z-index: 998; /* Below nav when attached */
+    z-index: 1; /* Keep behind everything even when attached */
 }
 
 .hanging-hook {
@@ -1081,8 +1081,8 @@ img.top-hook {
 /* Main bottle container */
 .message-bottle {
     position: relative;
-    width: 200px;
-    height: 400px;
+    width: 250px;
+    height: 500px;
     transform-style: preserve-3d;
     cursor: pointer;
     transition: all 0.4s ease;
@@ -1090,7 +1090,7 @@ img.top-hook {
 }
 
 .message-bottle:hover {
-    transform: scale(1.03) rotate(-1deg) rotateY(3deg);
+    transform: scale(1.02) rotate(-0.5deg) rotateY(2deg);
     filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.4));
 }
 
@@ -1100,8 +1100,8 @@ img.top-hook {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 80px;
+    width: 70px;
+    height: 100px;
     background: linear-gradient(135deg,
         rgba(240, 248, 255, 0.1) 0%,
         rgba(173, 216, 230, 0.15) 25%,
@@ -1109,7 +1109,7 @@ img.top-hook {
         rgba(70, 130, 180, 0.25) 75%,
         rgba(25, 25, 112, 0.3) 100%);
     border: 2px solid rgba(135, 206, 235, 0.3);
-    border-radius: 30px 30px 15px 15px;
+    border-radius: 35px 35px 20px 20px;
     z-index: 5;
     box-shadow:
         0 5px 15px rgba(0, 0, 0, 0.2),
@@ -1123,17 +1123,17 @@ img.top-hook {
 /* Cork for the bottle */
 .bottle-cork {
     position: absolute;
-    top: -15px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    width: 45px;
-    height: 25px;
+    width: 55px;
+    height: 30px;
     background: linear-gradient(180deg,
         rgba(160, 82, 45, 0.95) 0%,
         rgba(139, 69, 19, 0.9) 50%,
         rgba(101, 67, 33, 0.95) 100%);
     border: 2px solid rgba(74, 44, 23, 0.6);
-    border-radius: 22px 22px 8px 8px;
+    border-radius: 27px 27px 10px 10px;
     z-index: 6;
     box-shadow:
         0 3px 10px rgba(0, 0, 0, 0.4),
@@ -1159,11 +1159,11 @@ img.top-hook {
 /* Main glass bottle body */
 .bottle-body {
     position: absolute;
-    top: 65px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    width: 160px;
-    height: 300px;
+    width: 200px;
+    height: 380px;
     background: linear-gradient(135deg,
         rgba(240, 248, 255, 0.05) 0%,
         rgba(173, 216, 230, 0.08) 15%,
@@ -1172,7 +1172,7 @@ img.top-hook {
         rgba(25, 25, 112, 0.18) 75%,
         rgba(0, 0, 139, 0.22) 100%);
     border: 2px solid rgba(135, 206, 235, 0.3);
-    border-radius: 80px 80px 80px 80px;
+    border-radius: 20px 20px 100px 100px;
     overflow: hidden;
     z-index: 2;
     box-shadow:
@@ -1199,7 +1199,7 @@ img.top-hook {
         transparent 60%,
         rgba(255, 255, 255, 0.03) 80%,
         rgba(255, 255, 255, 0.08) 100%);
-    border-radius: 65px 65px 65px 65px;
+    border-radius: 15px 15px 85px 85px;
     pointer-events: none;
     z-index: 4;
 }
@@ -1254,14 +1254,18 @@ img.top-hook {
 /* Message area inside bottle */
 .bottle-message {
     position: absolute;
-    top: 70px;
-    left: 20px;
-    right: 20px;
-    bottom: 80px;
+    top: 80px;
+    left: 25px;
+    right: 25px;
+    bottom: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     z-index: 3;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    backdrop-filter: blur(2px);
 }
 
 /* Water surface effect inside bottle */
@@ -1305,26 +1309,50 @@ img.top-hook {
     }
 }
 
+/* Improved form styling inside bottle */
+.bottle-message input,
+.bottle-message textarea {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bottle-message input::placeholder,
+.bottle-message textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.bottle-message input:focus,
+.bottle-message textarea:focus {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 215, 0, 0.6) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
     .message-bottle {
-        width: 180px;
-        height: 350px;
+        width: 220px;
+        height: 420px;
     }
 
     .bottle-body {
-        width: 140px;
-        height: 260px;
+        width: 170px;
+        height: 320px;
     }
 
     .bottle-neck {
-        width: 50px;
-        height: 65px;
+        width: 60px;
+        height: 80px;
     }
 
     .bottle-cork {
-        width: 38px;
-        height: 20px;
+        width: 45px;
+        height: 25px;
     }
 
     .bottle-label {
@@ -1333,10 +1361,11 @@ img.top-hook {
     }
 
     .bottle-message {
-        top: 60px;
-        left: 18px;
-        right: 18px;
-        bottom: 70px;
+        top: 70px;
+        left: 20px;
+        right: 20px;
+        bottom: 85px;
+        padding: 12px;
     }
 }
 
@@ -1361,23 +1390,23 @@ img.top-hook {
 /* Additional responsive adjustments for very small screens */
 @media (max-width: 480px) {
     .message-bottle {
-        width: 160px;
-        height: 320px;
+        width: 200px;
+        height: 380px;
     }
 
     .bottle-body {
-        width: 120px;
-        height: 240px;
+        width: 150px;
+        height: 280px;
     }
 
     .bottle-neck {
-        width: 45px;
-        height: 60px;
+        width: 55px;
+        height: 70px;
     }
 
     .bottle-cork {
-        width: 35px;
-        height: 18px;
+        width: 42px;
+        height: 22px;
     }
 
     .bottle-label {
@@ -1386,9 +1415,188 @@ img.top-hook {
     }
 
     .bottle-message {
-        top: 55px;
-        left: 15px;
-        right: 15px;
-        bottom: 65px;
+        top: 65px;
+        left: 18px;
+        right: 18px;
+        bottom: 75px;
+        padding: 10px;
+    }
+}
+
+/* Mardi Gras Fairy Dust Cursor Trail */
+.fairy-dust-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.fairy-dust-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: fairyDustFloat 2s ease-out forwards;
+}
+
+/* Mardi Gras color variants */
+.fairy-dust-purple {
+    background: radial-gradient(circle, #7B3F98, #663399);
+    box-shadow: 
+        0 0 6px #7B3F98,
+        0 0 12px rgba(123, 63, 152, 0.6),
+        0 0 18px rgba(123, 63, 152, 0.3);
+}
+
+.fairy-dust-gold {
+    background: radial-gradient(circle, #FFD700, #FDB927);
+    box-shadow: 
+        0 0 6px #FFD700,
+        0 0 12px rgba(255, 215, 0, 0.6),
+        0 0 18px rgba(255, 215, 0, 0.3);
+}
+
+.fairy-dust-green {
+    background: radial-gradient(circle, #32CD32, #228B22);
+    box-shadow: 
+        0 0 6px #32CD32,
+        0 0 12px rgba(50, 205, 50, 0.6),
+        0 0 18px rgba(50, 205, 50, 0.3);
+}
+
+/* Size variations */
+.fairy-dust-small {
+    width: 3px;
+    height: 3px;
+}
+
+.fairy-dust-medium {
+    width: 5px;
+    height: 5px;
+}
+
+.fairy-dust-large {
+    width: 7px;
+    height: 7px;
+}
+
+/* Sparkle stars for extra magic */
+.fairy-sparkle {
+    position: absolute;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: sparkleFloat 1.5s ease-out forwards;
+}
+
+.fairy-sparkle::before {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8px;
+    animation: sparkleRotate 1.5s linear infinite;
+}
+
+.fairy-sparkle.sparkle-purple::before {
+    color: #7B3F98;
+    text-shadow: 
+        0 0 4px #7B3F98,
+        0 0 8px rgba(123, 63, 152, 0.5);
+}
+
+.fairy-sparkle.sparkle-gold::before {
+    color: #FFD700;
+    text-shadow: 
+        0 0 4px #FFD700,
+        0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.fairy-sparkle.sparkle-green::before {
+    color: #32CD32;
+    text-shadow: 
+        0 0 4px #32CD32,
+        0 0 8px rgba(50, 205, 50, 0.5);
+}
+
+/* Animations */
+@keyframes fairyDustFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(-20px) scale(1.2) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(0.3) rotate(360deg);
+    }
+}
+
+@keyframes sparkleFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.5) rotate(0deg);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-15px) scale(1) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.2) rotate(360deg);
+    }
+}
+
+@keyframes sparkleRotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Cursor enhancement */
+body {
+    cursor: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.8), rgba(123, 63, 152, 0.6));
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    box-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.6),
+        0 0 20px rgba(123, 63, 152, 0.4),
+        0 0 30px rgba(50, 205, 50, 0.3);
+}
+
+.custom-cursor::before {
+    content: '✨';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    animation: sparkleRotate 2s linear infinite;
+}
+
+/* Hide cursor on touch devices */
+@media (pointer: coarse) {
+    body {
+        cursor: auto;
+    }
+    
+    .custom-cursor {
+        display: none;
     }
 }

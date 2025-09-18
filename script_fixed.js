@@ -595,6 +595,206 @@ style.textContent = `
     @keyframes spin {
         to { transform: translate(-50%, -50%) rotate(360deg); }
     }
+
+// Mardi Gras Fairy Dust Cursor Trail
+class FairyDustCursor {
+    constructor() {
+        this.container = null;
+        this.customCursor = null;
+        this.lastMouseX = 0;
+        this.lastMouseY = 0;
+        this.particles = [];
+        this.colors = ['purple', 'gold', 'green'];
+        this.sizes = ['small', 'medium', 'large'];
+        this.isTouch = 'ontouchstart' in window;
+        
+        this.init();
+    }
+    
+    init() {
+        if (this.isTouch) return; // Skip on touch devices
+        
+        this.createContainer();
+        this.createCustomCursor();
+        this.bindEvents();
+    }
+    
+    createContainer() {
+        this.container = document.createElement('div');
+        this.container.className = 'fairy-dust-container';
+        document.body.appendChild(this.container);
+    }
+    
+    createCustomCursor() {
+        this.customCursor = document.createElement('div');
+        this.customCursor.className = 'custom-cursor';
+        document.body.appendChild(this.customCursor);
+    }
+    
+    bindEvents() {
+        document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        document.addEventListener('mouseenter', () => this.showCursor());
+        document.addEventListener('mouseleave', () => this.hideCursor());
+    }
+    
+    handleMouseMove(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        // Update custom cursor position
+        if (this.customCursor) {
+            this.customCursor.style.left = x + 'px';
+            this.customCursor.style.top = y + 'px';
+        }
+        
+        // Calculate movement speed for particle intensity
+        const deltaX = x - this.lastMouseX;
+        const deltaY = y - this.lastMouseY;
+        const speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        
+        // Create particles based on movement speed
+        if (speed > 2) {
+            this.createParticle(x, y);
+            
+            // Create extra particles for fast movement
+            if (speed > 8) {
+                this.createParticle(x + Math.random() * 10 - 5, y + Math.random() * 10 - 5);
+            }
+            
+            // Occasional sparkle
+            if (Math.random() < 0.3) {
+                this.createSparkle(x, y);
+            }
+        }
+        
+        this.lastMouseX = x;
+        this.lastMouseY = y;
+    }
+    
+    createParticle(x, y) {
+        const particle = document.createElement('div');
+        
+        // Random properties
+        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        const size = this.sizes[Math.floor(Math.random() * this.sizes.length)];
+        
+        // Add random offset for natural spread
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
+        
+        particle.className = 'fairy-dust-particle fairy-dust-' + color + ' fairy-dust-' + size;
+        particle.style.left = (x + offsetX) + 'px';
+        particle.style.top = (y + offsetY) + 'px';
+        
+        // Add random horizontal drift
+        const driftX = (Math.random() - 0.5) * 30;
+        const driftY = Math.random() * -20 - 10;
+        
+        particle.style.setProperty('--drift-x', driftX + 'px');
+        particle.style.setProperty('--drift-y', driftY + 'px');
+        
+        // Custom animation with drift
+        particle.style.animation = 
+            'fairyDustFloat 2s ease-out forwards, fairyDustDrift 2s ease-out forwards';
+        
+        this.container.appendChild(particle);
+        
+        // Remove particle after animation
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 2000);
+    }
+    
+    createSparkle(x, y) {
+        const sparkle = document.createElement('div');
+        
+        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        
+        // Add random offset
+        const offsetX = (Math.random() - 0.5) * 30;
+        const offsetY = (Math.random() - 0.5) * 30;
+        
+        sparkle.className = 'fairy-sparkle sparkle-' + color;
+        sparkle.style.left = (x + offsetX) + 'px';
+        sparkle.style.top = (y + offsetY) + 'px';
+        
+        this.container.appendChild(sparkle);
+        
+        // Remove sparkle after animation
+        setTimeout(() => {
+            if (sparkle.parentNode) {
+                sparkle.parentNode.removeChild(sparkle);
+            }
+        }, 1500);
+    }
+    
+    showCursor() {
+        if (this.customCursor) {
+            this.customCursor.style.opacity = '1';
+        }
+    }
+    
+    hideCursor() {
+        if (this.customCursor) {
+            this.customCursor.style.opacity = '0';
+        }
+    }
+    
+    destroy() {
+        if (this.container) {
+            this.container.remove();
+        }
+        if (this.customCursor) {
+            this.customCursor.remove();
+        }
+        document.body.style.cursor = 'auto';
+    }
+}
+
+// Add drift animation dynamically
+const style = document.createElement('style');
+style.textContent =
+    '@keyframes fairyDustDrift {' +
+        '0% {' +
+            'transform: translateX(0) translateY(0);' +
+        '}' +
+        '100% {' +
+            'transform: translateX(var(--drift-x, 0)) translateY(var(--drift-y, -30px));' +
+        '}' +
+    '}';
+document.head.appendChild(style);
+
+// Initialize when DOM is ready
+let fairyDustCursor = null;
+
+function initFairyDustCursor() {
+    if (!fairyDustCursor) {
+        fairyDustCursor = new FairyDustCursor();
+    }
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFairyDustCursor);
+} else {
+    initFairyDustCursor();
+}
+
+// Export for external use
+window.fairyDustCursor = {
+    init: initFairyDustCursor,
+    destroy: () => {
+        if (fairyDustCursor) {
+            fairyDustCursor.destroy();
+            fairyDustCursor = null;
+        }
+    }
+};
+    }
+};
+
 `;
 document.head.appendChild(style);
 
