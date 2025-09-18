@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScrollY = currentScrollY;
 
         // Back to top button visibility
-        const backToTop = document.getElementById('backToTop');
         if (backToTop) {
             if (currentScrollY > 300) {
                 backToTop.classList.remove('opacity-0', 'invisible');
@@ -282,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let hooksContainer = null;
 let hooksShown = false;
 let navVisible = true;
-let lastScrollY = 0;
+let hookLastScrollY = 0;
 
 // Initialize the hook system
 function initHookSystem() {
@@ -381,7 +380,7 @@ function handleScroll() {
     }
     
     // Determine nav visibility based on scroll direction
-    const scrollingDown = currentScrollY > lastScrollY;
+    const scrollingDown = currentScrollY > hookLastScrollY;
     const shouldHideNav = scrollingDown && pastHero && currentScrollY > 100;
     
     // Update nav visibility
@@ -407,7 +406,7 @@ function handleScroll() {
         updateHookAttachment();
     }
     
-    lastScrollY = currentScrollY;
+    hookLastScrollY = currentScrollY;
 }
 
 // Show hooks with pop-out animation
@@ -461,12 +460,6 @@ function updateHookAttachment() {
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', initHookSystem);
 
-// Also initialize if script loads after DOM
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHookSystem);
-} else {
-    initHookSystem();
-}
 
 // Export functions for external use
 window.hookSystem = {
