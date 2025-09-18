@@ -322,16 +322,18 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!heroSection) return;
 
         const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-    const scrollPosition = window.scrollY + window.innerHeight * 0.15; // trigger slightly sooner
-        
+        const scrollPosition = window.scrollY + window.innerHeight * 0.3; // trigger earlier for better visibility
+
         if (scrollPosition > heroBottom && !hooksShown) {
             hooksShown = true;
             ensureHooksBuilt();
             const hooks = document.querySelectorAll('.hanging-hook');
-            hooks.forEach(hook => {
-                setTimeout(() => hook.classList.add('hook-dropped'), parseInt(hook.dataset.delay));
+            hooks.forEach((hook, index) => {
+                // Stagger the animation timing for each hook
+                const delay = parseInt(hook.dataset.delay) + (index * 200);
+                setTimeout(() => hook.classList.add('hook-dropped'), delay);
             });
-        } else if (scrollPosition <= heroBottom && hooksShown) {
+        } else if (scrollPosition <= heroBottom - 100 && hooksShown) { // hide earlier
             hooksShown = false;
             document.querySelectorAll('.hanging-hook').forEach(hook => {
                 hook.classList.remove('hook-dropped');
