@@ -278,96 +278,204 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial check
     initAnimations();
 
-    // Enhanced features: Hanging hooks animation
-    // Prefer the user's absolute image path for all hanging hooks, with safe fallbacks
-    const HANGING_HOOK_SOURCES = [
-        'file:///Users/sidewayz8/Desktop/Captn/public/hook.png',
-        'public/hook.png',
-        './public/hook.png',
-        'hook.png'
-    ];
-    // Create the container but keep it visually collapsed at the very top; we'll only drop hooks after hero is off-screen
-    const hangingHooksContainer = document.createElement('div');
-    hangingHooksContainer.classList.add('hanging-hooks-container');
-    document.body.appendChild(hangingHooksContainer);
+   // Enhanced Hook System Script
+let hooksContainer = null;
+let hooksShown = false;
+let navVisible = true;
+let lastScrollY = 0;
+
+// Initialize the hook system
+function initHookSystem() {
+    createHooksContainer();
+    ensureHooksBuilt();
+    setupScrollListener();
+}
+
+// Create the container initially hidden above the screen
+function createHooksContainer() {
+    if (hooksContainer) return;
     
-    // Build hooks only when needed (after hero)
-    function ensureHooksBuilt() {
-        if (hangingHooksContainer.childElementCount > 0) return;
-        let hooksHTML = '';
-        for (let i = 1; i <= 7; i++) {
-            hooksHTML += `
-                <div class="hanging-hook hanging-hook-top-${i}" data-delay="${i * 150}">
-                    <div class="hook-chain"></div>
-                    <img src="public/hook.png" alt="Hook" class="top-hook" />
-                </div>`;
-        }
-        hangingHooksContainer.innerHTML = hooksHTML;
-        document.querySelectorAll('.hanging-hooks-container .top-hook').forEach(img => {
-            setHookSrcWithFallback(img, [...HANGING_HOOK_SOURCES]);
-        });
-    }
-    // Ensure all hanging hook images point to the requested asset path (with fallbacks)
-    const setHookSrcWithFallback = (img, sources) => {
-        if (!sources || sources.length === 0) return;
-        const [first, ...rest] = sources;
-        const testImg = new Image();
-        testImg.onload = () => { img.src = first; };
-        testImg.onerror = () => setHookSrcWithFallback(img, rest);
-        testImg.src = first;
-    };
-    let hooksShown = false;
-    let navHidden = false;
+    hooksContainer = document.createElement('div');
+    hooksContainer.className = 'hanging-hooks-container';
+    hooksContainer.style.cssText = `
+        position: fixed;
+        top: -120px;
+        left: 0;
+        right: 0;
+        height: 120px;
+        z-index: 1000;
+        pointer-events: none;
+        overflow: hidden;
+        transition: top 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    `;
+    
+    document.body.appendChild(hooksContainer);
+}
 
-    window.addEventListener('scroll', function() {
-        const scrollY = window.scrollY;
-        const mainNav = document.getElementById('mainNav');
-        const hooksContainer = document.querySelector('.hanging-hooks-container');
-
-        // Show hooks immediately when scrolling down
-        if (scrollY > 50 && !hooksShown) {
-            hooksShown = true;
-            ensureHooksBuilt();
-            const hooks = document.querySelectorAll('.hanging-hook');
-            hooks.forEach((hook, index) => {
-                // Stagger the animation timing for each hook
-                const delay = parseInt(hook.dataset.delay) + (index * 200);
-                setTimeout(() => hook.classList.add('hook-dropped'), delay);
-            });
-        }
-
-        // Handle nav visibility and hooks positioning
-        if (scrollY > 100) {
-            // Hide nav and move hooks to top
-            if (!navHidden) {
-                navHidden = true;
-                if (mainNav) {
-                    mainNav.classList.add('nav-hidden');
-                    mainNav.style.transform = 'translateY(-100%)';
-                }
-                if (hooksContainer) hooksContainer.style.top = '0px';
-            }
-        } else {
-            // Show nav and move hooks below nav
-            if (navHidden) {
-                navHidden = false;
-                if (mainNav) {
-                    mainNav.classList.remove('nav-hidden');
-                    mainNav.style.transform = 'translateY(0)';
-                }
-                if (hooksContainer) hooksContainer.style.top = '64px';
-            }
-        }
-
-        // Hide hooks when at very top
-        if (scrollY < 20 && hooksShown) {
-            hooksShown = false;
-            document.querySelectorAll('.hanging-hook').forEach(hook => {
-                hook.classList.remove('hook-dropped');
-            });
-        }
+// Build hooks immediately but keep container hidden
+function ensureHooksBuilt() {
+    if (!hooksContainer) return;
+    
+    // Clear existing hooks
+    hooksContainer.innerHTML = '';
+    
+    // Create 7 hooks with staggered positioning
+    const hookPositions = ['10%', '25%', '40%', '50%', '60%', '75%', '90%'];
+    
+    hookPositions.forEach((position, index) => {
+        const hookElement = document.createElement('div');
+        hookElement.className = `hanging-hook hanging-hook-top-${index + 1}`;
+        hookElement.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: ${position};
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: top center;
+        `;
+        
+        // Create the hook image element
+        const hookImage = document.createElement('div');
+        hookImage.className = 'top-hook';
+        hookImage.style.cssText = `
+            width: 84px;
+            height: 126px;
+            background-image: url('hook.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: brightness(1.3) saturate(1.4) contrast(1.1)
+                    drop-shadow(0 0 16px rgba(255, 215, 0, 0.9))
+                    drop-shadow(0 0 32px rgba(255, 215, 0, 0.6))
+                    drop-shadow(0 12px 20px rgba(0, 0, 0, 0.4));
+            animation: gentleSwing 6s ease-in-out infinite;
+            transform-origin: top center;
+            will-change: transform, filter;
+            opacity: 0;
+            transform: scale(0.7) translateY(-30px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        `;
+        
+        hookElement.appendChild(hookImage);
+        hooksContainer.appendChild(hookElement);
     });
+}
+
+// Setup scroll listener for hook behavior
+function setupScrollListener() {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+// Handle scroll events to show/hide hooks and nav
+function handleScroll() {
+    const currentScrollY = window.scrollY;
+    const nav = document.querySelector('nav') || document.querySelector('.nav') || document.querySelector('.navbar');
+    const hero = document.querySelector('.hero') || document.querySelector('#hero') || document.querySelector('.hero-section');
     
+    // Determine if we've scrolled past hero
+    let pastHero = false;
+    if (hero) {
+        const heroHeight = hero.offsetHeight;
+        pastHero = currentScrollY > heroHeight * 0.8; // Trigger at 80% of hero height
+    } else {
+        pastHero = currentScrollY > 600; // Fallback threshold
+    }
+    
+    // Determine nav visibility based on scroll direction
+    const scrollingDown = currentScrollY > lastScrollY;
+    const shouldHideNav = scrollingDown && pastHero && currentScrollY > 100;
+    
+    // Update nav visibility
+    if (nav) {
+        if (shouldHideNav && navVisible) {
+            nav.style.transform = 'translateY(-100%)';
+            navVisible = false;
+        } else if (!shouldHideNav && !navVisible) {
+            nav.style.transform = 'translateY(0)';
+            navVisible = true;
+        }
+    }
+    
+    // Handle hook visibility and positioning
+    if (pastHero && !hooksShown) {
+        showHooks();
+    } else if (!pastHero && hooksShown) {
+        hideHooks();
+    }
+    
+    // Update hook attachment state
+    if (hooksShown) {
+        updateHookAttachment();
+    }
+    
+    lastScrollY = currentScrollY;
+}
+
+// Show hooks with pop-out animation
+function showHooks() {
+    if (!hooksContainer || hooksShown) return;
+    
+    hooksShown = true;
+    
+    // Add visible state to container
+    hooksContainer.classList.add('hooks-visible');
+    
+    // Add pop-out animation to each hook with stagger
+    const hooks = hooksContainer.querySelectorAll('.hanging-hook');
+    hooks.forEach((hook, index) => {
+        setTimeout(() => {
+            hook.classList.add('hook-popped-out');
+        }, index * 100); // Staggered appearance
+    });
+}
+
+// Hide hooks
+function hideHooks() {
+    if (!hooksContainer || !hooksShown) return;
+    
+    hooksShown = false;
+    
+    // Remove all hook states
+    hooksContainer.classList.remove('hooks-visible', 'hooks-attached');
+    
+    const hooks = hooksContainer.querySelectorAll('.hanging-hook');
+    hooks.forEach(hook => {
+        hook.classList.remove('hook-popped-out');
+    });
+}
+
+// Update hook attachment to nav
+function updateHookAttachment() {
+    if (!hooksContainer || !hooksShown) return;
+    
+    if (navVisible) {
+        // Hooks attach to bottom of nav
+        hooksContainer.classList.add('hooks-attached');
+        hooksContainer.classList.remove('hooks-visible');
+    } else {
+        // Hooks dangle from top of screen
+        hooksContainer.classList.add('hooks-visible');
+        hooksContainer.classList.remove('hooks-attached');
+    }
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initHookSystem);
+
+// Also initialize if script loads after DOM
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHookSystem);
+} else {
+    initHookSystem();
+}
+
+// Export functions for external use
+window.hookSystem = {
+    init: initHookSystem,
+    show: showHooks,
+    hide: hideHooks,
+    rebuild: ensureHooksBuilt
+};
+
 
     // Message in a Bottle functionality
     function initMessageInBottle() {
