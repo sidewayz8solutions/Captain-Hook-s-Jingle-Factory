@@ -21,156 +21,70 @@
         }
     </script>
     <style>
+        /* Background image that contains the ocean + bottle, exactly as the mock */
         .bottle-background {
             background-image: url('public/bottlereal.png');
-            background-size: 180%;
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: left center;
+            background-position: center center;
             min-height: 100vh;
             position: relative;
+            isolation: isolate;
         }
 
+        /* Left stack inside the bottle (two yellow boxes) */
         .bottle-form-area {
             position: absolute;
-            left: 40%;
-            top: 38%;
-            width: 20%;
-            height: 45%;
+            left: 20%; /* place roughly over the bottle body */
+            top: 32%;
+            width: 22%;
+            height: 52%;
+            transform: none;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            padding: 15px 10px;
-            overflow-y: auto;
+            justify-content: space-between;
+            gap: 4%;
         }
 
+        /* Right stack (three yellow boxes) */
         .contact-boxes-area {
             position: absolute;
-            right: 5%;
-            top: 25%;
-            width: 25%;
-            height: 50%;
+            right: 10%;
+            top: 32%;
+            width: 34%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 18px;
+            gap: 28px;
         }
 
-        .bottle-form-area h3 {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            line-height: 1.1;
+        /* The yellow placeholder rectangles */
+        .placeholder-yellow {
+            background: #FFF159; /* vivid yellow */
+            border: 6px solid rgba(0,0,0,0.9);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+            border-radius: 8px;
         }
+        .placeholder-yellow.small { height: 28%; }
+        .placeholder-yellow.large { height: 66%; }
+        .placeholder-yellow.box { height: 110px; }
 
-        .bottle-form-area input,
-        .bottle-form-area textarea {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: white;
-            border-radius: 4px;
-            padding: 6px;
-            margin-bottom: 6px;
-            backdrop-filter: blur(10px);
-            font-size: 0.8rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .bottle-form-area textarea {
-            height: 80px;
-            resize: none;
-            min-height: 80px;
-        }
-
-        .bottle-form-area input::placeholder,
-        .bottle-form-area textarea::placeholder {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .bottle-form-area input:focus,
-        .bottle-form-area textarea:focus {
-            outline: none;
-            border-color: rgba(255, 215, 0, 0.7);
-            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.4);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .bottle-form-area button {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #2C3E50;
-            border: none;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            padding: 8px 16px;
-            width: 100%;
-            margin-top: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .bottle-form-area button:hover {
-            background: linear-gradient(135deg, #FFA500, #FFD700);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-        }
-
-        .bottle-form-area .flex {
-            margin-top: 5px;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .bottle-form-area #charCount {
-            font-size: 0.75rem;
-            text-align: center;
-        }
-
+        /* Responsive placement for tablets/phones: stack vertically */
         @media (max-width: 1024px) {
             .bottle-background {
                 background-position: center top;
-                background-size: 150%;
                 min-height: 120vh;
             }
-
-            .bottle-form-area {
-                position: static;
-                width: 100%;
-                margin: 20px 0;
-                background: rgba(0, 0, 0, 0.8);
-                border-radius: 15px;
-                padding: 30px;
-            }
-
-            .bottle-form-area h3 {
-                font-size: 1.5rem;
-            }
-
-            .bottle-form-area input,
-            .bottle-form-area textarea {
-                font-size: 1rem;
-                padding: 12px;
-            }
-
-            .bottle-form-area button {
-                font-size: 1rem;
-                padding: 12px 24px;
-            }
-
-            .contact-boxes-area {
-                position: static;
-                width: 100%;
-                margin: 20px 0;
-            }
+            .bottle-form-area,
+            .contact-boxes-area { position: static; width: 100%; height: auto; }
+            .bottle-form-area { margin: 12px 0; }
+            .contact-boxes-area { margin: 12px 0; }
+            .placeholder-yellow.small { height: 80px; }
+            .placeholder-yellow.large { height: 220px; }
+            .placeholder-yellow.box { height: 90px; }
         }
 
         @media (max-width: 768px) {
-            .bottle-background {
-                background-size: 160%;
-            }
+            .bottle-background { background-size: cover; }
         }
     </style>
 </head>
@@ -220,89 +134,23 @@
 
     <!-- Main Content -->
     <main class="pt-24">
-        <!-- Header -->
-        <section class="py-16 text-center">
-            <div class="container mx-auto px-6">
-                <h1 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4">
-                    Chart Your Course
-                </h1>
-                <p class="text-xl text-gray-300 font-crimson">Ready to set sail on your audio adventure?</p>
-            </div>
-        </section>
 
         <!-- Contact Section with Bottle Background -->
         <section class="py-20">
             <div class="container mx-auto px-6">
                 <div class="bottle-background">
-                    <!-- Message in Bottle Form -->
+                    <!-- EXACT LAYOUT PLACEHOLDERS -->
+                    <!-- Left (inside bottle): two stacked yellow rectangles -->
                     <div class="bottle-form-area">
-                        <h3 class="font-cinzel text-yellow-400 text-center">Send us a message in a bottle</h3>
-                        <form id="messageBottleForm">
-                            <input
-                                type="text"
-                                id="senderName"
-                                placeholder="Your name..."
-                                class="w-full font-crimson"
-                                required
-                            />
-                            <input
-                                type="email"
-                                id="senderEmail"
-                                placeholder="Your email..."
-                                class="w-full font-crimson"
-                                required
-                            />
-                            <textarea
-                                id="messageTextarea"
-                                placeholder="Write your message to Captain Hook..."
-                                class="w-full font-crimson"
-                                maxlength="500"
-                                required
-                            ></textarea>
-                            <div class="flex">
-                                <span id="charCount" class="text-gray-300">0/500</span>
-                                <button
-                                    type="submit"
-                                    id="sendMessageBtn"
-                                    class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300"
-                                >
-                                    Send Message
-                                </button>
-                            </div>
-                        </form>
+                        <div class="placeholder-yellow small"></div>
+                        <div class="placeholder-yellow large"></div>
                     </div>
 
-                    <!-- Contact Info Boxes -->
+                    <!-- Right: three equal yellow rectangles stacked -->
                     <div class="contact-boxes-area">
-                        <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-purple-400/20">
-                            <div class="w-12 h-12 bg-yellow-400/10 rounded-full flex items-center justify-center">
-                                <span class="text-yellow-400 text-2xl">📧</span>
-                            </div>
-                            <div>
-                                <div class="text-sm text-gray-400 font-cinzel">Email Port</div>
-                                <div class="text-yellow-400 font-crimson">ahoy@captainhooksjingles.com</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-purple-400/20">
-                            <div class="w-12 h-12 bg-purple-400/10 rounded-full flex items-center justify-center">
-                                <span class="text-purple-400 text-2xl">📞</span>
-                            </div>
-                            <div>
-                                <div class="text-sm text-gray-400 font-cinzel">Signal Flags</div>
-                                <div class="text-purple-400 font-crimson">+1 (504) 555-HOOK</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item flex items-center space-x-4 p-4 bg-gray-800/30 rounded-lg border border-green-400/20">
-                            <div class="w-12 h-12 bg-green-400/10 rounded-full flex items-center justify-center">
-                                <span class="text-green-400 text-2xl">📍</span>
-                            </div>
-                            <div>
-                                <div class="text-sm text-gray-400 font-cinzel">Harbor Location</div>
-                                <div class="text-green-400 font-crimson">French Quarter, New Orleans, LA</div>
-                            </div>
-                        </div>
+                        <div class="placeholder-yellow box"></div>
+                        <div class="placeholder-yellow box"></div>
+                        <div class="placeholder-yellow box"></div>
                     </div>
                 </div>
             </div>
