@@ -32,7 +32,7 @@
             isolation: isolate;
         }
 
-        /* Left stack inside the bottle (two yellow boxes) */
+        /* Left stack inside the bottle (contact form) */
         .bottle-form-area {
             position: absolute;
             left: 20%; /* place roughly over the bottle body */
@@ -42,11 +42,12 @@
             transform: none;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 4%;
+            justify-content: flex-start;
+            gap: 12px;
+            padding: 20px;
         }
 
-        /* Right stack (three yellow boxes) */
+        /* Right stack (three contact info boxes) */
         .contact-boxes-area {
             position: absolute;
             right: 10%;
@@ -57,34 +58,183 @@
             gap: 28px;
         }
 
-        /* The yellow placeholder rectangles */
-        .placeholder-yellow {
-            background: #FFF159; /* vivid yellow */
-            border: 6px solid rgba(0,0,0,0.9);
-            box-shadow: 0 10px 24px rgba(0,0,0,0.45);
-            border-radius: 8px;
+        /* Contact form styling */
+        .bottle-form-title {
+            color: #FFF159;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
         }
-        .placeholder-yellow.small { height: 28%; }
-        .placeholder-yellow.large { height: 66%; }
-        .placeholder-yellow.box { height: 110px; }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Crimson Text', serif;
+            font-size: 14px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #FFF159;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+
+        .form-textarea {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Crimson Text', serif;
+            font-size: 14px;
+            width: 60%;
+            height: 100px;
+            resize: vertical;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #FFF159;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+
+        .character-counter {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            text-align: left;
+            margin-top: 4px;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .send-button {
+            background: #FFF159;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+
+        .send-button:hover {
+            background: #E6D84A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 241, 89, 0.4);
+        }
+
+        /* Contact info boxes */
+        .contact-info-box {
+            background: rgba(0, 40, 60, 0.85);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 18px;
+            backdrop-filter: blur(10px);
+            height: 110px;
+            display: flex;
+            align-items: left;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-box:hover {
+            background: rgba(0, 40, 60, 0.95);
+            border-color: #FFF159;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 241, 89, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0 0 6px 0;
+            letter-spacing: 1px;
+        }
+
+        .contact-details p {
+            color: #FFF159;
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.3;
+        }
 
         /* Responsive placement for tablets/phones: stack vertically */
         @media (max-width: 1024px) {
             .bottle-background {
                 background-position: center top;
                 min-height: 120vh;
+                padding: 40px 20px;
             }
             .bottle-form-area,
-            .contact-boxes-area { position: static; width: 100%; height: auto; }
-            .bottle-form-area { margin: 12px 0; }
-            .contact-boxes-area { margin: 12px 0; }
-            .placeholder-yellow.small { height: 80px; }
-            .placeholder-yellow.large { height: 220px; }
-            .placeholder-yellow.box { height: 90px; }
+            .contact-boxes-area { 
+                position: static; 
+                width: 100%; 
+                height: auto; 
+                max-width: 500px;
+                margin: 0 auto 40px auto;
+            }
+            .bottle-form-area { 
+                background: rgba(0, 40, 60, 0.85);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                backdrop-filter: blur(10px);
+                padding: px;
+            }
         }
 
         @media (max-width: 768px) {
-            .bottle-background { background-size: cover; }
+            .bottle-background { 
+                background-size: cover; 
+                padding: 20px 16px;
+            }
+            .bottle-form-area {
+                padding: 24px;
+            }
+            .contact-info-box {
+                padding: 16px 20px;
+                height: auto;
+                min-height: 90px;
+            }
         }
     </style>
 </head>
@@ -139,18 +289,60 @@
         <section class="py-20">
             <div class="container mx-auto px-6">
                 <div class="bottle-background">
-                    <!-- EXACT LAYOUT PLACEHOLDERS -->
-                    <!-- Left (inside bottle): two stacked yellow rectangles -->
+                    <!-- Contact Form (inside bottle) -->
                     <div class="bottle-form-area">
-                        <div class="placeholder-yellow small"></div>
-                        <div class="placeholder-yellow large"></div>
+                        <h2 class="bottle-form-title">SEND US A MESSAGE IN A BOTTLE</h2>
+                        <form id="contactForm">
+                            <input type="text" class="form-input" placeholder="Your name..." required>
+                            <input type="email" class="form-input" placeholder="Your email..." required>
+                            <textarea class="form-textarea" placeholder="Write your message to Captain Hook..." maxlength="500" id="messageTextarea"></textarea>
+                            <div class="character-counter">
+                                <span id="charCount">0</span>/500
+                            </div>
+                            <button type="submit" class="send-button">SEND MESSAGE</button>
+                        </form>
                     </div>
 
-                    <!-- Right: three equal yellow rectangles stacked -->
+                    <!-- Contact Info Boxes (right side) -->
                     <div class="contact-boxes-area">
-                        <div class="placeholder-yellow box"></div>
-                        <div class="placeholder-yellow box"></div>
-                        <div class="placeholder-yellow box"></div>
+                        <!-- Email Port -->
+                        <div class="contact-info-box">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" fill="#FFF159" viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>EMAIL PORT</h3>
+                                <p>ahoy@captainhooksjingles.com</p>
+                            </div>
+                        </div>
+
+                        <!-- Signal Flags -->
+                        <div class="contact-info-box">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" fill="#FFF159" viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>SIGNAL FLAGS</h3>
+                                <p>+1 (504) 555-HOOK</p>
+                            </div>
+                        </div>
+
+                        <!-- Harbor Location -->
+                        <div class="contact-info-box">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" fill="#FFF159" viewBox="0 0 24 24">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>HARBOR LOCATION</h3>
+                                <p>French Quarter, New Orleans, LA</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,5 +370,19 @@
     </footer>
 
     <script src="script_fixed.js"></script>
+    <script>
+        // Character counter for the message textarea
+        document.getElementById('messageTextarea').addEventListener('input', function() {
+            const charCount = this.value.length;
+            document.getElementById('charCount').textContent = charCount;
+        });
+
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Your message has been sent to Captain Hook! Expect a response via carrier parrot.');
+        });
+    </script>
 </body>
 </html>
