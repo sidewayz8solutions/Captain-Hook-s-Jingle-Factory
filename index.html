@@ -23,7 +23,8 @@
                         'mardi-purple-dark': '#4C1D95',
                         'mardi-gold': '#FFD700',
                         'mardi-gold-dark': '#F59E0B',
-                        'mardi-green': '#004F18FF',
+                        'mardi-green': '#00A86B',
+                        'mardi-green-dark': '#006B3C',
                     },
                     fontFamily: {
                         'pirata': ['Pirata One', 'cursive'],
@@ -59,10 +60,10 @@
                         },
                         'pulse-glow': {
                             '0%, 100%': { 
-                                boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(123, 44, 191, 0.3), 0 0 60px rgba(16, 185, 129, 0.2)'
+                                boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(123, 44, 191, 0.3), 0 0 60px rgba(0, 168, 107, 0.2)'
                             },
                             '50%': { 
-                                boxShadow: '0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(123, 44, 191, 0.5), 0 0 80px rgba(16, 185, 129, 0.3)'
+                                boxShadow: '0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(123, 44, 191, 0.5), 0 0 80px rgba(0, 168, 107, 0.3)'
                             },
                         },
                         fadeIn: {
@@ -120,7 +121,7 @@
                     <a href="services.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Services</a>
                     <a href="gallery.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Treasure Gallery</a>
                     <a href="our-legend.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Our Legend</a>
-                    <a href="#contact" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
+                    <a href="contact.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
                     <button class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel text-sm uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300">
                         Set Sail
                     </button>
@@ -143,7 +144,7 @@
                     <a href="services.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
                     <a href="gallery.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
                     <a href="our-legend.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
-                    <a href="#contact" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <a href="contact.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
                     <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transition-all duration-300">
                         Set Sail Now
                     </button>
@@ -184,19 +185,35 @@
             <div class="captain-container">
                 <img src="public/chook.png" class="captain-image enhanced-captain-glow" alt="Captain Hook">
             </div>
-            <!-- Removed H1/H2 per request -->
+            
+            <!-- Main Pirate Hero Message -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-mardi-gold via-mardi-purple to-mardi-green mb-6 animate-fade-in">
+                🏴‍☠️ Ahoy, Ye Brave Brand Buccaneers!
+            </h1>
+            
+            <h2 class="text-2xl md:text-4xl lg:text-5xl font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-mardi-green to-mardi-gold mb-8 animate-fade-in animation-delay-200">
+                Welcome aboard Captain Hook's Jingle Factory
+            </h2>
+            
+            <div class="text-xl md:text-2xl text-mardi-gold font-pirata mb-6 animate-fade-in animation-delay-300">
+                Where Every Tune Be Treasure!
+            </div>
 
-            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 font-crimson animate-fade-in animation-delay-400 max-w-3xl mx-auto">
-                Where musical treasures are forged with passion, precision, and a touch of pirate magic
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 font-crimson animate-fade-in animation-delay-400 max-w-4xl mx-auto">
+                Be ye seekin' a jingle that sticks tighter than barnacles on your hull? Then step aboard, ye daring entrepreneur, and let ol' Captain Hook craft ye a jingle so catchy, so golden, it'll have yer competitors walkin' the plank! <span class="text-yellow-400 font-bold">Arrrgh!</span>
+            </p>
+            
+            <p class="text-md md:text-lg text-gray-300 mb-12 font-crimson animate-fade-in animation-delay-500 max-w-4xl mx-auto">
+                Here at Captain Hook's Jingle Factory, we don't just write jingles—we forge legendary hooks in the fiery belly of Mount Melody! Each tune be custom-made, seaworthy, and shinier than a chest o' bedazzled doubloons.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in animation-delay-600">
-                <button class="px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-2xl">
-                    Chart Your Course
-                </button>
-                <button class="px-10 py-4 bg-transparent border-2 border-yellow-500 text-yellow-500 font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-yellow-500 hover:text-gray-900 transform hover:scale-105 transition-all duration-300">
-                    View Our Treasures
-                </button>
+                <a href="#contact" class="px-12 py-4 bg-gradient-to-r from-mardi-gold to-mardi-gold-dark text-gray-900 font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-mardi-gold-dark hover:to-mardi-gold transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                    🏴 Get Hooked Today!
+                </a>
+                <a href="gallery.html" class="px-12 py-4 bg-transparent border-2 border-mardi-purple text-mardi-purple font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-mardi-purple hover:text-white transform hover:scale-105 transition-all duration-300">
+                    🎧 Hear the Treasure Tunes
+                </a>
             </div>
         </div>
     </section>
@@ -207,66 +224,66 @@
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-4">
-                    Our Legendary Services
+                <h2 class="text-4xl md:text-5xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-mardi-gold to-mardi-purple mb-4">
+                    ⚓ What We Be Offering, Ye Ask?
                 </h2>
-                <p class="text-xl text-gray-300 font-crimson">Navigate through our treasure trove of audio services</p>
+                <p class="text-xl text-gray-300 font-crimson">Navigate through our treasure trove of legendary audio services, each forged with pirate precision!</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Service Card 1 -->
                 <div class="service-card p-8 rounded-2xl animate-on-scroll">
-                    <div class="text-yellow-400 mb-6">
+                    <div class="text-mardi-gold mb-6">
                         <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-yellow-400">Lightning Fast Creation</h3>
-                    <p class="text-gray-300 mb-6 font-crimson">Custom jingles crafted in record time without compromising quality. Your brand's sound, delivered when you need it.</p>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-mardi-gold">🪝 Custom Jingles</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Built to catch ears like a hook to a sail. We don't dawdle like a landlubber!</p>
                     <ul class="space-y-2 mb-8 text-sm text-gray-400">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> 24-hour rush delivery</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Unlimited revisions</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span> Real-time collaboration</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-gold rounded-full mr-2"></span> 🦜 Legendary Hooks</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-gold rounded-full mr-2"></span> ⚓ Fast Turnaround</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-gold rounded-full mr-2"></span> 🌊 Big Sound, No Gimmicks</li>
                     </ul>
-                    <a href="services.html" class="block w-full py-3 border-2 border-yellow-400/30 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 text-center">
+                    <a href="services.html" class="block w-full py-3 border-2 border-mardi-gold/30 text-mardi-gold rounded-full hover:bg-mardi-gold hover:text-gray-900 transition-all duration-300 text-center">
                         Explore Service
                     </a>
                 </div>
 
                 <!-- Service Card 2 -->
                 <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-200">
-                    <div class="text-purple-400 mb-6">
+                    <div class="text-mardi-purple mb-6">
                         <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-purple-400">Premium Production</h3>
-                    <p class="text-gray-300 mb-6 font-crimson">State-of-the-art studio quality with world-class musicians and producers. Every note perfected for maximum impact.</p>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-mardi-purple">🎵 Theme Songs & Shanties</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">That'll have yer brand a chantin' from sea to shining sea. 💰 Sonic Branding Booty – We give yer brand a sound worth plunderin'!</p>
                     <ul class="space-y-2 mb-8 text-sm text-gray-400">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> 4K audio quality</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Live orchestration</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span> Multi-format delivery</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-purple rounded-full mr-2"></span> Studio-grade quality</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-purple rounded-full mr-2"></span> Professional musicians</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-purple rounded-full mr-2"></span> Multi-format delivery</li>
                     </ul>
-                    <a href="services.html" class="block w-full py-3 border-2 border-purple-400/30 text-purple-400 rounded-full hover:bg-purple-400 hover:text-gray-900 transition-all duration-300 text-center">
+                    <a href="services.html" class="block w-full py-3 border-2 border-mardi-purple/30 text-mardi-purple rounded-full hover:bg-mardi-purple hover:text-gray-900 transition-all duration-300 text-center">
                         Explore Service
                     </a>
                 </div>
 
                 <!-- Service Card 3 -->
                 <div class="service-card p-8 rounded-2xl animate-on-scroll animation-delay-400">
-                    <div class="text-green-400 mb-6">
+                    <div class="text-mardi-green mb-6">
                         <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-green-400">Global Reach</h3>
-                    <p class="text-gray-300 mb-6 font-crimson">Jingles that transcend borders and languages. We create universal hooks that resonate with audiences worldwide.</p>
+                    <h3 class="text-2xl font-cinzel font-bold mb-4 text-mardi-green">🎧 Podcast & Radio Spots</h3>
+                    <p class="text-gray-300 mb-6 font-crimson">Get yer show soundin' shipshape. 🎙️ Radio & TV Spots – Make waves on the air, far and wide.</p>
                     <ul class="space-y-2 mb-8 text-sm text-gray-400">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> 50+ languages</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> Cultural adaptation</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span> International licensing</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-green rounded-full mr-2"></span> 💎 Affordable Treasure</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-green rounded-full mr-2"></span> 🎥 Film Scores Available</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-mardi-green rounded-full mr-2"></span> Global reach</li>
                     </ul>
-                    <a href="services.html" class="block w-full py-3 border-2 border-green-400/30 text-green-400 rounded-full hover:bg-green-400 hover:text-gray-900 transition-all duration-300 text-center">
+                    <a href="services.html" class="block w-full py-3 border-2 border-mardi-green/30 text-mardi-green rounded-full hover:bg-mardi-green hover:text-gray-900 transition-all duration-300 text-center">
                         Explore Service
                     </a>
                 </div>
@@ -274,69 +291,73 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/30 to-gray-900"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
-                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-600 mb-8">
-                    The Legend Begins
-                </h2>
-                <p class="text-xl text-gray-300 font-crimson leading-relaxed mb-8">
-                    From the depths of creativity emerges Captain Hook's Jingle Factory - where musical treasures are forged with passion, precision, and a touch of pirate magic.
+    <!-- Pirate Gold Offer Section -->
+    <section class="py-16 bg-gradient-to-br from-mardi-gold/10 to-mardi-purple/10 border-t border-b border-mardi-gold/20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-mardi-gold to-mardi-purple mb-6">
+                🏴‍☠️ Claim Yer Pirate Gold!
+            </h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-2xl font-bold text-mardi-gold mb-4">💰 10% OFF yer first jingle</div>
+                <p class="text-lg text-gray-300 font-crimson mb-8">
+                    when ye join our "Crew of the Catchiest Brands" (that's our email list, for ye landwalkers.) It's our way of sharin' a bit o' treasure with ye.
                 </p>
-                <p class="text-lg text-gray-400 font-crimson leading-relaxed">
-                    Our crew of legendary composers and sound engineers have sailed the seven seas of audio, collecting the finest melodies and hooks that capture hearts and minds.
+                <p class="text-lg text-gray-300 font-crimson mb-8">
+                    So what be ye waitin' for, sailor? Take no prisoners! Let the Captain craft ye a sound so mighty, even Poseidon'll be hummin' it in his sleep.
                 </p>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll">
-                    <div class="text-4xl font-bold text-yellow-400 mb-2">1000+</div>
-                    <div class="text-gray-400">Jingles Created</div>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#newsletter-signup" class="px-10 py-4 bg-gradient-to-r from-mardi-gold to-mardi-gold/80 text-gray-900 font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-mardi-gold/90 hover:to-mardi-gold transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                        👉 Join the Crew – Claim Yer Gold!
+                    </a>
+                    <a href="#contact" class="px-10 py-4 bg-transparent border-2 border-mardi-purple text-mardi-purple font-cinzel font-bold uppercase tracking-wider rounded-full hover:bg-mardi-purple hover:text-gray-900 transform hover:scale-105 transition-all duration-300">
+                        📜 Contact the Captain
+                    </a>
                 </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-purple-400/20 animate-on-scroll animation-delay-200">
-                    <div class="text-4xl font-bold text-purple-400 mb-2">99%</div>
-                    <div class="text-gray-400">Client Satisfaction</div>
-                </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-400">
-                    <div class="text-4xl font-bold text-green-400 mb-2">15+</div>
-                    <div class="text-gray-400">Years at Sea</div>
-                </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-2xl border border-yellow-400/20 animate-on-scroll animation-delay-600">
-                    <div class="text-4xl font-bold text-yellow-400 mb-2">24/7</div>
-                    <div class="text-gray-400">Support Crew</div>
-                </div>
-            </div>
-
-            <!-- Achievement Cards -->
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-purple-900/20 rounded-2xl border border-yellow-400/20 animate-on-scroll">
-                    <div class="text-3xl mb-4">🏆</div>
-                    <h3 class="text-2xl font-cinzel text-yellow-400 mb-4">Award Winning</h3>
-                    <p class="text-gray-300 font-crimson">Industry Recognition for Excellence in Audio Production</p>
-                </div>
-                <div class="p-8 bg-gradient-to-br from-gray-800/50 to-green-900/20 rounded-2xl border border-green-400/20 animate-on-scroll animation-delay-200">
-                    <div class="text-3xl mb-4">🎧</div>
-                    <h3 class="text-2xl font-cinzel text-green-400 mb-4">Premium Quality</h3>
-                    <p class="text-gray-300 font-crimson">Studio Grade Audio with Cutting-Edge Technology</p>
+                <div class="mt-6 text-sm text-mardi-gold font-crimson">
+                    Sign up now and claim yer shiny discount – before it vanishes into the fog!
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 relative">
+    <!-- Navigation Section -->
+    <section id="navigation" class="py-20 relative">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 animate-on-scroll">
-                <a href="contact.html" class="inline-block group">
-                    <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 mb-4 group-hover:from-yellow-300 group-hover:to-green-500 transition-all duration-300 transform group-hover:scale-105">
-                        Chart Your Course
-                    </h2>
-                </a>
-                <p class="text-xl text-gray-300 font-crimson">Ready to set sail on your audio adventure?</p>
+                <h2 class="text-5xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-mardi-gold to-mardi-green mb-6">
+                    🏴‍☠️ Chart Your Course
+                </h2>
+                <p class="text-xl text-gray-300 font-crimson mb-12">Ready to set sail on your audio adventure? Choose your destination!</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                    <!-- Chart Your Course - Services -->
+                    <a href="services.html" class="group p-8 bg-gradient-to-br from-mardi-purple/30 to-mardi-purple-dark/20 rounded-2xl border border-mardi-purple/50 hover:border-mardi-purple transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl mb-4 group-hover:animate-bounce">⚓</div>
+                        <h3 class="text-xl font-cinzel text-mardi-purple mb-3 group-hover:text-mardi-purple">Chart Your Course</h3>
+                        <p class="text-gray-300 font-crimson text-sm">Explore our legendary services and find the perfect audio treasure for your brand</p>
+                    </a>
+
+                    <!-- Contact the Crew -->
+                    <a href="contact.html" class="group p-8 bg-gradient-to-br from-mardi-gold/30 to-mardi-gold-dark/20 rounded-2xl border border-mardi-gold/50 hover:border-mardi-gold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl mb-4 group-hover:animate-bounce">📜</div>
+                        <h3 class="text-xl font-cinzel text-mardi-gold mb-3 group-hover:text-mardi-gold-dark">Contact the Crew</h3>
+                        <p class="text-gray-300 font-crimson text-sm">Send us a message in a bottle and let's discuss your next audio adventure</p>
+                    </a>
+
+                    <!-- Treasure Gallery -->
+                    <a href="gallery.html" class="group p-8 bg-gradient-to-br from-mardi-green/30 to-mardi-green-dark/20 rounded-2xl border border-mardi-green/50 hover:border-mardi-green transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl mb-4 group-hover:animate-bounce">🎧</div>
+                        <h3 class="text-xl font-cinzel text-mardi-green mb-3 group-hover:text-mardi-green-dark">Treasure Gallery</h3>
+                        <p class="text-gray-300 font-crimson text-sm">Listen to our collection of legendary jingles and audio treasures</p>
+                    </a>
+
+                    <!-- Our Legend -->
+                    <a href="our-legend.html" class="group p-8 bg-gradient-to-br from-mardi-purple/20 to-mardi-green/20 rounded-2xl border border-mardi-gold/50 hover:border-mardi-gold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl mb-4 group-hover:animate-bounce">🏴‍☠️</div>
+                        <h3 class="text-xl font-cinzel text-mardi-gold mb-3 group-hover:text-mardi-purple">Our Legend</h3>
+                        <p class="text-gray-300 font-crimson text-sm">Meet the captain and crew behind this legendary jingle factory</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -375,35 +396,35 @@
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="font-cinzel text-lg text-purple-400 mb-4">Quick Navigation</h3>
+                    <h3 class="font-cinzel text-lg text-mardi-purple mb-4">Quick Navigation</h3>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-yellow-400 transition-colors">Home Port</a></li>
-                        <li><a href="services.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Services</a></li>
-                        <li><a href="gallery.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Treasure Gallery</a></li>
-                        <li><a href="our-legend.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Our Legend</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-yellow-400 transition-colors">Contact</a></li>
+                        <li><a href="#home" class="text-gray-400 hover:text-mardi-gold transition-colors">Home Port</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Treasure Gallery</a></li>
+                        <li><a href="our-legend.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Our Legend</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
                 <!-- Services -->
                 <div>
-                    <h3 class="font-cinzel text-lg text-green-400 mb-4">Our Services</h3>
+                    <h3 class="font-cinzel text-lg text-mardi-green mb-4">Our Services</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Custom Jingles</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Radio IDs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Podcast Intros</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Voice Overs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Sound Design</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-mardi-green transition-colors">Custom Jingles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-mardi-green transition-colors">Radio IDs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-mardi-green transition-colors">Podcast Intros</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-mardi-green transition-colors">Voice Overs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-mardi-green transition-colors">Sound Design</a></li>
                     </ul>
                 </div>
 
                 <!-- Newsletter -->
-                <div>
-                    <h3 class="font-cinzel text-lg text-yellow-400 mb-4">Join Our Crew</h3>
+                <div id="newsletter-signup">
+                    <h3 class="font-cinzel text-lg text-mardi-gold mb-4">Join Our Crew</h3>
                     <p class="text-gray-400 text-sm mb-4">Get exclusive offers and audio production tips delivered to your inbox.</p>
                     <form class="space-y-3">
-                        <input type="email" placeholder="Your email address" class="w-full px-4 py-2 bg-gray-900 border border-gray-800 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors">
-                        <button type="submit" class="w-full py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-cinzel font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300">
+                        <input type="email" placeholder="Your email address" class="w-full px-4 py-2 bg-gray-900 border border-gray-800 rounded-lg focus:border-mardi-gold focus:outline-none transition-colors">
+                        <button type="submit" class="w-full py-2 bg-gradient-to-r from-mardi-gold to-mardi-gold/80 text-gray-900 font-cinzel font-bold rounded-lg hover:from-mardi-gold/90 hover:to-mardi-gold transition-all duration-300">
                             Subscribe
                         </button>
                     </form>
@@ -416,20 +437,20 @@
                     © 2024 Captain Hook's Jingle Factory. All treasures reserved.
                 </p>
                 <div class="flex items-center space-x-2">
-                    <span class="text-yellow-400">⚜️</span>
-                    <span class="text-purple-400">⚜️</span>
-                    <span class="text-green-400">⚜️</span>
+                    <span class="text-mardi-gold">⚜️</span>
+                    <span class="text-mardi-purple">⚜️</span>
+                    <span class="text-mardi-green">⚜️</span>
                     <span class="text-gray-400 font-cinzel text-sm">Louisiana Proud</span>
-                    <span class="text-yellow-400">⚜️</span>
-                    <span class="text-purple-400">⚜️</span>
-                    <span class="text-green-400">⚜️</span>
+                    <span class="text-mardi-gold">⚜️</span>
+                    <span class="text-mardi-purple">⚜️</span>
+                    <span class="text-mardi-green">⚜️</span>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40 opacity-0 invisible">
+    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-mardi-gold to-mardi-gold/80 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40 opacity-0 invisible">
         <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
