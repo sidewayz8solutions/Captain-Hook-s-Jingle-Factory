@@ -83,7 +83,7 @@
 
 .captain-image {
     width: auto;
-    height: min(92vh, 1100px);
+    height: min(120vh, 1400px);
     max-width: 95vw;
     object-fit: contain;
     margin: 0 auto;
@@ -431,7 +431,7 @@ textarea::placeholder {
 @media (max-width: 768px) {
     .captain-image {
         width: auto;
-        height: min(80vh, 800px);
+        height: min(100vh, 1000px);
         max-width: 95vw;
     }
     
