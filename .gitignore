@@ -59,3 +59,17 @@ dist/
 
 # Cache
 .cache/
+
+# Project specific
+Captain-Hook-s-Jingle-Factory-1/
+*.txt
+index copy.html
+server.py
+fetch-client/
+.snapshots/
+.qoder/
+.kilocode/
+.kilocodemodes
+
+# Vercel
+.vercel

@@ -1,0 +1,18 @@
+{
+  "name": "captain-hooks-jingle-factory",
+  "version": "1.0.0",
+  "description": "Captain Hook's Jingle Factory - Louisiana Pirate-themed Jingle Production",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'",
+    "start": "python -m http.server 8000"
+  },
+  "dependencies": {
+    "@genkit-ai/mcp": "^1.19.3",
+    "@playwright/test": "^1.55.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
