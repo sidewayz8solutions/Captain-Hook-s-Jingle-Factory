@@ -83,7 +83,7 @@
 
 .captain-image {
     width: auto;
-    height: min(90vh, 800px);
+    height: 130vh !important;
     max-width: 95vw;
     object-fit: contain;
     margin: 0 auto;
