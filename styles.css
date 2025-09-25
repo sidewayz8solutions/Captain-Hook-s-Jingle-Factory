@@ -378,6 +378,8 @@
 .mobile-menu-open {
     transform: translateY(0) !important;
     opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
 }
 
 /* Menu Lines */
