@@ -417,10 +417,15 @@
         <div class="container mx-auto px-6 h-full">
             <div class="flex justify-center items-center h-full min-h-[400px]">
                 <div class="treasure-bell-container relative w-full max-w-full">
-                    <img src="/public/tbell.png"
-                         alt="Treasure Bell"
-                         class="treasure-bell w-full h-auto max-w-2xl mx-auto object-contain cursor-pointer hover:scale-105 transition-transform duration-300 drop-shadow-2xl"
-                         id="treasureBell">
+                    <video src="/public/tink.mp4"
+                           autoplay
+                           loop
+                           muted
+                           playsinline
+                           class="treasure-bell w-full h-auto max-w-2xl mx-auto object-contain cursor-pointer hover:scale-105 transition-transform duration-300 drop-shadow-2xl"
+                           id="treasureBell">
+                        Your browser does not support the video element.
+                    </video>
                     <div class="bell-sparkles absolute inset-0 pointer-events-none" id="bellSparkles"></div>
                 </div>
             </div>
