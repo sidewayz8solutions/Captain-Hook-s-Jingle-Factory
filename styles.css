@@ -898,6 +898,48 @@ img.top-hook {
     50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6); }
 }
 
+/* Bell Animation Styles */
+.treasure-bell {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+    transition: all 0.3s ease;
+}
+
+.treasure-bell:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+}
+
+.treasure-bell.bell-ringing {
+    animation: bellRing 1s ease-in-out;
+}
+
+@keyframes bellRing {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(5deg); }
+    20% { transform: rotate(-5deg); }
+    30% { transform: rotate(4deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(3deg); }
+    60% { transform: rotate(-3deg); }
+    70% { transform: rotate(2deg); }
+    80% { transform: rotate(-2deg); }
+    90% { transform: rotate(1deg); }
+}
+
+@keyframes bellExplosion {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.5);
+        opacity: 0;
+    }
+}
+
 .contact-form-wrapper {
     opacity: 0;
     transform: translateY(20px);
