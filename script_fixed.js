@@ -142,41 +142,87 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(element);
     });
 
-    // Audio player mock functionality
-    const playButtons = document.querySelectorAll('.audio-player button');
-    playButtons.forEach(button => {
-        let playing = false;
-        
+    // Audio player functionality for colorful buttons
+    const audioPlayButtons = document.querySelectorAll('.audio-play-btn');
+    let currentlyPlaying = null;
+
+    audioPlayButtons.forEach(button => {
         button.addEventListener('click', function() {
-            playing = !playing;
-            
-            if (playing) {
-                // Change play to pause icon
+            const audioIndex = this.getAttribute('data-audio-index');
+            const audioPlayer = this.closest('.audio-player');
+            const audioElement = audioPlayer.querySelector('audio');
+            const soundwaveBars = audioPlayer.querySelectorAll('.soundwave-bar');
+
+            // Stop any currently playing audio
+            if (currentlyPlaying && currentlyPlaying !== audioElement) {
+                currentlyPlaying.pause();
+                currentlyPlaying.currentTime = 0;
+
+                // Reset the previous button to play icon
+                const prevButton = document.querySelector(`[data-audio-index="${currentlyPlaying.dataset.index}"]`);
+                if (prevButton) {
+                    prevButton.innerHTML = `
+                        <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"></path>
+                        </svg>
+                    `;
+                }
+
+                // Stop previous soundwave animation
+                const prevSoundwaves = document.querySelectorAll('.soundwave-bar');
+                prevSoundwaves.forEach(bar => {
+                    bar.style.animationPlayState = 'paused';
+                });
+            }
+
+            if (audioElement.paused) {
+                // Play audio
+                audioElement.play();
+                currentlyPlaying = audioElement;
+                audioElement.dataset.index = audioIndex;
+
+                // Change to pause icon
                 this.innerHTML = `
-                    <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
                     </svg>
                 `;
-                
-                // Animate soundwave bars
-                const soundwaveBars = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
+
+                // Start soundwave animation
                 soundwaveBars.forEach(bar => {
                     bar.style.animationPlayState = 'running';
                 });
+
             } else {
-                // Change pause to play icon
+                // Pause audio
+                audioElement.pause();
+                currentlyPlaying = null;
+
+                // Change to play icon
                 this.innerHTML = `
-                    <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="2 8 24 32">
+                    <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"></path>
                     </svg>
                 `;
-                
-                // Pause soundwave animation
-                const soundwaveBars = this.closest('.audio-player').querySelectorAll('.soundwave-bar');
+
+                // Stop soundwave animation
                 soundwaveBars.forEach(bar => {
                     bar.style.animationPlayState = 'paused';
                 });
             }
+
+            // Reset button when audio ends
+            audioElement.addEventListener('ended', () => {
+                this.innerHTML = `
+                    <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                `;
+                soundwaveBars.forEach(bar => {
+                    bar.style.animationPlayState = 'paused';
+                });
+                currentlyPlaying = null;
+            });
         });
     });
 
