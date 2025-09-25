@@ -337,16 +337,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    height: 40px;
+    gap: 4px;
+    height: 60px;
     animation: shimmer 3s linear infinite;
 }
 
 .soundwave-bar {
-    width: 3px;
-    background: linear-gradient(180deg, #065f46, #4C1D95, #FFD700); /* dark green, dark purple, yellow */
+    width: 6px;
+    background: linear-gradient(180deg, #FFD700, #7B2CBF, #00A86B); /* Mardi Gras gold, purple, green */
     animation: wave 1.2s ease-in-out infinite;
     animation-play-state: running; /* JS will pause/resume */
+    border-radius: 3px;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
 }
 
 .soundwave-bar:nth-child(2) { animation-delay: 0.1s; }
