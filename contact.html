@@ -271,23 +271,29 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="lg:hidden text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
+                    <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-mardi-gold transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-mardi-purple transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-mardi-green transform transition-all duration-300"></span>
                 </button>
             </div>
+        </div>
 
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4">
-                <div class="flex flex-col space-y-4">
-                    <a href="index.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Home</a>
-                    <a href="services.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Services</a>
-                    <a href="gallery.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Gallery</a>
-                    <a href="our-legend.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Our Legend</a>
-                    <a href="contact.html" class="font-cinzel text-mardi-gold">Contact</a>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl">
+            <div class="container mx-auto px-6 py-8">
+                <div class="space-y-4">
+                    <a href="index.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="services.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
+                    <a href="gallery.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="our-legend.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Legend</a>
+                    <a href="contact.html" class="block py-3 px-6 text-mardi-gold font-bold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-mardi-purple to-mardi-purple/80 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-mardi-gold hover:to-mardi-gold/80 transition-all duration-300">
+                        Set Sail Now
+                    </button>
                 </div>
             </div>
+        </div>
         </div>
     </nav>
 
