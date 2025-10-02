@@ -187,22 +187,48 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (audioElement.paused) {
-                // Play audio
-                audioElement.play();
-                currentlyPlaying = audioElement;
-                audioElement.dataset.index = audioIndex;
-
-                // Change to pause icon
-                this.innerHTML = `
-                    <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
-                    </svg>
-                `;
-
-                // Start soundwave animation
-                soundwaveBars.forEach(bar => {
-                    bar.style.animationPlayState = 'running';
-                });
+                // Try to play audio (handle promise for autoplay/CORS errors)
+                const playPromise = audioElement.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        currentlyPlaying = audioElement;
+                        audioElement.dataset.index = audioIndex;
+                        // Change to pause icon
+                        this.innerHTML = `
+                            <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
+                            </svg>
+                        `;
+                        // Start soundwave animation
+                        soundwaveBars.forEach(bar => {
+                            bar.style.animationPlayState = 'running';
+                        });
+                    }).catch((err) => {
+                        // Playback failed; provide subtle feedback and revert icon
+                        if (audioPlayer) {
+                            audioPlayer.classList.add('ring-2','ring-red-500');
+                            setTimeout(() => audioPlayer.classList.remove('ring-2','ring-red-500'), 900);
+                        }
+                        this.innerHTML = `
+                            <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                        `;
+                        console.error('Audio play failed:', err);
+                    });
+                } else {
+                    // Fallback (very old browsers)
+                    currentlyPlaying = audioElement;
+                    audioElement.dataset.index = audioIndex;
+                    this.innerHTML = `
+                        <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
+                        </svg>
+                    `;
+                    soundwaveBars.forEach(bar => {
+                        bar.style.animationPlayState = 'running';
+                    });
+                }
 
             } else {
                 // Pause audio
