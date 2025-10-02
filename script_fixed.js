@@ -148,10 +148,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     audioPlayButtons.forEach(button => {
         button.addEventListener('click', function() {
+            if (this.getAttribute('aria-disabled') === 'true') {
+                return;
+            }
             const audioIndex = this.getAttribute('data-audio-index');
             const audioPlayer = this.closest('.audio-player');
-            const audioElement = audioPlayer.querySelector('audio');
-            const soundwaveBars = audioPlayer.querySelectorAll('.soundwave-bar');
+            const audioElement = audioPlayer ? audioPlayer.querySelector('audio') : null;
+            const soundwaveBars = audioPlayer ? audioPlayer.querySelectorAll('.soundwave-bar') : [];
+            const sourceEl = audioElement ? audioElement.querySelector('source') : null;
+            if (!audioElement || !sourceEl || !sourceEl.getAttribute('src')) {
+                if (audioPlayer) {
+                    audioPlayer.classList.add('ring-2','ring-yellow-400');
+                    setTimeout(() => audioPlayer.classList.remove('ring-2','ring-yellow-400'), 800);
+                }
+                return;
+            }
 
             // Stop any currently playing audio
             if (currentlyPlaying && currentlyPlaying !== audioElement) {
