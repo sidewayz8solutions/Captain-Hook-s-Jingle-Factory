@@ -164,6 +164,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Check if audio can be loaded (for Dropbox URL issues)
+            if (audioElement.readyState === 0 && audioElement.networkState === 2) {
+                // Audio is trying to load but failing - likely a Dropbox URL issue
+                if (audioPlayer) {
+                    audioPlayer.classList.add('ring-2','ring-red-500');
+                    setTimeout(() => audioPlayer.classList.remove('ring-2','ring-red-500'), 1200);
+
+                    // Show a temporary message
+                    const title = audioPlayer.querySelector('h3');
+                    if (title) {
+                        const originalText = title.textContent;
+                        title.textContent = '⚠️ Audio Loading Issue - Check Console';
+                        setTimeout(() => {
+                            title.textContent = originalText;
+                        }, 3000);
+                    }
+                }
+                console.warn('Audio loading failed - Dropbox URLs may not work for streaming. Consider hosting audio files locally.');
+                return;
+            }
+
             // Stop any currently playing audio
             if (currentlyPlaying && currentlyPlaying !== audioElement) {
                 currentlyPlaying.pause();
