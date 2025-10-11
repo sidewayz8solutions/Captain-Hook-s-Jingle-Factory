@@ -382,6 +382,68 @@
     pointer-events: auto !important;
 }
 
+/* Mobile Menu Default State - ensure proper positioning */
+#mobileMenu {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    height: auto;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Ensure mobile menu shows above other elements */
+#mobileMenu.mobile-menu-open {
+    z-index: 60;
+    position: fixed;
+    top: 100%;
+}
+
+/* Mobile menu backdrop */
+#mobileMenu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: -1;
+}
+
+/* Additional mobile menu fixes */
+@media (max-width: 1023px) {
+    #mobileMenu {
+        left: 0;
+        right: 0;
+        width: 100vw;
+        min-height: 50vh;
+    }
+    
+    #mobileMenu.mobile-menu-open {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        position: fixed !important;
+        top: 100% !important;
+        z-index: 60 !important;
+    }
+    
+    /* Ensure mobile menu button is functional */
+    #mobileMenuBtn {
+        z-index: 61;
+        position: relative;
+    }
+    
+    /* Hide desktop nav on mobile */
+    .hidden.lg\:flex {
+        display: none !important;
+    }
+}
+
 /* Menu Lines */
 .menu-line-1 { top: 8px; }
 .menu-line-2 { top: 16px; }
