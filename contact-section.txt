@@ -58,7 +58,7 @@
                             </div>
                             <div>
                                 <div class="text-sm text-gray-400">Signal Flags</div>
-                                <div class="text-purple-400">+1 (555) HOOK-123</div>
+                                <div class="text-purple-400">+1 (504)788-HOOK</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
