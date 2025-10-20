@@ -313,9 +313,9 @@
                     <!-- Contact Form (inside bottle) -->
                     <div class="bottle-form-area">
                         <form id="contactForm">
-                            <input type="text" class="form-input" placeholder="Your name..." required>
-                            <input type="email" class="form-input" placeholder="Your email..." required>
-                            <textarea class="form-textarea" placeholder="Write your message to Captain Hook..." maxlength="500" id="messageTextarea"></textarea>
+                            <input id="nameInput" name="name" type="text" class="form-input" placeholder="Your name..." required>
+                            <input id="emailInput" name="email" type="email" class="form-input" placeholder="Your email..." required>
+                            <textarea id="messageTextarea" name="message" class="form-textarea" placeholder="Write your message to Captain Hook..." maxlength="500"></textarea>
                             <div class="character-counter">
                                 <span id="charCount">0</span>/500
                             </div>
@@ -334,7 +334,7 @@
                             </div>
                             <div class="contact-details">
                                 <h3>EMAIL PORT</h3>
-                                <p>ahoy@captainhooksjingles.com</p>
+                                <p><a href="mailto:ahoy@captainhooksjinglefactory.com" class="underline text-yellow-300 hover:text-yellow-200">ahoy@captainhooksjinglefactory.com</a></p>
                             </div>
                         </div>
 
@@ -347,7 +347,7 @@
                             </div>
                             <div class="contact-details">
                                 <h3>SIGNAL FLAGS</h3>
-                                <p>+1 (504) 555-HOOK</p>
+                                <p>504-788-HOOK</p>
                             </div>
                         </div>
 
@@ -467,8 +467,12 @@
         // Form submission handler
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Add your form submission logic here
-            alert('Your message has been sent to Captain Hook! Expect a response via carrier parrot.');
+            const name = (document.getElementById('nameInput') || {}).value?.trim() || '';
+            const email = (document.getElementById('emailInput') || {}).value?.trim() || '';
+            const message = (document.getElementById('messageTextarea') || {}).value?.trim() || '';
+            const subject = encodeURIComponent(`New message from ${name || 'Website Visitor'}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            window.location.href = `mailto:ahoy@captainhooksjinglefactory.com?subject=${subject}&body=${body}`;
         });
     </script>
 </body>
