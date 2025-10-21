@@ -479,6 +479,171 @@
     pointer-events: none;
 }
 
+/* Enhanced Loading Animations */
+/* Sparkling Stars Background */
+.stars-container {
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, white, transparent),
+        radial-gradient(2px 2px at 15% 90%, white, transparent);
+    background-size: 200% 200%;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Flying Fairy Animation */
+.fairy-container {
+    animation: fairyFly 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    z-index: 10;
+}
+
+.fairy {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
+            drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))
+            drop-shadow(0 0 30px rgba(255, 215, 0, 0.4));
+    animation: fairySpin 2s linear infinite, fairyGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes fairyFly {
+    0% {
+        left: -5%;
+        top: 20%;
+    }
+    15% {
+        left: 25%;
+        top: 15%;
+    }
+    30% {
+        left: 50%;
+        top: 30%;
+    }
+    45% {
+        left: 75%;
+        top: 20%;
+    }
+    60% {
+        left: 90%;
+        top: 40%;
+    }
+    75% {
+        left: 60%;
+        top: 60%;
+    }
+    90% {
+        left: 30%;
+        top: 50%;
+    }
+    100% {
+        left: -5%;
+        top: 20%;
+    }
+}
+
+@keyframes fairySpin {
+    0%, 100% { transform: rotate(-10deg) scale(1); }
+    25% { transform: rotate(10deg) scale(1.1); }
+    50% { transform: rotate(-10deg) scale(1); }
+    75% { transform: rotate(10deg) scale(0.9); }
+}
+
+@keyframes fairyGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
+                drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))
+                drop-shadow(0 0 30px rgba(255, 215, 0, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 1))
+                drop-shadow(0 0 30px rgba(255, 215, 0, 0.8))
+                drop-shadow(0 0 45px rgba(255, 215, 0, 0.6));
+    }
+}
+
+/* Fairy Dust Particles */
+.fairy-dust {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: dustFall 2s ease-out forwards;
+}
+
+@keyframes dustFall {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100px) scale(0.3);
+    }
+}
+
+/* Animated Logo */
+.loading-logo {
+    animation: logoBounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards,
+               logoFloat 3s ease-in-out 1.5s infinite;
+    filter: drop-shadow(0 0 20px rgba(123, 44, 191, 0.6))
+            drop-shadow(0 0 40px rgba(123, 44, 191, 0.4));
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+}
+
+@keyframes logoBounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.2) rotate(10deg);
+    }
+    80% {
+        transform: scale(0.9) rotate(-5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
+}
+
+/* Loading Text Animation */
+.loading-text {
+    animation: textFadeIn 1s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+@keyframes textFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
 /* Form Inputs */
 input[type="text"],
 input[type="email"],

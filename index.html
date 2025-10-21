@@ -89,11 +89,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-900 text-white overflow-x-hidden">
-    <!-- Loading Overlay -->
-    <div class="loading-overlay fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-gray-900 to-mardi-purple-dark z-[9999] flex items-center justify-center transition-opacity duration-500">
-        <div class="text-center">
-            <div class="text-6xl mb-4 animate-bounce">⚓</div>
-            <div class="text-2xl font-pirata text-mardi-gold animate-pulse">Loading Treasures...</div>
+    <!-- Enhanced Loading Overlay with Fairy -->
+    <div class="loading-overlay fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 z-[9999] overflow-hidden transition-opacity duration-500">
+        <!-- Sparkling Stars Background -->
+        <div class="stars-container absolute inset-0"></div>
+
+        <!-- Flying Fairy -->
+        <div class="fairy-container absolute">
+            <div class="fairy">✨</div>
+        </div>
+
+        <!-- Fairy Dust Trail Container -->
+        <div class="fairy-dust-container absolute inset-0 pointer-events-none"></div>
+
+        <!-- Animated Logo -->
+        <div class="logo-container absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="public/hook.png" alt="Captain Hook's Logo" class="loading-logo w-48 h-48 md:w-64 md:h-64 object-contain">
+        </div>
+
+        <!-- Loading Text -->
+        <div class="loading-text absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center">
+            <div class="text-3xl md:text-4xl font-pirata text-yellow-300 animate-pulse mb-2">
+                Summoning the Magic...
+            </div>
+            <div class="text-lg font-cinzel text-purple-200">
+                ⚓ Preparing Your Jingle Treasures ⚓
+            </div>
         </div>
     </div>
 

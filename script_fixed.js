@@ -2,14 +2,49 @@
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Remove loading overlay after page loads
-    setTimeout(() => {
-        const loadingOverlay = document.querySelector('.loading-overlay');
-        if (loadingOverlay) {
-            loadingOverlay.classList.add('hidden');
-        }
-        // Removed pop-in and glow burst animations per user request
-    }, 1500);
+    // Enhanced loading with fairy dust trail
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    const fairyContainer = document.querySelector('.fairy-container');
+    const dustContainer = document.querySelector('.fairy-dust-container');
+
+    // Create fairy dust trail
+    if (fairyContainer && dustContainer) {
+        const createFairyDust = () => {
+            const rect = fairyContainer.getBoundingClientRect();
+            const dust = document.createElement('div');
+            dust.className = 'fairy-dust';
+            dust.style.left = rect.left + rect.width / 2 + 'px';
+            dust.style.top = rect.top + rect.height / 2 + 'px';
+
+            // Random slight offset for natural look
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            dust.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+            dustContainer.appendChild(dust);
+
+            // Remove dust particle after animation
+            setTimeout(() => dust.remove(), 2000);
+        };
+
+        // Create dust particles continuously
+        const dustInterval = setInterval(createFairyDust, 100);
+
+        // Stop creating dust and hide overlay after extended time
+        setTimeout(() => {
+            clearInterval(dustInterval);
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+            }
+        }, 4500); // Extended from 1500ms to 4500ms
+    } else {
+        // Fallback if elements not found
+        setTimeout(() => {
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+            }
+        }, 4500);
+    }
 
     // Navigation scroll effect
     const mainNav = document.getElementById('mainNav');
