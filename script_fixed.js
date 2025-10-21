@@ -2,29 +2,85 @@
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Intro video overlay logic: guaranteed autoplay as muted loading screen
+    // Intro video overlay logic: robust loading screen with fairy01.mp4
     const introOverlay = document.getElementById('intro-overlay');
     const introVideo = document.getElementById('intro-video');
 
     if (introOverlay && introVideo) {
+        console.log('Intro video elements found, setting up loading screen...');
+
         const hideIntro = () => {
+            console.log('Hiding intro overlay...');
             introOverlay.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => { try { introOverlay.remove(); } catch (e) {} }, 800);
+            setTimeout(() => {
+                try {
+                    introOverlay.remove();
+                    console.log('Intro overlay removed');
+                } catch (e) {
+                    console.error('Error removing intro overlay:', e);
+                }
+            }, 800);
         };
 
-        introVideo.addEventListener('ended', hideIntro);
-        introVideo.addEventListener('loadedmetadata', () => {
-            const dur = introVideo.duration;
-            setTimeout(hideIntro, (isFinite(dur) && dur > 0) ? Math.ceil(dur * 1000) + 200 : 10000);
+        // Force video attributes for maximum compatibility
+        introVideo.muted = true;
+        introVideo.autoplay = true;
+        introVideo.playsInline = true;
+        introVideo.controls = false;
+
+        // Multiple event listeners for different scenarios
+        introVideo.addEventListener('ended', () => {
+            console.log('Video ended, hiding intro');
+            hideIntro();
         });
 
-        const tryPlayMuted = () => {
+        introVideo.addEventListener('loadedmetadata', () => {
+            console.log('Video metadata loaded, duration:', introVideo.duration);
+            const dur = introVideo.duration;
+            // Safety timeout based on video duration
+            setTimeout(hideIntro, (isFinite(dur) && dur > 0) ? Math.ceil(dur * 1000) + 500 : 8000);
+        });
+
+        introVideo.addEventListener('error', (e) => {
+            console.error('Video error:', e);
+            // Hide overlay after 2 seconds if video fails
+            setTimeout(hideIntro, 2000);
+        });
+
+        // Aggressive play attempts
+        const forcePlay = () => {
+            console.log('Attempting to play video...');
             introVideo.muted = true;
-            introVideo.play().catch(() => {});
+            const playPromise = introVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Video playing successfully');
+                }).catch(error => {
+                    console.error('Video play failed:', error);
+                    // Still hide overlay after a delay even if video fails
+                    setTimeout(hideIntro, 3000);
+                });
+            }
         };
 
-        if (introVideo.readyState >= 2) { tryPlayMuted(); }
-        else { introVideo.addEventListener('canplay', tryPlayMuted, { once: true }); }
+        // Try to play immediately if ready
+        if (introVideo.readyState >= 2) {
+            forcePlay();
+        } else {
+            // Wait for video to be ready
+            introVideo.addEventListener('canplay', forcePlay, { once: true });
+            introVideo.addEventListener('loadeddata', forcePlay, { once: true });
+        }
+
+        // Ultimate fallback - hide overlay after 10 seconds no matter what
+        setTimeout(() => {
+            if (document.getElementById('intro-overlay')) {
+                console.log('Fallback timeout - forcing overlay removal');
+                hideIntro();
+            }
+        }, 10000);
+    } else {
+        console.error('Intro video elements not found!');
     }
 
     // (Deprecated) legacy overlay variables are left unused
