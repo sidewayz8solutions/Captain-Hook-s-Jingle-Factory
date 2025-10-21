@@ -127,6 +127,12 @@ npm run dev
 
 Then open your browser to http://localhost:3000
 
+## DNS Configuration for Custom Domain
+
+If you're having issues with your custom domain (captainhooksjinglefactory.com),
+please refer to the DNS_SETUP.md file for detailed instructions on configuring
+your domain registrar's DNS settings to work with GitHub Pages.
+
 ---
 
 ⚓ **Built with passion, precision, and a touch of pirate magic!**
