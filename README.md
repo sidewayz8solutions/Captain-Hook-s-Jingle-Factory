@@ -90,6 +90,43 @@ You can customize colors by editing the Tailwind config in the HTML file or the 
 
 For any issues or questions about the website, refer to the `CLAUDE.md` file for the complete development documentation.
 
+## GitHub Pages Deployment (Backup Solution)
+
+Since Vercel may experience downtime, you can deploy your website using GitHub Pages:
+
+1. Ensure all your files are committed and pushed to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "Update website files"
+   git push origin main
+   ```
+
+2. Go to your GitHub repository settings:
+   - Visit: https://github.com/sidewayz8solutions/Captain-Hook-s-Jingle-Factory/settings
+
+3. Scroll down to the "Pages" section and configure:
+   - Source: Deploy from a branch
+   - Branch: main
+   - Folder: / (root)
+
+4. Click "Save" to enable GitHub Pages
+
+5. Your website will be available at:
+   https://sidewayz8solutions.github.io/Captain-Hook-s-Jingle-Factory/
+
+6. The custom domain (captainhooksjinglefactory.com) should automatically work
+   since you already have the CNAME file in your repository.
+
+## Local Development
+
+To run the website locally for testing:
+
+```bash
+npm run dev
+```
+
+Then open your browser to http://localhost:3000
+
 ---
 
 ⚓ **Built with passion, precision, and a touch of pirate magic!**
