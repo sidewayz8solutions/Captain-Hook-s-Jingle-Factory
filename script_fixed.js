@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Create dust particles continuously
-        const dustInterval = setInterval(createFairyDust, 100);
+        const dustInterval = setInterval(createFairyDust, 40);
 
         // Stop creating dust and hide overlay after extended time
         setTimeout(() => {
