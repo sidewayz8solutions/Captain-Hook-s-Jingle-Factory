@@ -215,14 +215,14 @@
                 padding: 40px 20px;
             }
             .bottle-form-area,
-            .contact-boxes-area { 
-                position: static; 
-                width: 100%; 
-                height: auto; 
+            .contact-boxes-area {
+                position: static;
+                width: 100%;
+                height: auto;
                 max-width: 500px;
                 margin: 0 auto 40px auto;
             }
-            .bottle-form-area { 
+            .bottle-form-area {
                 background: rgba(0, 40, 60, 0.85);
                 border: 2px solid rgba(255, 255, 255, 0.2);
                 border-radius: 12px;
@@ -232,8 +232,8 @@
         }
 
         @media (max-width: 768px) {
-            .bottle-background { 
-                background-size: cover; 
+            .bottle-background {
+                background-size: cover;
                 padding: 20px 16px;
             }
             .bottle-form-area {
@@ -312,7 +312,11 @@
                 <div class="bottle-background">
                     <!-- Contact Form (inside bottle) -->
                     <div class="bottle-form-area">
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formsubmit.co/ahoy@captainhooksjinglefactory.com" method="POST">
+            <input type="hidden" name="_subject" value="New message from Captain Hook's Jingle Factory">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://sidewayz8solutions.github.io/Captain-Hook-s-Jingle-Factory/contact.html?sent=1">
                             <input id="nameInput" name="name" type="text" class="form-input" placeholder="Your name..." required>
                             <input id="emailInput" name="email" type="email" class="form-input" placeholder="Your email..." required>
                             <textarea id="messageTextarea" name="message" class="form-textarea" placeholder="Write your message to Captain Hook..." maxlength="500"></textarea>
@@ -456,7 +460,7 @@
         </div>
     </footer>
 
-    <script src="script_fixed.js"></script>
+    <script defer src="script_fixed.js"></script>
     <script>
         // Character counter for the message textarea
         document.getElementById('messageTextarea').addEventListener('input', function() {
@@ -464,15 +468,10 @@
             document.getElementById('charCount').textContent = charCount;
         });
 
-        // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = (document.getElementById('nameInput') || {}).value?.trim() || '';
-            const email = (document.getElementById('emailInput') || {}).value?.trim() || '';
-            const message = (document.getElementById('messageTextarea') || {}).value?.trim() || '';
-            const subject = encodeURIComponent(`New message from ${name || 'Website Visitor'}`);
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-            window.location.href = `mailto:ahoy@captainhooksjinglefactory.com?subject=${subject}&body=${body}`;
+        // Form submission handler (allow native POST submit; just disable button to prevent double submit)
+        document.getElementById('contactForm').addEventListener('submit', function() {
+            const btn = this.querySelector('.send-button');
+            if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
         });
     </script>
 </body>

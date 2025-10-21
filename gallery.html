@@ -376,10 +376,10 @@
                         <div class="soundwave-bar"></div>
                         <div class="soundwave-bar"></div>
                     </div>
-                    <audio class="hidden">
-                        <source src="public/gleo.mp4?v=deployfix2" type="audio/mp4">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <video class="hidden" playsinline preload="none">
+                        <source src="public/gleo.mp4?v=deployfix2" type="video/mp4">
+                        Your browser does not support the video element.
+                    </video>
                     <div class="flex items-center justify-center">
                         <button class="audio-play-btn w-16 h-16 bg-gradient-to-r from-mardi-purple to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg" data-audio-index="4">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -412,10 +412,10 @@
                         <div class="soundwave-bar"></div>
                         <div class="soundwave-bar"></div>
                     </div>
-                    <audio class="hidden">
-                            <source src="public/gleo2.mp4?v=deployfix2" type="audio/mp4">
-                            Your browser does not support the audio element.
-                        </audio>
+                    <video class="hidden" playsinline preload="none">
+                            <source src="public/gleo2.mp4?v=deployfix2" type="video/mp4">
+                            Your browser does not support the video element.
+                        </video>
                     <div class="flex items-center justify-center">
                         <button class="audio-play-btn w-16 h-16 bg-gradient-to-r from-mardi-green to-mardi-green-dark rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg" data-audio-index="5">
                             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -543,7 +543,7 @@
     </button>
 
     <!-- JavaScript -->
-    <script src="script_fixed.js"></script>
+    <script defer src="script_fixed.js"></script>
     <script>
         // Add click handler for treasure bell
         document.addEventListener('DOMContentLoaded', function() {

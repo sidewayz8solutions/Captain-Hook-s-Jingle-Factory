@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const audioIndex = this.getAttribute('data-audio-index');
             const audioPlayer = this.closest('.audio-player');
-            const audioElement = audioPlayer ? audioPlayer.querySelector('audio') : null;
+            const audioElement = audioPlayer ? audioPlayer.querySelector('audio,video') : null;
             const soundwaveBars = audioPlayer ? audioPlayer.querySelectorAll('.soundwave-bar') : [];
             const sourceEl = audioElement ? audioElement.querySelector('source') : null;
             if (!audioElement || !sourceEl || !sourceEl.getAttribute('src')) {

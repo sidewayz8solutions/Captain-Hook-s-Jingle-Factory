@@ -1,8 +1,13 @@
 {
-
-
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://sidewayz8solutions.github.io/Captain-Hook-s-Jingle-Factory/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/services",
