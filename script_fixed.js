@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Background music with persistent golden hook mute button
     (function setupDualAudio() {
-        const BG_SRC = 'public/background.MP3'; // plays once
-        const WAVES_SRC = 'public/waves.MP3';   // loops
+        const BG_SRC = './public/background.MP3'; // plays once
+        const WAVES_SRC = './public/waves.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
 
         function createOrGetAudios() {
@@ -220,8 +220,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Log/handle errors without stopping the other track
-            bg.addEventListener('error', (e) => { console.error('background.MP3 error', e); });
-            waves.addEventListener('error', (e) => { console.error('waves.MP3 error', e); });
+            bg.addEventListener('error', (e) => {
+                console.error('background.MP3 error', e);
+                // try lowercase extension as a fallback just in case
+                if (!bg.src.toLowerCase().endsWith('/public/background.mp3')) {
+                    bg.src = './public/background.mp3'; bg.load(); bg.play().catch(()=>{});
+                }
+            });
+            waves.addEventListener('error', (e) => {
+                console.error('waves.MP3 error', e);
+                if (!waves.src.toLowerCase().endsWith('/public/waves.mp3')) {
+                    waves.src = './public/waves.mp3'; waves.load(); waves.play().catch(()=>{});
+                }
+            });
 
             startBoth(bg, waves);
         }
