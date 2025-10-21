@@ -2,9 +2,10 @@
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Intro video overlay logic
+    // Intro video overlay logic with audio
     const introOverlay = document.getElementById('intro-overlay');
     const introVideo = document.getElementById('intro-video');
+    const unmuteBtn = document.getElementById('intro-unmute');
 
     if (introOverlay && introVideo) {
         const hideIntro = () => {
@@ -24,10 +25,29 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Attempt to ensure playback starts
-        const tryPlay = () => introVideo.play().catch(() => {/* autoplay policies */});
-        if (introVideo.readyState >= 2) { tryPlay(); }
-        else { introVideo.addEventListener('canplay', tryPlay, { once: true }); }
+        // Attempt to play with sound first
+        const tryPlayWithSound = () => {
+            introVideo.muted = false;
+            introVideo.play().then(() => {
+                // Success: playing with sound, hide unmute button
+                if (unmuteBtn) unmuteBtn.classList.add('hidden');
+            }).catch(() => {
+                // Failed: autoplay blocked, show unmute button
+                introVideo.muted = true;
+                introVideo.play().catch(() => {/* fallback */});
+                if (unmuteBtn) {
+                    unmuteBtn.classList.remove('hidden');
+                    unmuteBtn.addEventListener('click', () => {
+                        introVideo.muted = false;
+                        introVideo.play();
+                        unmuteBtn.classList.add('hidden');
+                    }, { once: true });
+                }
+            });
+        };
+
+        if (introVideo.readyState >= 2) { tryPlayWithSound(); }
+        else { introVideo.addEventListener('canplay', tryPlayWithSound, { once: true }); }
     }
 
     // (Deprecated) legacy overlay variables are left unused
