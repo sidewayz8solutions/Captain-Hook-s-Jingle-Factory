@@ -90,13 +90,8 @@
 </head>
 <body class="bg-gray-900 text-white overflow-x-hidden">
     <!-- Intro Video Overlay -->
-    <div id="intro-overlay" class="fixed inset-0 z-[9999] bg-black transition-opacity duration-700">
-        <video id="intro-video" class="w-full h-full object-cover" src="public/fairly.mp4" autoplay muted playsinline preload="auto"></video>
-        <div class="absolute inset-x-0 bottom-10 flex justify-center">
-            <button id="intro-unmute" class="px-6 py-3 rounded-full bg-gradient-to-r from-mardi-gold to-mardi-gold-dark text-gray-900 font-cinzel shadow-lg hover:scale-105 transition hidden">
-                Tap for sound
-            </button>
-        </div>
+    <div id="intro-overlay" class="fixed inset-0 z-[9999] bg-black transition-opacity duration-700 overflow-hidden">
+        <video id="intro-video" class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover" src="public/fairly.mp4" autoplay playsinline preload="auto"></video>
     </div>
 
     <!-- Navigation -->

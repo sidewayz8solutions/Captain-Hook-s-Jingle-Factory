@@ -2,47 +2,39 @@
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Intro video overlay logic with audio
+    // Intro video overlay logic: play with audio, no button
     const introOverlay = document.getElementById('intro-overlay');
     const introVideo = document.getElementById('intro-video');
-    const unmuteBtn = document.getElementById('intro-unmute');
 
     if (introOverlay && introVideo) {
         const hideIntro = () => {
             introOverlay.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                try { introOverlay.remove(); } catch (e) {}
-            }, 800);
+            setTimeout(() => { try { introOverlay.remove(); } catch (e) {} }, 800);
         };
 
         introVideo.addEventListener('ended', hideIntro);
         introVideo.addEventListener('loadedmetadata', () => {
             const dur = introVideo.duration;
-            if (isFinite(dur) && dur > 0) {
-                setTimeout(hideIntro, Math.ceil(dur * 1000) + 200);
-            } else {
-                setTimeout(hideIntro, 8000);
-            }
+            setTimeout(hideIntro, (isFinite(dur) && dur > 0) ? Math.ceil(dur * 1000) + 200 : 10000);
         });
 
-        // Attempt to play with sound first
+        const resumeWithAudio = () => {
+            introVideo.muted = false;
+            introVideo.play().catch(() => {});
+            window.removeEventListener('pointerdown', resumeWithAudio);
+            window.removeEventListener('touchstart', resumeWithAudio);
+            window.removeEventListener('click', resumeWithAudio);
+            window.removeEventListener('keydown', resumeWithAudio);
+        };
+
         const tryPlayWithSound = () => {
             introVideo.muted = false;
-            introVideo.play().then(() => {
-                // Success: playing with sound, hide unmute button
-                if (unmuteBtn) unmuteBtn.classList.add('hidden');
-            }).catch(() => {
-                // Failed: autoplay blocked, show unmute button
-                introVideo.muted = true;
-                introVideo.play().catch(() => {/* fallback */});
-                if (unmuteBtn) {
-                    unmuteBtn.classList.remove('hidden');
-                    unmuteBtn.addEventListener('click', () => {
-                        introVideo.muted = false;
-                        introVideo.play();
-                        unmuteBtn.classList.add('hidden');
-                    }, { once: true });
-                }
+            introVideo.play().catch(() => {
+                // Autoplay with audio blocked: wait for any user interaction (no button)
+                window.addEventListener('pointerdown', resumeWithAudio, { once: true });
+                window.addEventListener('touchstart', resumeWithAudio, { once: true });
+                window.addEventListener('click', resumeWithAudio, { once: true });
+                window.addEventListener('keydown', resumeWithAudio, { once: true });
             });
         };
 
