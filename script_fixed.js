@@ -107,17 +107,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Background music with persistent golden hook mute button
     (function setupBackgroundMusic() {
-        const MUSIC_SRC = 'public/pirate_theme.mp3'; // TODO: add this file to public/
+        const MUSIC_SOURCES = ['public/background.MP3','public/waves.MP3','public/pirate_theme.mp3']; // tries in order
         const LS_MUTED = 'bgMusicMuted';
         const LS_TIME = 'bgMusicTime';
         const VOLUME = 0.22; // not too loud
+        let srcIndex = Math.max(0, Math.min(MUSIC_SOURCES.length - 1, parseInt(localStorage.getItem('bgMusicSrcIndex') || '0')));
 
         function createOrGetAudio() {
             let audio = document.getElementById('bg-music');
             if (!audio) {
                 audio = document.createElement('audio');
                 audio.id = 'bg-music';
-                audio.src = MUSIC_SRC;
+                audio.src = MUSIC_SOURCES[srcIndex] || MUSIC_SOURCES[0];
                 audio.loop = true;
                 audio.preload = 'auto';
                 audio.crossOrigin = 'anonymous';
@@ -199,10 +200,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 setMutedUI(btn, newMuted);
             });
 
-            startPlayback(audio);
+            // Fallback to next available music source on error
+            audio.addEventListener('error', () => {
+                try {
+                    srcIndex = (srcIndex + 1) % MUSIC_SOURCES.length;
+                    localStorage.setItem('bgMusicSrcIndex', String(srcIndex));
+                    audio.src = MUSIC_SOURCES[srcIndex];
+                    audio.load();
+                    audio.play().catch(()=>{});
+                } catch {}
+            });
 
-            // If audio fails to load, dim the button
-            audio.addEventListener('error', () => setMutedUI(btn, true));
+            startPlayback(audio);
         }
 
         // Delay start if intro overlay is present (to avoid audio clash)
