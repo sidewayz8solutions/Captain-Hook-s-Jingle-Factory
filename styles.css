@@ -506,7 +506,9 @@
 }
 
 .fairy {
-    font-size: 2.5rem;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))
             drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))
             drop-shadow(0 0 30px rgba(255, 215, 0, 0.4));
@@ -592,29 +594,32 @@
 
 /* Animated Logo */
 .loading-logo {
-    animation: logoBounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards,
-               logoFloat 3s ease-in-out 1.5s infinite;
+    animation: logoHeavyDrop 1.2s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards,
+               logoFloat 3s ease-in-out 1.4s infinite;
     filter: drop-shadow(0 0 20px rgba(123, 44, 191, 0.6))
             drop-shadow(0 0 40px rgba(123, 44, 191, 0.4));
     opacity: 0;
-    transform: scale(0) rotate(-180deg);
+    transform: translateY(-120%) scale(1);
 }
 
-@keyframes logoBounceIn {
+@keyframes logoHeavyDrop {
     0% {
         opacity: 0;
-        transform: scale(0) rotate(-180deg);
+        transform: translateY(-120%) scaleY(1.2);
     }
     60% {
         opacity: 1;
-        transform: scale(1.2) rotate(10deg);
+        transform: translateY(0) scaleY(0.85);
     }
-    80% {
-        transform: scale(0.9) rotate(-5deg);
+    75% {
+        transform: translateY(-15px) scaleY(1.1);
+    }
+    90% {
+        transform: translateY(0) scaleY(0.95);
     }
     100% {
         opacity: 1;
-        transform: scale(1) rotate(0deg);
+        transform: translateY(0) scaleY(1);
     }
 }
 
