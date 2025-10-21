@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.id = 'bg-mute-btn';
                 btn.type = 'button';
                 btn.title = 'Toggle music';
-                btn.className = 'fixed bottom-4 right-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gradient-to-br from-yellow-300 to-amber-500 hover:scale-105 transition-transform duration-200 flex items-center justify-center';
+                btn.className = 'fixed bottom-4 left-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gradient-to-br from-yellow-300 to-amber-500 hover:scale-105 transition-transform duration-200 flex items-center justify-center';
                 const img = document.createElement('img');
                 img.src = 'public/hook.png';
                 img.alt = 'Mute/Unmute';
