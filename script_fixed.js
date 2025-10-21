@@ -106,26 +106,37 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => { clearInterval(dustInterval); if (loadingOverlay) loadingOverlay.classList.add('hidden'); }, 4500);
     }
     // Background music with persistent golden hook mute button
-    (function setupBackgroundMusic() {
-        const MUSIC_SOURCES = ['public/background.MP3','public/waves.MP3','public/pirate_theme.mp3']; // tries in order
+    (function setupDualAudio() {
+        const BG_SRC = 'public/background.MP3'; // plays once
+        const WAVES_SRC = 'public/waves.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
-        const LS_TIME = 'bgMusicTime';
-        const VOLUME = 0.22; // not too loud
-        let srcIndex = Math.max(0, Math.min(MUSIC_SOURCES.length - 1, parseInt(localStorage.getItem('bgMusicSrcIndex') || '0')));
 
-        function createOrGetAudio() {
-            let audio = document.getElementById('bg-music');
-            if (!audio) {
-                audio = document.createElement('audio');
-                audio.id = 'bg-music';
-                audio.src = MUSIC_SOURCES[srcIndex] || MUSIC_SOURCES[0];
-                audio.loop = true;
-                audio.preload = 'auto';
-                audio.crossOrigin = 'anonymous';
-                document.body.appendChild(audio);
+        function createOrGetAudios() {
+            let bg = document.getElementById('bg-music');
+            if (!bg) {
+                bg = document.createElement('audio');
+                bg.id = 'bg-music';
+                bg.src = BG_SRC;
+                bg.loop = false; // play once only
+                bg.preload = 'auto';
+                bg.crossOrigin = 'anonymous';
+                bg.volume = 0.22; // not too loud
+                document.body.appendChild(bg);
             }
-            audio.volume = VOLUME;
-            return audio;
+
+            let waves = document.getElementById('waves-music');
+            if (!waves) {
+                waves = document.createElement('audio');
+                waves.id = 'waves-music';
+                waves.src = WAVES_SRC;
+                waves.loop = true; // continuous loop
+                waves.preload = 'auto';
+                waves.crossOrigin = 'anonymous';
+                waves.volume = 0.10; // lower than background
+                document.body.appendChild(waves);
+            }
+
+            return { bg, waves };
         }
 
         function createOrGetButton() {
@@ -137,10 +148,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.title = 'Toggle music';
                 btn.className = 'fixed bottom-4 left-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gradient-to-br from-yellow-300 to-amber-500 hover:scale-105 transition-transform duration-200 flex items-center justify-center';
                 const img = document.createElement('img');
-                img.src = 'public/hook.png';
+                img.src = 'public/ab.png'; // golden hook image
                 img.alt = 'Mute/Unmute';
                 img.className = 'w-8 h-8 drop-shadow-lg';
-                img.onerror = () => { img.src = 'hook.png'; };
+                img.onerror = () => { img.src = 'ab.png'; };
                 btn.appendChild(img);
                 document.body.appendChild(btn);
             }
@@ -152,66 +163,67 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.style.filter = muted ? 'grayscale(20%)' : 'none';
         }
 
-        function startPlayback(audio) {
+        function startBoth(bg, waves) {
             const muted = localStorage.getItem(LS_MUTED) === 'true';
-            audio.muted = muted;
+            bg.muted = muted; waves.muted = muted;
+            // Start fresh each visit
+            try { bg.currentTime = 0; } catch {}
+            try { waves.currentTime = 0; } catch {}
 
-            const savedTime = parseFloat(localStorage.getItem(LS_TIME) || '0');
-            const setTime = () => {
-                if (!isNaN(savedTime) && isFinite(savedTime) && audio.duration && isFinite(audio.duration) && audio.duration > 0) {
-                    audio.currentTime = savedTime % audio.duration;
-                }
+            const playBoth = () => {
+                const p1 = bg.play();
+                const p2 = waves.play();
+                Promise.allSettled([p1, p2]).then(results => {
+                    const blocked = results.some(r => r.status === 'rejected');
+                    if (blocked) {
+                        const resume = () => {
+                            bg.play().catch(()=>{});
+                            waves.play().catch(()=>{});
+                            cleanup();
+                        };
+                        const cleanup = () => {
+                            window.removeEventListener('pointerdown', resume);
+                            window.removeEventListener('touchstart', resume);
+                            window.removeEventListener('click', resume);
+                            window.removeEventListener('keydown', resume);
+                        };
+                        window.addEventListener('pointerdown', resume, { once: true });
+                        window.addEventListener('touchstart', resume, { once: true });
+                        window.addEventListener('click', resume, { once: true });
+                        window.addEventListener('keydown', resume, { once: true });
+                    }
+                });
             };
-            if (audio.readyState >= 1) setTime(); else audio.addEventListener('loadedmetadata', setTime, { once: true });
 
-            const tryPlay = () => audio.play().catch(() => {
-                // Autoplay with audio may be blocked until interaction
-                const resume = () => { audio.muted = (localStorage.getItem(LS_MUTED) === 'true'); audio.play().catch(()=>{}); cleanup(); };
-                const cleanup = () => {
-                    window.removeEventListener('pointerdown', resume);
-                    window.removeEventListener('touchstart', resume);
-                    window.removeEventListener('click', resume);
-                    window.removeEventListener('keydown', resume);
-                };
-                window.addEventListener('pointerdown', resume, { once: true });
-                window.addEventListener('touchstart', resume, { once: true });
-                window.addEventListener('click', resume, { once: true });
-                window.addEventListener('keydown', resume, { once: true });
-            });
-
-            tryPlay();
-
-            // Persist playback time periodically
-            setInterval(() => {
-                try { localStorage.setItem(LS_TIME, String(audio.currentTime || 0)); } catch {}
-            }, 4000);
+            if (bg.readyState >= 2 || waves.readyState >= 2) {
+                playBoth();
+            } else {
+                const once = () => playBoth();
+                bg.addEventListener('canplay', once, { once: true });
+                waves.addEventListener('canplay', once, { once: true });
+                // Safety start if events don’t fire promptly
+                setTimeout(playBoth, 1500);
+            }
         }
 
-        function initBgMusic() {
-            const audio = createOrGetAudio();
+        function initDualAudio() {
+            const { bg, waves } = createOrGetAudios();
             const btn = createOrGetButton();
             setMutedUI(btn, localStorage.getItem(LS_MUTED) === 'true');
 
             btn.addEventListener('click', () => {
                 const newMuted = !(localStorage.getItem(LS_MUTED) === 'true');
                 localStorage.setItem(LS_MUTED, String(newMuted));
-                audio.muted = newMuted;
-                if (!newMuted) { audio.play().catch(()=>{}); }
+                bg.muted = newMuted; waves.muted = newMuted;
+                if (!newMuted) { bg.play().catch(()=>{}); waves.play().catch(()=>{}); }
                 setMutedUI(btn, newMuted);
             });
 
-            // Fallback to next available music source on error
-            audio.addEventListener('error', () => {
-                try {
-                    srcIndex = (srcIndex + 1) % MUSIC_SOURCES.length;
-                    localStorage.setItem('bgMusicSrcIndex', String(srcIndex));
-                    audio.src = MUSIC_SOURCES[srcIndex];
-                    audio.load();
-                    audio.play().catch(()=>{});
-                } catch {}
-            });
+            // Log/handle errors without stopping the other track
+            bg.addEventListener('error', (e) => { console.error('background.MP3 error', e); });
+            waves.addEventListener('error', (e) => { console.error('waves.MP3 error', e); });
 
-            startPlayback(audio);
+            startBoth(bg, waves);
         }
 
         // Delay start if intro overlay is present (to avoid audio clash)
@@ -219,12 +231,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const observer = new MutationObserver(() => {
                 if (!document.getElementById('intro-overlay')) {
                     observer.disconnect();
-                    initBgMusic();
+                    initDualAudio();
                 }
             });
             observer.observe(document.body, { childList: true });
         } else {
-            initBgMusic();
+            initDualAudio();
         }
     })();
 
