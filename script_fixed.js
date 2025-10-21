@@ -2,12 +2,40 @@
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Enhanced loading with fairy dust trail
+    // Intro video overlay logic
+    const introOverlay = document.getElementById('intro-overlay');
+    const introVideo = document.getElementById('intro-video');
+
+    if (introOverlay && introVideo) {
+        const hideIntro = () => {
+            introOverlay.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                try { introOverlay.remove(); } catch (e) {}
+            }, 800);
+        };
+
+        introVideo.addEventListener('ended', hideIntro);
+        introVideo.addEventListener('loadedmetadata', () => {
+            const dur = introVideo.duration;
+            if (isFinite(dur) && dur > 0) {
+                setTimeout(hideIntro, Math.ceil(dur * 1000) + 200);
+            } else {
+                setTimeout(hideIntro, 8000);
+            }
+        });
+
+        // Attempt to ensure playback starts
+        const tryPlay = () => introVideo.play().catch(() => {/* autoplay policies */});
+        if (introVideo.readyState >= 2) { tryPlay(); }
+        else { introVideo.addEventListener('canplay', tryPlay, { once: true }); }
+    }
+
+    // (Deprecated) legacy overlay variables are left unused
     const loadingOverlay = document.querySelector('.loading-overlay');
     const fairyContainer = document.querySelector('.fairy-container');
     const dustContainer = document.querySelector('.fairy-dust-container');
 
-    // Create fairy dust trail
+    // Old dust logic no-ops if elements are absent
     if (fairyContainer && dustContainer) {
         const createFairyDust = () => {
             const rect = fairyContainer.getBoundingClientRect();
@@ -15,35 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
             dust.className = 'fairy-dust';
             dust.style.left = rect.left + rect.width / 2 + 'px';
             dust.style.top = rect.top + rect.height / 2 + 'px';
-
-            // Random slight offset for natural look
             const offsetX = (Math.random() - 0.5) * 20;
             const offsetY = (Math.random() - 0.5) * 20;
             dust.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-
             dustContainer.appendChild(dust);
-
-            // Remove dust particle after animation
             setTimeout(() => dust.remove(), 2000);
         };
-
-        // Create dust particles continuously
         const dustInterval = setInterval(createFairyDust, 40);
-
-        // Stop creating dust and hide overlay after extended time
-        setTimeout(() => {
-            clearInterval(dustInterval);
-            if (loadingOverlay) {
-                loadingOverlay.classList.add('hidden');
-            }
-        }, 4500); // Extended from 1500ms to 4500ms
-    } else {
-        // Fallback if elements not found
-        setTimeout(() => {
-            if (loadingOverlay) {
-                loadingOverlay.classList.add('hidden');
-            }
-        }, 4500);
+        setTimeout(() => { clearInterval(dustInterval); if (loadingOverlay) loadingOverlay.classList.add('hidden'); }, 4500);
     }
 
     // Navigation scroll effect
