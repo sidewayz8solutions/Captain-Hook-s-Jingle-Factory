@@ -64,6 +64,120 @@ document.addEventListener('DOMContentLoaded', function() {
         const dustInterval = setInterval(createFairyDust, 40);
         setTimeout(() => { clearInterval(dustInterval); if (loadingOverlay) loadingOverlay.classList.add('hidden'); }, 4500);
     }
+    // Background music with persistent golden hook mute button
+    (function setupBackgroundMusic() {
+        const MUSIC_SRC = 'public/pirate_theme.mp3'; // TODO: add this file to public/
+        const LS_MUTED = 'bgMusicMuted';
+        const LS_TIME = 'bgMusicTime';
+        const VOLUME = 0.22; // not too loud
+
+        function createOrGetAudio() {
+            let audio = document.getElementById('bg-music');
+            if (!audio) {
+                audio = document.createElement('audio');
+                audio.id = 'bg-music';
+                audio.src = MUSIC_SRC;
+                audio.loop = true;
+                audio.preload = 'auto';
+                audio.crossOrigin = 'anonymous';
+                document.body.appendChild(audio);
+            }
+            audio.volume = VOLUME;
+            return audio;
+        }
+
+        function createOrGetButton() {
+            let btn = document.getElementById('bg-mute-btn');
+            if (!btn) {
+                btn = document.createElement('button');
+                btn.id = 'bg-mute-btn';
+                btn.type = 'button';
+                btn.title = 'Toggle music';
+                btn.className = 'fixed bottom-4 right-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gradient-to-br from-yellow-300 to-amber-500 hover:scale-105 transition-transform duration-200 flex items-center justify-center';
+                const img = document.createElement('img');
+                img.src = 'public/hook.png';
+                img.alt = 'Mute/Unmute';
+                img.className = 'w-8 h-8 drop-shadow-lg';
+                img.onerror = () => { img.src = 'hook.png'; };
+                btn.appendChild(img);
+                document.body.appendChild(btn);
+            }
+            return btn;
+        }
+
+        function setMutedUI(btn, muted) {
+            btn.style.opacity = muted ? '0.6' : '1';
+            btn.style.filter = muted ? 'grayscale(20%)' : 'none';
+        }
+
+        function startPlayback(audio) {
+            const muted = localStorage.getItem(LS_MUTED) === 'true';
+            audio.muted = muted;
+
+            const savedTime = parseFloat(localStorage.getItem(LS_TIME) || '0');
+            const setTime = () => {
+                if (!isNaN(savedTime) && isFinite(savedTime) && audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+                    audio.currentTime = savedTime % audio.duration;
+                }
+            };
+            if (audio.readyState >= 1) setTime(); else audio.addEventListener('loadedmetadata', setTime, { once: true });
+
+            const tryPlay = () => audio.play().catch(() => {
+                // Autoplay with audio may be blocked until interaction
+                const resume = () => { audio.muted = (localStorage.getItem(LS_MUTED) === 'true'); audio.play().catch(()=>{}); cleanup(); };
+                const cleanup = () => {
+                    window.removeEventListener('pointerdown', resume);
+                    window.removeEventListener('touchstart', resume);
+                    window.removeEventListener('click', resume);
+                    window.removeEventListener('keydown', resume);
+                };
+                window.addEventListener('pointerdown', resume, { once: true });
+                window.addEventListener('touchstart', resume, { once: true });
+                window.addEventListener('click', resume, { once: true });
+                window.addEventListener('keydown', resume, { once: true });
+            });
+
+            tryPlay();
+
+            // Persist playback time periodically
+            setInterval(() => {
+                try { localStorage.setItem(LS_TIME, String(audio.currentTime || 0)); } catch {}
+            }, 4000);
+        }
+
+        function initBgMusic() {
+            const audio = createOrGetAudio();
+            const btn = createOrGetButton();
+            setMutedUI(btn, localStorage.getItem(LS_MUTED) === 'true');
+
+            btn.addEventListener('click', () => {
+                const newMuted = !(localStorage.getItem(LS_MUTED) === 'true');
+                localStorage.setItem(LS_MUTED, String(newMuted));
+                audio.muted = newMuted;
+                if (!newMuted) { audio.play().catch(()=>{}); }
+                setMutedUI(btn, newMuted);
+            });
+
+            startPlayback(audio);
+
+            // If audio fails to load, dim the button
+            audio.addEventListener('error', () => setMutedUI(btn, true));
+        }
+
+        // Delay start if intro overlay is present (to avoid audio clash)
+        if (document.getElementById('intro-overlay')) {
+            const observer = new MutationObserver(() => {
+                if (!document.getElementById('intro-overlay')) {
+                    observer.disconnect();
+                    initBgMusic();
+                }
+            });
+            observer.observe(document.body, { childList: true });
+        } else {
+            initBgMusic();
+        }
+    })();
+
 
     // Navigation scroll effect
     const mainNav = document.getElementById('mainNav');
@@ -71,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
-        
+
         if (currentScrollY > 50) {
             mainNav.classList.add('scrolled');
         } else {
@@ -84,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             mainNav.style.transform = 'translateY(0)';
         }
-        
+
         lastScrollY = currentScrollY;
 
         // Back to top button visibility
@@ -147,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
                 const offsetTop = targetSection.offsetTop - 120;
                 window.scrollTo({
@@ -357,11 +471,11 @@ document.addEventListener('DOMContentLoaded', function() {
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Simple form validation
             const inputs = this.querySelectorAll('input[required], textarea[required]');
             let valid = true;
-            
+
             inputs.forEach(input => {
                 if (!input.value.trim()) {
                     valid = false;
@@ -370,17 +484,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     input.classList.remove('border-red-500');
                 }
             });
-            
+
             if (valid) {
                 // Show success message
                 const button = this.querySelector('button[type="submit"]');
                 const originalText = button.textContent;
                 button.textContent = 'Message Sent!';
                 button.classList.add('bg-green-500');
-                
+
                 // Reset form
                 this.reset();
-                
+
                 // Reset button after 3 seconds
                 setTimeout(() => {
                     button.textContent = originalText;
@@ -393,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Parallax effect for hero section
     const heroSection = document.getElementById('home');
     const captain = document.querySelector('.captain-image');
-    
+
     if (heroSection && captain) {
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
@@ -410,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         });
-        
+
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
@@ -431,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 behavior: 'smooth'
             });
         }
-        
+
         // Press 'M' to toggle mobile menu
         if ((e.key === 'm' || e.key === 'M') && mobileMenuBtn) {
             mobileMenuBtn.click();
@@ -457,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.forEach(element => {
             const elementTop = element.getBoundingClientRect().top;
             const elementBottom = element.getBoundingClientRect().bottom;
-            
+
             if (elementTop < window.innerHeight && elementBottom > 0) {
                 element.classList.add('visible');
             }
@@ -467,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run on scroll and resize
     window.addEventListener('scroll', initAnimations);
     window.addEventListener('resize', initAnimations);
-    
+
     // Initial check
     initAnimations();
 
@@ -495,50 +609,50 @@ function initHookSystem() {
 // Create the container initially hidden above the screen
 function createHooksContainer() {
     if (hooksContainer) return;
-    
+
     hooksContainer = document.createElement('div');
     hooksContainer.className = 'hanging-hooks-container';
-    
+
     document.body.appendChild(hooksContainer);
 }
 
 // Build hooks immediately but keep container hidden
 function ensureHooksBuilt() {
     if (!hooksContainer) return;
-    
+
     console.log('Building hooks...');
-    
+
     // Clear existing hooks
     hooksContainer.innerHTML = '';
-    
+
     // Create 7 hooks with staggered positioning
     const hookPositions = ['10%', '25%', '40%', '50%', '60%', '75%', '90%'];
-    
+
     hookPositions.forEach((position, index) => {
         const hookElement = document.createElement('div');
         hookElement.className = `hanging-hook hanging-hook-top-${index + 1}`;
         hookElement.style.left = position;
-        
+
         // Create the hook image element
         const hookImage = document.createElement('img');
         hookImage.className = 'top-hook';
         hookImage.src = 'public/hook.png';
         hookImage.alt = 'Pirate Hook';
-        
+
         // Fallback to root hook image if public folder fails
         hookImage.onerror = function() {
             console.log('Hook image failed to load from public folder, trying root');
             this.src = 'hook.png';
         };
-        
+
         hookImage.onload = function() {
             console.log(`Hook ${index + 1} image loaded successfully`);
         };
-        
+
         hookElement.appendChild(hookImage);
         hooksContainer.appendChild(hookElement);
     });
-    
+
     console.log('Hooks built:', hooksContainer.children.length);
 }
 
@@ -552,7 +666,7 @@ function handleScroll() {
     const currentScrollY = window.scrollY;
     const nav = document.querySelector('nav') || document.querySelector('.nav') || document.querySelector('.navbar');
     const hero = document.querySelector('.hero') || document.querySelector('#hero') || document.querySelector('.hero-section');
-    
+
     // Determine if we've scrolled past hero
     let pastHero = false;
     if (hero) {
@@ -561,11 +675,11 @@ function handleScroll() {
     } else {
         pastHero = currentScrollY > 600; // Fallback threshold
     }
-    
+
     // Determine nav visibility based on scroll direction
     const scrollingDown = currentScrollY > hookLastScrollY;
     const shouldHideNav = scrollingDown && pastHero && currentScrollY > 100;
-    
+
     // Update nav visibility
     if (nav) {
         if (shouldHideNav && navVisible) {
@@ -576,32 +690,32 @@ function handleScroll() {
             navVisible = true;
         }
     }
-    
+
     // Handle hook visibility and positioning
     if (pastHero && !hooksShown) {
         showHooks();
     } else if (!pastHero && hooksShown) {
         hideHooks();
     }
-    
+
     // Update hook attachment state
     if (hooksShown) {
         updateHookAttachment();
     }
-    
+
     hookLastScrollY = currentScrollY;
 }
 
 // Show hooks with pop-out animation
 function showHooks() {
     if (!hooksContainer || hooksShown) return;
-    
+
     console.log('Showing hooks...');
     hooksShown = true;
-    
+
     // Add visible state to container
     hooksContainer.classList.add('hooks-visible');
-    
+
     // Add pop-out animation to each hook with stagger
     const hooks = hooksContainer.querySelectorAll('.hanging-hook');
     console.log('Found hooks to animate:', hooks.length);
@@ -616,12 +730,12 @@ function showHooks() {
 // Hide hooks
 function hideHooks() {
     if (!hooksContainer || !hooksShown) return;
-    
+
     hooksShown = false;
-    
+
     // Remove all hook states
     hooksContainer.classList.remove('hooks-visible', 'hooks-attached');
-    
+
     const hooks = hooksContainer.querySelectorAll('.hanging-hook');
     hooks.forEach(hook => {
         hook.classList.remove('hook-popped-out');
@@ -631,7 +745,7 @@ function hideHooks() {
 // Update hook attachment to nav
 function updateHookAttachment() {
     if (!hooksContainer || !hooksShown) return;
-    
+
     if (navVisible) {
         // Hooks attach to bottom of nav
         hooksContainer.classList.add('hooks-attached');
@@ -685,7 +799,7 @@ window.hookSystem = {
         if (messageForm) {
             messageForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const name = senderName ? senderName.value.trim() : '';
                 const email = senderEmail ? senderEmail.value.trim() : '';
                 const message = messageTextarea ? messageTextarea.value.trim() : '';
@@ -712,7 +826,7 @@ window.hookSystem = {
                     messageForm.reset();
                     charCount.textContent = '0/500';
                     charCount.style.color = '#9ca3af';
-                    
+
                     sendMessageBtn.classList.remove('loading');
                     sendMessageBtn.textContent = 'Send Message';
                 }, 2000);
@@ -807,7 +921,7 @@ const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLef
 document.addEventListener('keydown', (e) => {
     konamiCode.push(e.key);
     konamiCode = konamiCode.slice(-10);
-    
+
     if (konamiCode.join(',') === konamiPattern.join(',')) {
         document.body.style.animation = 'shake 0.5s';
         setTimeout(() => {
@@ -863,98 +977,98 @@ class FairyDustCursor {
         this.colors = ['purple', 'gold', 'green'];
         this.sizes = ['small', 'medium', 'large'];
         this.isTouch = 'ontouchstart' in window;
-        
+
         this.init();
     }
-    
+
     init() {
         if (this.isTouch) return; // Skip on touch devices
-        
+
         this.createContainer();
         this.createCustomCursor();
         this.bindEvents();
     }
-    
+
     createContainer() {
         this.container = document.createElement('div');
         this.container.className = 'fairy-dust-container';
         document.body.appendChild(this.container);
     }
-    
+
     createCustomCursor() {
         this.customCursor = document.createElement('div');
         this.customCursor.className = 'custom-cursor';
         document.body.appendChild(this.customCursor);
     }
-    
+
     bindEvents() {
         document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
         document.addEventListener('mouseenter', () => this.showCursor());
         document.addEventListener('mouseleave', () => this.hideCursor());
     }
-    
+
     handleMouseMove(e) {
         const x = e.clientX;
         const y = e.clientY;
-        
+
         // Update custom cursor position
         if (this.customCursor) {
             this.customCursor.style.left = x + 'px';
             this.customCursor.style.top = y + 'px';
         }
-        
+
         // Calculate movement speed for particle intensity
         const deltaX = x - this.lastMouseX;
         const deltaY = y - this.lastMouseY;
         const speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        
+
         // Create particles based on movement speed
         if (speed > 2) {
             this.createParticle(x, y);
-            
+
             // Create extra particles for fast movement
             if (speed > 8) {
                 this.createParticle(x + Math.random() * 10 - 5, y + Math.random() * 10 - 5);
             }
-            
+
             // Occasional sparkle
             if (Math.random() < 0.3) {
                 this.createSparkle(x, y);
             }
         }
-        
+
         this.lastMouseX = x;
         this.lastMouseY = y;
     }
-    
+
     createParticle(x, y) {
         const particle = document.createElement('div');
-        
+
         // Random properties
         const color = this.colors[Math.floor(Math.random() * this.colors.length)];
         const size = this.sizes[Math.floor(Math.random() * this.sizes.length)];
-        
+
         // Add random offset for natural spread
         const offsetX = (Math.random() - 0.5) * 20;
         const offsetY = (Math.random() - 0.5) * 20;
-        
+
         particle.className = 'fairy-dust-particle fairy-dust-' + color + ' fairy-dust-' + size;
         particle.style.left = (x + offsetX) + 'px';
         particle.style.top = (y + offsetY) + 'px';
-        
+
         // Add random horizontal drift
         const driftX = (Math.random() - 0.5) * 30;
         const driftY = Math.random() * -20 - 10;
-        
+
         particle.style.setProperty('--drift-x', driftX + 'px');
         particle.style.setProperty('--drift-y', driftY + 'px');
-        
+
         // Custom animation with drift
-        particle.style.animation = 
+        particle.style.animation =
             'fairyDustFloat 2s ease-out forwards, fairyDustDrift 2s ease-out forwards';
-        
+
         this.container.appendChild(particle);
-        
+
         // Remove particle after animation
         setTimeout(() => {
             if (particle.parentNode) {
@@ -962,22 +1076,22 @@ class FairyDustCursor {
             }
         }, 2000);
     }
-    
+
     createSparkle(x, y) {
         const sparkle = document.createElement('div');
-        
+
         const color = this.colors[Math.floor(Math.random() * this.colors.length)];
-        
+
         // Add random offset
         const offsetX = (Math.random() - 0.5) * 30;
         const offsetY = (Math.random() - 0.5) * 30;
-        
+
         sparkle.className = 'fairy-sparkle sparkle-' + color;
         sparkle.style.left = (x + offsetX) + 'px';
         sparkle.style.top = (y + offsetY) + 'px';
-        
+
         this.container.appendChild(sparkle);
-        
+
         // Remove sparkle after animation
         setTimeout(() => {
             if (sparkle.parentNode) {
@@ -985,19 +1099,19 @@ class FairyDustCursor {
             }
         }, 1500);
     }
-    
+
     showCursor() {
         if (this.customCursor) {
             this.customCursor.style.opacity = '1';
         }
     }
-    
+
     hideCursor() {
         if (this.customCursor) {
             this.customCursor.style.opacity = '0';
         }
     }
-    
+
     destroy() {
         if (this.container) {
             this.container.remove();
