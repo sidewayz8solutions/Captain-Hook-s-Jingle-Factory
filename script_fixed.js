@@ -2,7 +2,7 @@
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Intro video overlay logic: play with audio, no button
+    // Intro video overlay logic: guaranteed autoplay as muted loading screen
     const introOverlay = document.getElementById('intro-overlay');
     const introVideo = document.getElementById('intro-video');
 
@@ -18,28 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(hideIntro, (isFinite(dur) && dur > 0) ? Math.ceil(dur * 1000) + 200 : 10000);
         });
 
-        const resumeWithAudio = () => {
-            introVideo.muted = false;
+        const tryPlayMuted = () => {
+            introVideo.muted = true;
             introVideo.play().catch(() => {});
-            window.removeEventListener('pointerdown', resumeWithAudio);
-            window.removeEventListener('touchstart', resumeWithAudio);
-            window.removeEventListener('click', resumeWithAudio);
-            window.removeEventListener('keydown', resumeWithAudio);
         };
 
-        const tryPlayWithSound = () => {
-            introVideo.muted = false;
-            introVideo.play().catch(() => {
-                // Autoplay with audio blocked: wait for any user interaction (no button)
-                window.addEventListener('pointerdown', resumeWithAudio, { once: true });
-                window.addEventListener('touchstart', resumeWithAudio, { once: true });
-                window.addEventListener('click', resumeWithAudio, { once: true });
-                window.addEventListener('keydown', resumeWithAudio, { once: true });
-            });
-        };
-
-        if (introVideo.readyState >= 2) { tryPlayWithSound(); }
-        else { introVideo.addEventListener('canplay', tryPlayWithSound, { once: true }); }
+        if (introVideo.readyState >= 2) { tryPlayMuted(); }
+        else { introVideo.addEventListener('canplay', tryPlayMuted, { once: true }); }
     }
 
     // (Deprecated) legacy overlay variables are left unused
