@@ -180,11 +180,28 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Intro skipped; overlay removed if present.');
     }
 
-    // Remove any legacy anchor loading overlay immediately to avoid blocking navigation
-    try {
-        const legacyOverlay = document.querySelector('.loading-overlay');
-        if (legacyOverlay) legacyOverlay.remove();
-    } catch {}
+    // (Deprecated) legacy overlay variables are left unused
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    const fairyContainer = document.querySelector('.fairy-container');
+    const dustContainer = document.querySelector('.fairy-dust-container');
+
+    // Old dust logic no-ops if elements are absent
+    if (fairyContainer && dustContainer) {
+        const createFairyDust = () => {
+            const rect = fairyContainer.getBoundingClientRect();
+            const dust = document.createElement('div');
+            dust.className = 'fairy-dust';
+            dust.style.left = rect.left + rect.width / 2 + 'px';
+            dust.style.top = rect.top + rect.height / 2 + 'px';
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            dust.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            dustContainer.appendChild(dust);
+            setTimeout(() => dust.remove(), 2000);
+        };
+        const dustInterval = setInterval(createFairyDust, 40);
+        setTimeout(() => { clearInterval(dustInterval); if (loadingOverlay) loadingOverlay.classList.add('hidden'); }, 4500);
+    }
     // Background music with persistent golden hook mute button
     (function setupDualAudio() {
         function isHomePage() {
