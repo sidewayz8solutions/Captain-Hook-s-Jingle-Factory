@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Background music with persistent golden hook mute button
     (function setupDualAudio() {
-        const BG_SRC = './public/background.MP3'; // plays once
-        const WAVES_SRC = './public/waves.MP3';   // loops
+        const BG_SRC = './background.MP3'; // plays once
+        const WAVES_SRC = './waves.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
 
         function createOrGetAudios() {
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.id = 'bg-mute-btn';
                 btn.type = 'button';
                 btn.title = 'Toggle music';
-                btn.className = 'fixed bottom-4 left-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gradient-to-br from-yellow-300 to-amber-500 hover:scale-105 transition-transform duration-200 flex items-center justify-center';
+                btn.className = 'fixed bottom-4 left-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-black hover:scale-105 transition-transform duration-200 flex items-center justify-center';
                 const img = document.createElement('img');
                 img.src = 'public/ab.png'; // golden hook image
                 img.alt = 'Mute/Unmute';
@@ -239,11 +239,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Delay start if intro overlay is present (to avoid audio clash)
         if (document.getElementById('intro-overlay')) {
-            const observer = new MutationObserver(() => {
-                if (!document.getElementById('intro-overlay')) {
-                    observer.disconnect();
-                    initDualAudio();
-                }
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        mutation.removedNodes.forEach((node) => {
+                            if (node.id === 'intro-overlay') {
+                                observer.disconnect();
+                                initDualAudio();
+                            }
+                        });
+                    }
+                });
             });
             observer.observe(document.body, { childList: true });
         } else {
