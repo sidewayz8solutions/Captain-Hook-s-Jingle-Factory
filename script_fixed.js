@@ -191,7 +191,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.type = 'button';
                 btn.title = 'Toggle music';
                 // Make button a positioning context for the caption
-                btn.className = 'fixed bottom-4 left-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-black hover:scale-105 transition-transform duration-200 flex items-center justify-center relative';
+                btn.className = 'fixed bottom-4 left-4 z-[10050] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gray-800 hover:scale-105 transition-transform duration-200 flex items-center justify-center relative';
+                // Inline fallback styles to ensure visibility even if Tailwind fails
+                try {
+                    Object.assign(btn.style, {
+                        position: 'fixed', bottom: '16px', left: '16px', zIndex: '10050',
+                        width: '56px', height: '56px', background: '#1f2937', borderRadius: '9999px'
+                    });
+                } catch {}
                 const img = document.createElement('img');
                 img.src = 'public/ab.png'; // golden hook image
                 img.alt = 'Mute/Unmute';
@@ -282,6 +289,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+
+            // Ensure the mute button exists as early as possible (even before audio starts)
+            try {
+                const earlyBtn = createOrGetButton();
+                setMutedUI(earlyBtn, localStorage.getItem(LS_MUTED) === 'true');
+            } catch {}
+
         function initDualAudio() {
             const { bg, waves } = createOrGetAudios();
             const btn = createOrGetButton();
@@ -322,19 +336,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Delay start if intro overlay is present (to avoid audio clash)
         if (document.getElementById('intro-overlay')) {
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'childList') {
-                        mutation.removedNodes.forEach((node) => {
-                            if (node.id === 'intro-overlay') {
-                                observer.disconnect();
-                                initDualAudio();
-                            }
-                        });
-                    }
-                });
+            const observer = new MutationObserver(() => {
+                if (!document.getElementById('intro-overlay')) {
+                    observer.disconnect();
+                    initDualAudio();
+                }
             });
-            observer.observe(document.body, { childList: true });
+            observer.observe(document.body, { childList: true, subtree: true });
         } else {
             initDualAudio();
         }
