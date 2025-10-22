@@ -165,6 +165,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 bg.preload = 'auto';
                 bg.crossOrigin = 'anonymous';
                 bg.volume = 0.22; // not too loud
+                // Slow the tempo slightly (keep pitch)
+                try { bg.playbackRate = 0.90; } catch {}
+                try { bg.preservesPitch = true; bg.mozPreservesPitch = true; bg.webkitPreservesPitch = true; } catch {}
                 document.body.appendChild(bg);
             }
 
@@ -191,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.type = 'button';
                 btn.title = 'Toggle music';
                 // Make button a positioning context for the caption
-                btn.className = 'fixed bottom-4 left-4 z-[10050] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gray-800 hover:scale-105 transition-transform duration-200 flex items-center justify-center relative';
+                btn.className = 'fixed bottom-4 left-4 z-[10050] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-gray-800 hover:scale-105 transition-transform transition-opacity duration-200 flex items-center justify-center relative';
                 // Inline fallback styles to ensure visibility even if Tailwind fails
                 try {
                     Object.assign(btn.style, {
@@ -212,6 +215,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 label.textContent = 'mute';
                 label.className = 'absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] leading-none font-semibold text-yellow-300 drop-shadow-sm select-none';
                 btn.appendChild(label);
+                // Hide during intro overlay, fade in after
+                if (document.getElementById('intro-overlay')) {
+                    btn.classList.add('opacity-0','pointer-events-none');
+                    try { btn.style.opacity = '0'; btn.style.pointerEvents = 'none'; } catch {}
+                }
                 document.body.appendChild(btn);
             } else {
                 // Ensure image is slightly raised and caption exists
@@ -339,6 +347,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const observer = new MutationObserver(() => {
                 if (!document.getElementById('intro-overlay')) {
                     observer.disconnect();
+                    // Fade-in the mute button now that intro is gone
+                    const btn = document.getElementById('bg-mute-btn');
+                    if (btn) {
+                        btn.classList.remove('opacity-0','pointer-events-none');
+                        try { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; } catch {}
+                    }
                     initDualAudio();
                 }
             });
