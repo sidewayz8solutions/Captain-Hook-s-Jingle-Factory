@@ -22,6 +22,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 800);
         };
 
+
+            // Try to enable audio on the intro video when allowed; otherwise prompt user
+            function showTapForSoundPrompt() {
+                if (document.getElementById('intro-sound-btn')) return;
+                const btn = document.createElement('button');
+                btn.id = 'intro-sound-btn';
+                btn.type = 'button';
+                btn.className = 'absolute bottom-8 left-1/2 -translate-x-1/2 z-[10000] px-4 py-2 rounded-full bg-amber-500/90 text-black font-semibold shadow-lg hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-300';
+                btn.textContent = 'Tap for sound';
+                const enable = () => {
+                    try { introVideo.muted = false; } catch {}
+                    introVideo.play().catch(()=>{});
+                    try { btn.remove(); } catch {}
+                    window.removeEventListener('pointerdown', enable);
+                    window.removeEventListener('touchstart', enable);
+                    window.removeEventListener('click', enable);
+                    window.removeEventListener('keydown', enable);
+                };
+                btn.addEventListener('click', enable);
+                window.addEventListener('pointerdown', enable, { once: true });
+                window.addEventListener('touchstart', enable, { once: true });
+                window.addEventListener('click', enable, { once: true });
+                window.addEventListener('keydown', enable, { once: true });
+                introOverlay.appendChild(btn);
+            }
+
+            function tryUnmuteOnce() {
+                try {
+                    introVideo.muted = false;
+                    const p = introVideo.play();
+                    if (p && typeof p.then === 'function') {
+                        p.catch(err => {
+                            console.warn('Autoplay with sound blocked; showing prompt', err);
+                            showTapForSoundPrompt();
+                        });
+                    }
+                } catch (e) {
+                    showTapForSoundPrompt();
+                }
+            }
+
         // Force video attributes for maximum compatibility
         introVideo.muted = true;
         introVideo.autoplay = true;
@@ -50,11 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Aggressive play attempts
         const forcePlay = () => {
             console.log('Attempting to play video...');
+            // Start muted to guarantee autoplay visual, then try to enable sound
             introVideo.muted = true;
             const playPromise = introVideo.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     console.log('Video playing successfully');
+                    // Attempt to unmute once playback has begun
+                    setTimeout(tryUnmuteOnce, 80);
                 }).catch(error => {
                     console.error('Video play failed:', error);
                     // Still hide overlay after a delay even if video fails
@@ -146,14 +190,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.id = 'bg-mute-btn';
                 btn.type = 'button';
                 btn.title = 'Toggle music';
-                btn.className = 'fixed bottom-4 left-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-black hover:scale-105 transition-transform duration-200 flex items-center justify-center';
+                // Make button a positioning context for the caption
+                btn.className = 'fixed bottom-4 left-4 z-[9980] w-14 h-14 rounded-full shadow-xl ring-2 ring-yellow-300 bg-black hover:scale-105 transition-transform duration-200 flex items-center justify-center relative';
                 const img = document.createElement('img');
                 img.src = 'public/ab.png'; // golden hook image
                 img.alt = 'Mute/Unmute';
-                img.className = 'w-8 h-8 drop-shadow-lg';
+                // Raise the hook slightly
+                img.className = 'w-8 h-8 drop-shadow-lg -translate-y-1';
                 img.onerror = () => { img.src = 'ab.png'; };
                 btn.appendChild(img);
+                // Gold caption under the button
+                const label = document.createElement('div');
+                label.id = 'bg-mute-caption';
+                label.textContent = 'mute';
+                label.className = 'absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] leading-none font-semibold text-yellow-300 drop-shadow-sm select-none';
+                btn.appendChild(label);
                 document.body.appendChild(btn);
+            } else {
+                // Ensure image is slightly raised and caption exists
+                const img = btn.querySelector('img');
+                if (img && !/\b-translate-y-/.test(img.className)) {
+                    img.className += ' -translate-y-1';
+                }
+                if (!btn.querySelector('#bg-mute-caption')) {
+                    const label = document.createElement('div');
+                    label.id = 'bg-mute-caption';
+                    label.textContent = 'mute';
+                    label.className = 'absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[10px] leading-none font-semibold text-yellow-300 drop-shadow-sm select-none';
+                    btn.appendChild(label);
+                    if (!/\brelative\b/.test(btn.className)) btn.className += ' relative';
+                }
             }
             return btn;
         }
@@ -170,14 +236,24 @@ document.addEventListener('DOMContentLoaded', function() {
             try { bg.currentTime = 0; } catch {}
             try { waves.currentTime = 0; } catch {}
 
-            const playBoth = () => {
-                const p1 = bg.play();
-                const p2 = waves.play();
-                Promise.allSettled([p1, p2]).then(results => {
+            const alreadyPlayed = sessionStorage.getItem('bgOncePlayed') === 'true';
+
+            const playTracks = () => {
+                const attempts = [];
+                if (!alreadyPlayed) {
+                    attempts.push(bg.play());
+                    try { sessionStorage.setItem('bgOncePlayed', 'true'); } catch {}
+                }
+                attempts.push(waves.play());
+
+                Promise.allSettled(attempts).then(results => {
                     const blocked = results.some(r => r.status === 'rejected');
                     if (blocked) {
                         const resume = () => {
-                            bg.play().catch(()=>{});
+                            if (!(sessionStorage.getItem('bgOncePlayed') === 'true')) {
+                                bg.play().catch(()=>{});
+                                try { sessionStorage.setItem('bgOncePlayed', 'true'); } catch {}
+                            }
                             waves.play().catch(()=>{});
                             cleanup();
                         };
@@ -196,13 +272,13 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             if (bg.readyState >= 2 || waves.readyState >= 2) {
-                playBoth();
+                playTracks();
             } else {
-                const once = () => playBoth();
+                const once = () => playTracks();
                 bg.addEventListener('canplay', once, { once: true });
                 waves.addEventListener('canplay', once, { once: true });
                 // Safety start if events don’t fire promptly
-                setTimeout(playBoth, 1500);
+                setTimeout(playTracks, 1500);
             }
         }
 
@@ -215,7 +291,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newMuted = !(localStorage.getItem(LS_MUTED) === 'true');
                 localStorage.setItem(LS_MUTED, String(newMuted));
                 bg.muted = newMuted; waves.muted = newMuted;
-                if (!newMuted) { bg.play().catch(()=>{}); waves.play().catch(()=>{}); }
+                if (!newMuted) {
+                    // Only trigger background once per session
+                    if (!(sessionStorage.getItem('bgOncePlayed') === 'true')) {
+                        bg.play().catch(()=>{});
+                        try { sessionStorage.setItem('bgOncePlayed', 'true'); } catch {}
+                    }
+                    waves.play().catch(()=>{});
+                }
                 setMutedUI(btn, newMuted);
             });
 
