@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch {}
             return false;
         }
-        const BG_SRC = './public/background.MP3'; // plays once
+        const BG_SRC = './public/background1/background1.MP3'; // plays once
         const WAVES_SRC = './public/waves.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
 
@@ -374,10 +374,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Log/handle errors without stopping the other track
             bg.addEventListener('error', (e) => {
-                console.error('background.MP3 error', e);
+                console.error('background1.MP3 error', e);
                 // try lowercase extension as a fallback just in case
-                if (!bg.src.toLowerCase().endsWith('/public/background.mp3')) {
-                    bg.src = './public/background.mp3'; bg.load(); bg.play().catch(()=>{});
+                if (!bg.src.toLowerCase().endsWith('/public/background1/background1.mp3')) {
+                    bg.src = './public/background1/background1.mp3'; bg.load(); bg.play().catch(()=>{});
                 }
             });
             waves.addEventListener('error', (e) => {
