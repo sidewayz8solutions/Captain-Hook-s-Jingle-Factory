@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Background music with persistent golden hook mute button
     (function setupDualAudio() {
-        const BG_SRC = './background.MP3'; // plays once
-        const WAVES_SRC = './waves.MP3';   // loops
+        const BG_SRC = './public/background.MP3'; // plays once
+        const WAVES_SRC = './public/waves.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
 
         function createOrGetAudios() {
