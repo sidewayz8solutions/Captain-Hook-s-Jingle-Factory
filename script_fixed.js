@@ -172,8 +172,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 10000);
     } else {
-        // Not the home page or intro elements absent; skip silently
-        console.log('Intro video not present; skipping intro overlay.');
+        // Not the home page or intro elements absent
+        // If an overlay exists without a video, remove it immediately so it doesn't block other pages
+        if (introOverlay) {
+            try { introOverlay.remove(); } catch {}
+        }
+        console.log('Intro skipped; overlay removed if present.');
     }
 
     // (Deprecated) legacy overlay variables are left unused
