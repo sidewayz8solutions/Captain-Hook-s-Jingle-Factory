@@ -179,6 +179,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 waves.loop = true; // continuous loop
                 waves.preload = 'auto';
                 waves.crossOrigin = 'anonymous';
+                // Mark background as actually played only when it starts playing
+                try {
+                    bg.addEventListener('playing', () => {
+                        try { sessionStorage.setItem('bgOncePlayed', 'true'); } catch {}
+                    }, { once: true });
+                } catch {}
+
                 waves.volume = 0.10; // lower than background
                 document.body.appendChild(waves);
             }
@@ -257,7 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const attempts = [];
                 if (!alreadyPlayed) {
                     attempts.push(bg.play());
-                    try { sessionStorage.setItem('bgOncePlayed', 'true'); } catch {}
                 }
                 attempts.push(waves.play());
 
@@ -267,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         const resume = () => {
                             if (!(sessionStorage.getItem('bgOncePlayed') === 'true')) {
                                 bg.play().catch(()=>{});
-                                try { sessionStorage.setItem('bgOncePlayed', 'true'); } catch {}
                             }
                             waves.play().catch(()=>{});
                             cleanup();
@@ -317,7 +322,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Only trigger background once per session
                     if (!(sessionStorage.getItem('bgOncePlayed') === 'true')) {
                         bg.play().catch(()=>{});
-                        try { sessionStorage.setItem('bgOncePlayed', 'true'); } catch {}
                     }
                     waves.play().catch(()=>{});
                 }
