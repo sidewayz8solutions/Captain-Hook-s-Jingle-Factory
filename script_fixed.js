@@ -2,12 +2,17 @@
 
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Starting initialization...');
+
     // Intro video overlay logic: robust loading screen with fairy01.mp4
     const introOverlay = document.getElementById('intro-overlay');
     const introVideo = document.getElementById('intro-video');
 
     if (introOverlay && introVideo) {
         console.log('Intro video elements found, setting up loading screen...');
+        console.log('Video src:', introVideo.src);
+        console.log('Video readyState:', introVideo.readyState);
+        console.log('Video networkState:', introVideo.networkState);
 
         const hideIntro = () => {
             console.log('Hiding intro overlay...');
@@ -84,13 +89,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
         introVideo.addEventListener('error', (e) => {
             console.error('Video error:', e);
+            console.error('Video error details:', {
+                code: e.target.error?.code,
+                message: e.target.error?.message,
+                src: introVideo.src,
+                networkState: introVideo.networkState,
+                readyState: introVideo.readyState
+            });
             // Hide overlay after 2 seconds if video fails
             setTimeout(hideIntro, 2000);
         });
 
+        introVideo.addEventListener('loadstart', () => console.log('Video load started'));
+        introVideo.addEventListener('canplay', () => console.log('Video can play'));
+        introVideo.addEventListener('canplaythrough', () => console.log('Video can play through'));
+        introVideo.addEventListener('stalled', () => console.log('Video stalled'));
+        introVideo.addEventListener('suspend', () => console.log('Video suspended'));
+        introVideo.addEventListener('waiting', () => console.log('Video waiting'));
+
         // Aggressive play attempts
         const forcePlay = () => {
             console.log('Attempting to play video...');
+            console.log('Video current state:', {
+                muted: introVideo.muted,
+                paused: introVideo.paused,
+                readyState: introVideo.readyState,
+                networkState: introVideo.networkState,
+                currentTime: introVideo.currentTime,
+                duration: introVideo.duration
+            });
+
             // Start muted to guarantee autoplay visual, then try to enable sound
             introVideo.muted = true;
             const playPromise = introVideo.play();
@@ -101,30 +129,51 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(tryUnmuteOnce, 80);
                 }).catch(error => {
                     console.error('Video play failed:', error);
+                    console.error('Play error details:', {
+                        name: error.name,
+                        message: error.message,
+                        code: error.code
+                    });
                     // Still hide overlay after a delay even if video fails
                     setTimeout(hideIntro, 3000);
                 });
+            } else {
+                console.warn('Play promise is undefined - browser may not support promises');
             }
         };
 
         // Try to play immediately if ready
         if (introVideo.readyState >= 2) {
+            console.log('Video ready, playing immediately');
             forcePlay();
         } else {
+            console.log('Video not ready, waiting for events...');
             // Wait for video to be ready
-            introVideo.addEventListener('canplay', forcePlay, { once: true });
-            introVideo.addEventListener('loadeddata', forcePlay, { once: true });
+            introVideo.addEventListener('canplay', () => {
+                console.log('canplay event fired');
+                forcePlay();
+            }, { once: true });
+            introVideo.addEventListener('loadeddata', () => {
+                console.log('loadeddata event fired');
+                forcePlay();
+            }, { once: true });
         }
 
         // Ultimate fallback - hide overlay after 10 seconds no matter what
         setTimeout(() => {
             if (document.getElementById('intro-overlay')) {
                 console.log('Fallback timeout - forcing overlay removal');
+                console.log('Final video state:', {
+                    readyState: introVideo.readyState,
+                    networkState: introVideo.networkState,
+                    error: introVideo.error
+                });
                 hideIntro();
             }
         }, 10000);
     } else {
-        console.error('Intro video elements not found!');
+        // Not the home page or intro elements absent; skip silently
+        console.log('Intro video not present; skipping intro overlay.');
     }
 
     // (Deprecated) legacy overlay variables are left unused
@@ -151,6 +200,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Background music with persistent golden hook mute button
     (function setupDualAudio() {
+        function isHomePage() {
+            try {
+                const path = window.location && window.location.pathname ? window.location.pathname : '/';
+                if (document.getElementById('intro-overlay')) return true; // explicit home marker
+                if (path === '/' || path.endsWith('/index.html')) return true;
+            } catch {}
+            return false;
+        }
         const BG_SRC = './public/background.MP3'; // plays once
         const WAVES_SRC = './public/waves.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
@@ -305,8 +362,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Ensure the mute button exists as early as possible (even before audio starts)
             try {
-                const earlyBtn = createOrGetButton();
-                setMutedUI(earlyBtn, localStorage.getItem(LS_MUTED) === 'true');
+                if (isHomePage()) {
+                    const earlyBtn = createOrGetButton();
+                    setMutedUI(earlyBtn, localStorage.getItem(LS_MUTED) === 'true');
+                }
             } catch {}
 
         function initDualAudio() {
@@ -357,12 +416,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         btn.classList.remove('opacity-0','pointer-events-none');
                         try { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; } catch {}
                     }
-                    initDualAudio();
+                    if (isHomePage()) initDualAudio();
                 }
             });
             observer.observe(document.body, { childList: true, subtree: true });
-        } else {
+        } else if (isHomePage()) {
             initDualAudio();
+        } else {
+            console.log('Non‑home page: skipping background audio init.');
         }
     })();
 
