@@ -349,8 +349,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Ensure the mute button exists as early as possible (even before audio starts)
             try {
-                const earlyBtn = createOrGetButton();
-                setMutedUI(earlyBtn, localStorage.getItem(LS_MUTED) === 'true');
+                if (isHomePage()) {
+                    const earlyBtn = createOrGetButton();
+                    setMutedUI(earlyBtn, localStorage.getItem(LS_MUTED) === 'true');
+                }
             } catch {}
 
         function initDualAudio() {
@@ -390,44 +392,6 @@ document.addEventListener('DOMContentLoaded', function() {
             startBoth(bg, waves);
         }
 
-
-            // Initialize only the waves track on non-home pages
-            function initWavesOnly() {
-                const { waves } = createOrGetAudios();
-                const btn = createOrGetButton();
-                setMutedUI(btn, localStorage.getItem(LS_MUTED) === 'true');
-
-                btn.addEventListener('click', () => {
-                    const newMuted = !(localStorage.getItem(LS_MUTED) === 'true');
-                    localStorage.setItem(LS_MUTED, String(newMuted));
-                    waves.muted = newMuted;
-                    if (!newMuted) { waves.play().catch(()=>{}); }
-                    setMutedUI(btn, newMuted);
-                });
-
-                const start = () => { waves.play().catch(()=>{}); };
-                if (waves.readyState >= 2) {
-                    start();
-                } else {
-                    const once = () => start();
-                    waves.addEventListener('canplay', once, { once: true });
-                    // Safety start if events don’t fire promptly
-                    setTimeout(start, 1500);
-                    // User gesture fallbacks
-                    const resume = () => { waves.play().catch(()=>{}); cleanup(); };
-                    const cleanup = () => {
-                        window.removeEventListener('pointerdown', resume);
-                        window.removeEventListener('touchstart', resume);
-                        window.removeEventListener('click', resume);
-                        window.removeEventListener('keydown', resume);
-                    };
-                    window.addEventListener('pointerdown', resume, { once: true });
-                    window.addEventListener('touchstart', resume, { once: true });
-                    window.addEventListener('click', resume, { once: true });
-                    window.addEventListener('keydown', resume, { once: true });
-                }
-            }
-
         // Delay start if intro overlay is present (to avoid audio clash)
         if (document.getElementById('intro-overlay')) {
             const observer = new MutationObserver(() => {
@@ -446,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (isHomePage()) {
             initDualAudio();
         } else {
-            initWavesOnly();
+            console.log('Non‑home page: skipping background audio init.');
         }
     })();
 
