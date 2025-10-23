@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
         const BG_SRC = './public/background1/background1.MP3'; // plays once
-        const WAVES_SRC = './public/waves.MP3';   // loops
+        const WAVES_SRC = './public/waves1.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
 
         function createOrGetAudios() {
@@ -381,9 +381,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             waves.addEventListener('error', (e) => {
-                console.error('waves.MP3 error', e);
-                if (!waves.src.toLowerCase().endsWith('/public/waves.mp3')) {
-                    waves.src = './public/waves.mp3'; waves.load(); waves.play().catch(()=>{});
+                console.error('waves1.MP3 error', e);
+                if (!waves.src.toLowerCase().endsWith('/public/waves1.mp3')) {
+                    waves.src = './public/waves1.mp3'; waves.load(); waves.play().catch(()=>{});
                 }
             });
 
