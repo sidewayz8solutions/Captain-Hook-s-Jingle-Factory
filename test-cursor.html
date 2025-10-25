@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Mardi Gras Cursor</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 50px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+        }
+        .test-area {
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        h1 {
+            color: #FFD700;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-area">
+        <h1>🎭 Mardi Gras Cursor Test 🎭</h1>
+        <p>Move your mouse around this area to see the magical fairy dust cursor trail!</p>
+        <p>The cursor should leave behind purple, gold, and green particles with sparkles.</p>
+        <p>Try moving fast and slow to see different particle effects.</p>
+        
+        <div style="margin: 50px 0; padding: 30px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+            <h2>✨ Test Zone ✨</h2>
+            <p>This is a larger area to test the cursor movement.</p>
+            <p>The particles should float upward and fade out.</p>
+        </div>
+    </div>
+
+    <script src="script_fixed.js"></script>
+    <script>
+        // Add some debug logging
+        console.log('Test page loaded');
+        console.log('FairyDustCursor available:', typeof FairyDustCursor);
+        console.log('fairyDustCursor global:', window.fairyDustCursor);
+
+        // Check if cursor elements exist
+        setTimeout(() => {
+            console.log('Checking cursor elements...');
+            const container = document.querySelector('.fairy-dust-container');
+            const customCursor = document.querySelector('.custom-cursor');
+            console.log('Fairy dust container:', container);
+            console.log('Custom cursor:', customCursor);
+
+            if (container && customCursor) {
+                console.log('✅ Mardi Gras cursor is working!');
+                document.body.style.cursor = 'none'; // Hide default cursor
+            } else {
+                console.log('❌ Cursor elements not found');
+                if (window.fairyDustCursor) {
+                    console.log('Trying to reinitialize...');
+                    window.fairyDustCursor.init();
+                }
+            }
+        }, 2000);
+
+        // Add mouse move listener to test
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.fairy-dust-particle');
+            if (particles.length > 0) {
+                console.log(`✨ ${particles.length} particles active`);
+            }
+        });
+    </script>
+</body>
+</html>
