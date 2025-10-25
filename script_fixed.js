@@ -196,6 +196,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
         const BG_SRC = './public/background1/background1.MP3'; // plays once
+        const JINGLE_SRC = './public/jingle.WAV';   // plays once before background
+
         const WAVES_SRC = './public/waves1.MP3';   // loops
         const LS_MUTED = 'bgMusicMuted';
 
