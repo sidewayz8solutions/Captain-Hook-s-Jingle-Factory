@@ -217,6 +217,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.appendChild(bg);
             }
 
+            let jingle = document.getElementById('jingle-music');
+            if (!jingle) {
+                jingle = document.createElement('audio');
+                jingle.id = 'jingle-music';
+                jingle.src = JINGLE_SRC;
+                jingle.loop = false; // play once before background
+                jingle.preload = 'auto';
+                jingle.crossOrigin = 'anonymous';
+                jingle.volume = 0.22; // match background volume
+                // Fallback to lowercase extension/path if needed
+                jingle.addEventListener('error', (e) => {
+                    console.error('jingle.WAV error', e);
+                    if (!jingle.src.toLowerCase().endsWith('/public/jingle.wav')) {
+                        jingle.src = './public/jingle.wav'; jingle.load(); jingle.play().catch(()=>{});
+                    }
+                });
+                document.body.appendChild(jingle);
+            }
+
             let waves = document.getElementById('waves-music');
             if (!waves) {
                 waves = document.createElement('audio');
@@ -236,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.appendChild(waves);
             }
 
-            return { bg, waves };
+            return { bg, waves, jingle };
         }
 
         function createOrGetButton() {
@@ -297,19 +316,26 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.style.filter = muted ? 'grayscale(20%)' : 'none';
         }
 
-        function startBoth(bg, waves) {
+        function startBoth(bg, waves, jingle) {
             const muted = localStorage.getItem(LS_MUTED) === 'true';
-            bg.muted = muted; waves.muted = muted;
+            bg.muted = muted; waves.muted = muted; jingle.muted = muted;
             // Start fresh each visit
             try { bg.currentTime = 0; } catch {}
             try { waves.currentTime = 0; } catch {}
+            try { jingle.currentTime = 0; } catch {}
+
 
             const alreadyPlayed = sessionStorage.getItem('bgOncePlayed') === 'true';
 
             const playTracks = () => {
                 const attempts = [];
                 if (!alreadyPlayed) {
-                    attempts.push(bg.play());
+                    try { jingle.currentTime = 0; } catch {}
+                    // Play jingle first; background will start after it ends
+                    attempts.push(jingle.play());
+                    jingle.addEventListener('ended', () => {
+                        bg.play().catch(()=>{});
+                    }, { once: true });
                 }
                 attempts.push(waves.play());
 
@@ -318,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (blocked) {
                         const resume = () => {
                             if (!(sessionStorage.getItem('bgOncePlayed') === 'true')) {
-                                bg.play().catch(()=>{});
+                                jingle.play().catch(()=>{}); // background will start after jingle ends
                             }
                             waves.play().catch(()=>{});
                             cleanup();
@@ -356,18 +382,18 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch {}
 
         function initDualAudio() {
-            const { bg, waves } = createOrGetAudios();
+            const { bg, waves, jingle } = createOrGetAudios();
             const btn = createOrGetButton();
             setMutedUI(btn, localStorage.getItem(LS_MUTED) === 'true');
 
             btn.addEventListener('click', () => {
                 const newMuted = !(localStorage.getItem(LS_MUTED) === 'true');
                 localStorage.setItem(LS_MUTED, String(newMuted));
-                bg.muted = newMuted; waves.muted = newMuted;
+                bg.muted = newMuted; waves.muted = newMuted; jingle.muted = newMuted;
                 if (!newMuted) {
-                    // Only trigger background once per session
+                    // Only trigger jingle (then background) once per session
                     if (!(sessionStorage.getItem('bgOncePlayed') === 'true')) {
-                        bg.play().catch(()=>{});
+                        jingle.play().catch(()=>{}); // background will start after jingle ends
                     }
                     waves.play().catch(()=>{});
                 }
@@ -389,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            startBoth(bg, waves);
+            startBoth(bg, waves, jingle);
         }
 
 
