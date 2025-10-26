@@ -8,12 +8,12 @@
 
     <!-- Latest Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Custom Tailwind Config -->
     <script>
         tailwind.config = {
@@ -60,10 +60,10 @@
                             '50%': { height: '30px' },
                         },
                         'pulse-glow': {
-                            '0%, 100%': { 
+                            '0%, 100%': {
                                 boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(123, 44, 191, 0.3), 0 0 60px rgba(0, 168, 107, 0.2)'
                             },
-                            '50%': { 
+                            '50%': {
                                 boxShadow: '0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(123, 44, 191, 0.5), 0 0 80px rgba(0, 168, 107, 0.3)'
                             },
                         },
@@ -84,7 +84,7 @@
             },
         }
     </script>
-    
+
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css?v=load-2">
 </head>
@@ -190,24 +190,24 @@
             <!-- Light rays from above -->
             <div class="light-rays"></div>
         </div>
-        
+
         <!-- Floating Hook Images removed per request -->
-  
+
         <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
             <!-- Captain Hook Centerpiece -->
             <div class="captain-container">
                 <img src="public/chook.png" class="captain-image enhanced-captain-glow" alt="Captain Hook">
             </div>
-            
+
             <!-- Main Pirate Hero Message -->
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-mardi-gold via-mardi-purple to-mardi-green mb-6 animate-fade-in">
                 🏴‍☠️ Ahoy, Ye Brave Buccaneers!
             </h1>
-            
+
             <h2 class="text-xl md:text-2xl lg:text-3xl font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-mardi-green to-mardi-gold mb-8 animate-fade-in animation-delay-200">
                 Welcome aboard Captain Hook's Jingle Factory
             </h2>
-            
+
             <div class="text-xl md:text-2xl text-mardi-gold font-pirata mb-6 animate-fade-in animation-delay-300">
                 Where Every Tune Be Treasure!
             </div>
@@ -215,7 +215,7 @@
             <p class="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-8 font-crimson animate-fade-in animation-delay-400 max-w-4xl mx-auto">
                 Be ye seekin' a jingle that sticks tighter than barnacles on your hull? Then step aboard and let ol' Captain Hook craft a jingle so catchy, so golden, it'll have yer competitors walkin' the plank! <span class="text-yellow-400 font-bold">Arrrgh!</span>
             </p>
-            
+
             <p class="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 font-crimson animate-fade-in animation-delay-500 max-w-4xl mx-auto">
                 Here at Captain Hook's Jingle Factory, we don't just write jingles—we forge legendary hooks in the fiery belly of Mount Melody! Each tune be custom-made, seaworthy, and shinier than a chest o' bedazzled doubloons.
             </p>
@@ -228,10 +228,25 @@
         </div>
     </section>
 
+    <!-- Listen CTA Section for email link target -->
+    <section id="listen" class="py-16 relative">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-pirata text-mardi-gold mb-4">Hear the Captain’s Jingle</h2>
+            <p class="text-gray-300 font-crimson mb-8">Tap Play below. If your browser blocks autoplay, this button will start it.</p>
+            <button id="play-jingle-btn" class="px-10 py-4 rounded-full bg-yellow-400 text-gray-900 font-cinzel font-bold uppercase tracking-wider hover:bg-yellow-500 transition-all duration-300">
+                ▶ Play the Captain’s Jingle
+            </button>
+            <div class="mt-4">
+                <a href="./public/jingle.WAV" class="text-sm text-gray-400 underline hover:text-yellow-400">Or open the direct audio link</a>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Services Section -->
     <section id="services" class="py-20 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900"></div>
-        
+
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="text-4xl md:text-5xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-mardi-gold to-mardi-purple mb-4">
@@ -366,7 +381,7 @@
                     🏴‍☠️ Chart Your Course
                 </h2>
                 <p class="text-xl text-gray-300 font-crimson mb-12">Ready to set sail on your audio adventure? Choose your destination!</p>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                     <!-- Chart Your Course - Services -->
                     <a href="services.html" class="group p-8 bg-gradient-to-br from-mardi-purple/30 to-mardi-purple-dark/20 rounded-2xl border border-mardi-purple/50 hover:border-mardi-purple transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">

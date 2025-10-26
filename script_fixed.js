@@ -456,6 +456,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
+
+            // CTA: Explicit play button used by email traffic (#listen)
+            const ctaPlay = document.getElementById('play-jingle-btn');
+            if (ctaPlay) {
+                ctaPlay.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const { bg, waves, jingle } = createOrGetAudios();
+                    // Ensure unmuted
+                    try { localStorage.setItem(LS_MUTED, 'false'); } catch {}
+                    try { bg.muted = false; waves.muted = false; jingle.muted = false; } catch {}
+                    try { setMutedUI(createOrGetButton(), false); } catch {}
+                    // Allow replay even if already played this session
+                    try { sessionStorage.removeItem('bgOncePlayed'); } catch {}
+                    try { jingle.currentTime = 0; bg.currentTime = 0; } catch {}
+                    try { if (waves.paused) { waves.play().catch(()=>{}); } } catch {}
+                    jingle.play().then(() => {
+                        jingle.addEventListener('ended', () => { bg.play().catch(()=>{}); }, { once: true });
+                    }).catch(() => {
+                        // If still blocked (unlikely after click), user can click again
+                    });
+                });
+            }
+
         // Delay start if intro overlay is present (to avoid audio clash)
         if (document.getElementById('intro-overlay')) {
             const observer = new MutationObserver(() => {
