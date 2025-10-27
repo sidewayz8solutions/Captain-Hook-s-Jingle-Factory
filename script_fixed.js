@@ -325,11 +325,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const jinglePlayed = sessionStorage.getItem('jingleOncePlayed') === 'true';
             const bgPlayed = sessionStorage.getItem('bgOncePlayed') === 'true';
+            let playTracksExecuted = false; // Prevent multiple executions
 
             const playTracks = () => {
+                if (playTracksExecuted) return; // Guard against duplicate calls
+                playTracksExecuted = true;
+                
                 const attempts = [];
                 if (!jinglePlayed) {
-                    try { jingle.currentTime = 0; } catch {}
+                    // Don't reset currentTime again - already done above
                     // Play jingle first; background will start after it ends
                     attempts.push(jingle.play());
                     jingle.addEventListener('ended', () => {
@@ -345,15 +349,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 Promise.allSettled(attempts).then(results => {
                     const blocked = results.some(r => r.status === 'rejected');
                     if (blocked) {
+                        playTracksExecuted = false; // Allow retry on user interaction
                         const resume = () => {
                             const jp = sessionStorage.getItem('jingleOncePlayed') === 'true';
                             const bp = sessionStorage.getItem('bgOncePlayed') === 'true';
-                            if (!jp) {
+                            if (!jp && jingle.paused) {
                                 jingle.play().catch(()=>{});
-                            } else if (!bp) {
+                            } else if (!bp && bg.paused) {
                                 bg.play().catch(()=>{});
                             }
-                            waves.play().catch(()=>{});
+                            if (waves.paused) waves.play().catch(()=>{});
                             cleanup();
                         };
                         const cleanup = () => {
@@ -370,14 +375,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             };
 
-            if (bg.readyState >= 2 || waves.readyState >= 2) {
+            if (bg.readyState >= 2 || waves.readyState >= 2 || jingle.readyState >= 2) {
                 playTracks();
             } else {
+                // Use a single event listener to avoid multiple triggers
                 const once = () => playTracks();
-                bg.addEventListener('canplay', once, { once: true });
-                waves.addEventListener('canplay', once, { once: true });
-                // Safety start if events don’t fire promptly
-                setTimeout(playTracks, 1500);
+                jingle.addEventListener('canplay', once, { once: true });
+                // Safety start if events don't fire promptly
+                setTimeout(() => {
+                    if (!playTracksExecuted) playTracks();
+                }, 1500);
             }
         }
 
