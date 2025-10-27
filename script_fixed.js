@@ -477,19 +477,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     try { localStorage.setItem(LS_MUTED, 'false'); } catch {}
                     try { bg.muted = false; waves.muted = false; jingle.muted = false; } catch {}
                     try { setMutedUI(createOrGetButton(), false); } catch {}
-                    const jPlayed = sessionStorage.getItem('jingleOncePlayed') === 'true';
-                    const bPlayed = sessionStorage.getItem('bgOncePlayed') === 'true';
-                    if (!jPlayed) {
-                        try { jingle.currentTime = 0; } catch {}
-                        jingle.play().then(() => {
-                            jingle.addEventListener('ended', () => {
-                                if (!bPlayed) { bg.play().catch(()=>{}); }
-                            }, { once: true });
-                        }).catch(()=>{});
-                    } else if (!bPlayed) {
-                        bg.play().catch(()=>{});
-                    }
-                    waves.play().catch(()=>{});
+                    // Always play jingle1.mp3 when button is clicked
+                    try { jingle.currentTime = 0; } catch {}
+                    jingle.play().catch((err) => {
+                        console.error('Failed to play jingle:', err);
+                    });
                 });
             }
 
