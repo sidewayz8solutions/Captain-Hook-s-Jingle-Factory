@@ -226,11 +226,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 jingle.preload = 'auto';
                 jingle.crossOrigin = 'anonymous';
                 jingle.volume = 0.22; // match background volume
-                // Mark jingle as played once it actually starts
-                try { jingle.addEventListener('playing', () => { try { sessionStorage.setItem('jingleOncePlayed', 'true'); } catch {} }, { once: true }); } catch {}
-                jingle.addEventListener('error', (e) => {
-                    console.error('jingle1.mp3 error', e);
-                });
+                // Mark jingle as played once it actually starts (only add once)
+                if (!jingle.hasAttribute('data-listener-added')) {
+                    jingle.setAttribute('data-listener-added', 'true');
+                    jingle.addEventListener('playing', () => { 
+                        sessionStorage.setItem('jingleOncePlayed', 'true');
+                    }, { once: true });
+                    jingle.addEventListener('error', (e) => {
+                        console.error('jingle1.mp3 error', e);
+                    });
+                }
                 document.body.appendChild(jingle);
             }
 
@@ -314,7 +319,11 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.style.filter = muted ? 'grayscale(20%)' : 'none';
         }
 
+        let startBothCalled = false; // Prevent multiple calls
         function startBoth(bg, waves, jingle) {
+            if (startBothCalled) return;
+            startBothCalled = true;
+            
             const muted = localStorage.getItem(LS_MUTED) === 'true';
             bg.muted = muted; waves.muted = muted; jingle.muted = muted;
             // Start fresh each visit
@@ -395,7 +404,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 setMutedUI(earlyBtn, localStorage.getItem(LS_MUTED) === 'true');
             } catch {}
 
+        let dualAudioInitialized = false; // Prevent multiple initializations
         function initDualAudio() {
+            if (dualAudioInitialized) return;
+            dualAudioInitialized = true;
+            
             const { bg, waves, jingle } = createOrGetAudios();
             const btn = createOrGetButton();
             setMutedUI(btn, localStorage.getItem(LS_MUTED) === 'true');
