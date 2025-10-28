@@ -278,11 +278,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 } catch {}
                 const img = document.createElement('img');
-                img.src = 'public/hooker.png'; // mute button icon
+                img.src = 'public/ab.png'; // mute button icon
                 img.alt = 'Mute/Unmute';
                 // Raise the hook slightly
                 img.className = 'w-8 h-8 drop-shadow-lg -translate-y-1 object-contain';
-                img.onerror = () => { img.src = 'hooker.png'; };
+                img.onerror = () => { img.src = 'ab.png'; };
                 btn.appendChild(img);
                 // Gold caption under the button
                 const label = document.createElement('div');
@@ -985,7 +985,7 @@ function ensureHooksBuilt() {
         // Create the hook image element
         const hookImage = document.createElement('img');
         hookImage.className = 'top-hook';
-        hookImage.src = 'public/hooker.png';
+        hookImage.src = 'public/hook.png';
         hookImage.alt = 'Pirate Hook';
 
         // Fallback to root hook image if public folder fails
