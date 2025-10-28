@@ -8,7 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const introOverlay = document.getElementById('intro-overlay');
     const introVideo = document.getElementById('intro-video');
 
-    if (introOverlay && introVideo) {
+    // Check if intro has already been shown this session
+    const introShown = sessionStorage.getItem('introVideoShown');
+    
+    if (introOverlay && introVideo && !introShown) {
+        // Mark intro as shown for this session
+        sessionStorage.setItem('introVideoShown', 'true');
         console.log('Intro video elements found, setting up loading screen...');
         console.log('Video src:', introVideo.src);
         console.log('Video readyState:', introVideo.readyState);
@@ -172,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 10000);
     } else {
-        // Not the home page or intro elements absent
+        // Not the home page or intro elements absent, or intro already shown
         // If an overlay exists without a video, remove it immediately so it doesn't block other pages
         if (introOverlay) {
             try { introOverlay.remove(); } catch {}
