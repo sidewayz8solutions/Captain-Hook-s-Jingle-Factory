@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Captain Hook's Jingle Factory</title>
+    <link rel="icon" type="image/png" href="/public/hook.png">
+
+    <!-- Latest Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mardi-purple': '#7B2CBF',
+                        'mardi-purple-dark': '#4C1D95',
+                        'mardi-gold': '#FFD700',
+                        'mardi-gold-dark': '#F59E0B',
+                        'mardi-green': '#00A86B',
+                        'mardi-green-dark': '#006B3C',
+                    },
+                    fontFamily: {
+                        'pirata': ['Pirata One', 'cursive'],
+                        'cinzel': ['Cinzel', 'serif'],
+                        'crimson': ['Crimson Text', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            'from': { opacity: '0', transform: 'translateY(20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            'from': { opacity: '0', transform: 'translateY(40px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="nav-backdrop absolute inset-0"></div>
+        <div class="relative container mx-auto px-6">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 group cursor-pointer">
+                    <div class="relative w-12 h-12">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                        <div class="relative w-full h-full flex items-center justify-center">
+                            <img src="public/hooker.png" alt="Captain Hook's" class="w-12 h-12 object-contain">
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Captain Hook's</h1>
+                        <p class="text-xs text-purple-300 font-cinzel uppercase tracking-wider -mt-1">Jingle Factory</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Home</a>
+                    <a href="services.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Services</a>
+                    <a href="gallery.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="our-legend.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Our Captain</a>
+                    <a href="contact.html" class="nav-link py-2 text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-cinzel text-sm uppercase tracking-wide">Contact</a>
+                    <a href="contact.html" class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-cinzel text-sm uppercase tracking-wide rounded-full hover:from-yellow-400 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300">
+                        Set Sail
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
+                    <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-yellow-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-purple-400 transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-green-400 transform transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl">
+            <div class="container mx-auto px-6 py-8">
+                <div class="space-y-4">
+                    <a href="index.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="services.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
+                    <a href="gallery.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="our-legend.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Captain</a>
+                    <a href="contact.html" class="block py-3 px-6 text-gray-300 hover:text-yellow-400 hover:bg-purple-900/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center pt-20 pb-20">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900"></div>
+        
+        <div class="relative z-10 container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12 animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 mb-6">
+                    🛡️ Privacy Policy
+                </h1>
+                <p class="text-xl text-gray-300 font-crimson">
+                    How We Protect Your Treasured Information
+                </p>
+                <p class="text-sm text-gray-400 mt-4">
+                    Last Updated: December 2025
+                </p>
+            </div>
+
+            <!-- Privacy Content -->
+            <div class="prose prose-invert max-w-none animate-slide-up">
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-purple-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-purple-400 mb-4">1. Information We Collect</h2>
+                    <p class="text-gray-300 font-crimson mb-4">
+                        Captain Hook's Jingle Factory respects your privacy and is committed to protecting your personal information. We collect information in the following ways:
+                    </p>
+                    <div class="ml-6">
+                        <h3 class="text-lg font-cinzel text-yellow-400 mb-2">Information You Provide:</h3>
+                        <ul class="text-gray-300 font-crimson space-y-2 ml-4 mb-4">
+                            <li>• Name and contact information when you reach out to us</li>
+                            <li>• Project details and requirements you share</li>
+                            <li>• Payment information for service transactions</li>
+                            <li>• Feedback and communications regarding our services</li>
+                        </ul>
+                        
+                        <h3 class="text-lg font-cinzel text-yellow-400 mb-2">Automatically Collected Information:</h3>
+                        <ul class="text-gray-300 font-crimson space-y-2 ml-4">
+                            <li>• Basic website analytics (page views, session duration)</li>
+                            <li>• Device and browser information</li>
+                            <li>• IP address and general location data</li>
+                            <li>• Cookies and similar tracking technologies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-blue-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-blue-400 mb-4">2. How We Use Your Information</h2>
+                    <p class="text-gray-300 font-crimson mb-4">
+                        We use the collected information for the following purposes:
+                    </p>
+                    <ul class="text-gray-300 font-crimson space-y-2 ml-6">
+                        <li>• To provide and deliver our audio production services</li>
+                        <li>• To communicate with you about your projects and inquiries</li>
+                        <li>• To process payments and manage transactions</li>
+                        <li>• To improve our website and service offerings</li>
+                        <li>• To send occasional updates about our services (with your consent)</li>
+                        <li>• To comply with legal obligations and protect our rights</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-green-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-green-400 mb-4">3. Information Sharing</h2>
+                    <p class="text-gray-300 font-crimson mb-4">
+                        We do not sell, trade, or otherwise transfer your personal information to third parties, except in the following circumstances:
+                    </p>
+                    <ul class="text-gray-300 font-crimson space-y-2 ml-6">
+                        <li>• With your explicit consent for specific purposes</li>
+                        <li>• With trusted service providers who assist in our operations (payment processors, hosting services)</li>
+                        <li>• When required by law or to protect our legal rights</li>
+                        <li>• In connection with a business transaction (merger, acquisition, etc.)</li>
+                    </ul>
+                    <p class="text-gray-300 font-crimson mt-4">
+                        All third-party service providers are bound by confidentiality agreements and are prohibited from using your information for any other purpose.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-yellow-400 mb-4">4. Data Security</h2>
+                    <p class="text-gray-300 font-crimson mb-4">
+                        We implement appropriate security measures to protect your personal information:
+                    </p>
+                    <ul class="text-gray-300 font-crimson space-y-2 ml-6">
+                        <li>• Secure Socket Layer (SSL) technology for data transmission</li>
+                        <li>• Encrypted storage of sensitive information</li>
+                        <li>• Regular security audits and updates</li>
+                        <li>• Limited access to personal information on a need-to-know basis</li>
+                        <li>• Secure payment processing through trusted providers</li>
+                    </ul>
+                    <p class="text-gray-300 font-crimson mt-4">
+                        While we strive to protect your information, no method of transmission over the internet is 100% secure. We cannot guarantee absolute security but continuously work to improve our protections.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-purple-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-purple-400 mb-4">5. Cookies and Tracking</h2>
+                    <p class="text-gray-300 font-crimson mb-4">
+                        Our website uses cookies and similar technologies to:
+                    </p>
+                    <ul class="text-gray-300 font-crimson space-y-2 ml-6">
+                        <li>• Remember your preferences and settings</li>
+                        <li>• Analyze website traffic and performance</li>
+                        <li>• Provide personalized content and experiences</li>
+                        <li>• Enable certain website functionality</li>
+                    </ul>
+                    <p class="text-gray-300 font-crimson mt-4">
+                        You can control cookie settings through your browser preferences. Disabling cookies may affect some website functionality.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-blue-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-blue-400 mb-4">6. Your Rights</h2>
+                    <p class="text-gray-300 font-crimson mb-4">
+                        You have the following rights regarding your personal information:
+                    </p>
+                    <ul class="text-gray-300 font-crimson space-y-2 ml-6">
+                        <li>• <strong>Access:</strong> Request copies of your personal information</li>
+                        <li>• <strong>Correction:</strong> Request correction of inaccurate or incomplete information</li>
+                        <li>• <strong>Deletion:</strong> Request deletion of your personal information (subject to legal obligations)</li>
+                        <li>• <strong>Portability:</strong> Request transfer of your information to another service</li>
+                        <li>• <strong>Opt-out:</strong> Unsubscribe from marketing communications at any time</li>
+                    </ul>
+                    <p class="text-gray-300 font-crimson mt-4">
+                        To exercise these rights, please contact us through our <a href="contact.html" class="text-yellow-400 hover:text-yellow-300 transition-colors">contact page</a>.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-green-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-green-400 mb-4">7. Data Retention</h2>
+                    <p class="text-gray-300 font-crimson">
+                        We retain your personal information only as long as necessary to provide our services and fulfill the purposes outlined in this policy. Project-related information is typically retained for 7 years for business and legal purposes. Marketing communications data is retained until you opt-out or request deletion.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-yellow-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-yellow-400 mb-4">8. Third-Party Links</h2>
+                    <p class="text-gray-300 font-crimson">
+                        Our website may contain links to third-party websites. We are not responsible for the privacy practices of these external sites. We encourage you to read their privacy policies before providing any personal information.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-purple-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-purple-400 mb-4">9. Children's Privacy</h2>
+                    <p class="text-gray-300 font-crimson">
+                        Our services are not directed to individuals under the age of 16. We do not knowingly collect personal information from children under 16. If we become aware that we have collected such information, we will take steps to delete it promptly.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-blue-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-blue-400 mb-4">10. Policy Updates</h2>
+                    <p class="text-gray-300 font-crimson">
+                        We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on our website and updating the "Last Updated" date. Your continued use of our services after such changes constitutes acceptance of the updated policy.
+                    </p>
+                </div>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl border border-green-400/20 mb-8">
+                    <h2 class="text-2xl font-cinzel text-green-400 mb-4">11. Contact Us</h2>
+                    <p class="text-gray-300 font-crimson">
+                        If you have any questions about this Privacy Policy or our data practices, please contact us through our <a href="contact.html" class="text-yellow-400 hover:text-yellow-300 transition-colors">contact page</a>. We're committed to addressing your privacy concerns and questions promptly.
+                    </p>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="index.html" class="inline-block px-8 py-3 bg-gradient-to-r from-purple-400 to-blue-400 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-300 hover:to-blue-300 transform hover:scale-105 transition-all duration-300">
+                        Return to Home Port
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <span class="text-3xl">⚓</span>
+                    <h3 class="font-pirata text-2xl text-yellow-400">Captain Hook's Jingle Factory</h3>
+                </div>
+                <p class="text-gray-400 text-sm font-crimson mb-8">
+                    Crafting legendary jingles from the heart of Louisiana since 2009.
+                </p>
+                <div class="flex justify-center space-x-6 text-sm">
+                    <a href="terms-of-service.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Terms of Service</a>
+                    <a href="privacy-policy.html" class="text-yellow-400 hover:text-yellow-300 transition-colors">Privacy Policy</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-yellow-400 transition-colors">Contact</a>
+                </div>
+                <p class="text-gray-500 text-xs mt-8">
+                    © 2025 Captain Hook's Jingle Factory. All treasures reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script_fixed.js"></script>
+</body>
+</html>

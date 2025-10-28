@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Captain Hook's Jingle Factory</title>
+    <link rel="icon" type="image/png" href="public/hook.png">
+    <link rel="stylesheet" href="styles.css?v=load-2">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'pirata': ['Pirata One', 'cursive'],
+                        'cinzel': ['Cinzel', 'serif'],
+                        'crimson': ['Crimson Text', 'serif']
+                    },
+                    colors: {
+                        'mardi-purple': '#7B2CBF',
+                        'mardi-gold': '#FFD700',
+                        'mardi-green': '#00A86B',
+                        'mardi-green-dark': '#006B3C'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Background image that contains the ocean + bottle, exactly as the mock */
+        .bottle-background {
+            background-image: url('public/bottlereal.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            min-height: 100vh;
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* Right stack inside the bottle (contact form) */
+        .bottle-form-area {
+            position: absolute;
+            right: 19%; /* place roughly over the bottle body */
+            top: 32%;
+            width: 35%;
+            height: 52%;
+            transform: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 10%; /* Push form fields lower in the bottle */
+            gap: 8px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* Left stack (three contact info boxes) */
+        .contact-boxes-area {
+            position: absolute;
+            left: 9%;
+            top: 32%;
+            width: 34%;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Contact form styling */
+        .bottle-form-title {
+            color: #FFF159;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Crimson Text', serif;
+            font-size: 14px;
+            width: 60%; /* Match the textarea width */
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #FFF159;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+
+        .form-textarea {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Crimson Text', serif;
+            font-size: 14px;
+            width: 60%;
+            height: 100px;
+            resize: vertical;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #FFF159;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+
+        .character-counter {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            text-align: left;
+            margin-top: 4px;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .send-button {
+            background: #FFF159;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+
+        .send-button:hover {
+            background: #E6D84A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 241, 89, 0.4);
+        }
+
+        /* Contact info boxes */
+        .contact-info-box {
+            background: rgba(0, 40, 60, 0.85);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 18px;
+            backdrop-filter: blur(10px);
+            height: 110px;
+            display: flex;
+            align-items: left;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-box:hover {
+            background: rgba(0, 40, 60, 0.95);
+            border-color: #FFF159;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 241, 89, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0 0 6px 0;
+            letter-spacing: 1px;
+        }
+
+        .contact-details p {
+            color: #FFF159;
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* Responsive placement for tablets/phones: stack vertically */
+        @media (max-width: 1024px) {
+            .bottle-background {
+                background-position: center top;
+                min-height: 120vh;
+                padding: 40px 20px;
+            }
+            .bottle-form-area,
+            .contact-boxes-area {
+                position: static;
+                width: 100%;
+                height: auto;
+                max-width: 500px;
+                margin: 0 auto 40px auto;
+            }
+            .bottle-form-area {
+                background: rgba(0, 40, 60, 0.85);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                backdrop-filter: blur(10px);
+                padding: px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bottle-background {
+                background-size: cover;
+                padding: 20px 16px;
+            }
+            .bottle-form-area {
+                padding: 24px;
+            }
+            .contact-info-box {
+                padding: 16px 20px;
+                height: auto;
+                min-height: 90px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen overflow-x-hidden">
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="public/hooker.png" alt="Captain Hook's" class="w-10 h-10 object-contain"/>
+                    <div>
+                        <h1 class="font-pirata text-2xl text-mardi-gold">Captain Hook's</h1>
+                        <p class="font-cinzel text-sm text-gray-300 -mt-1">Jingle Factory</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Home</a>
+                    <a href="services.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Services</a>
+                    <a href="gallery.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Gallery</a>
+                    <a href="our-legend.html" class="font-cinzel text-gray-300 hover:text-mardi-gold transition-colors">Our Captain</a>
+                    <a href="contact.html" class="font-cinzel text-mardi-gold">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden relative w-10 h-10 focus:outline-none">
+                    <span class="menu-line menu-line-1 block absolute h-0.5 w-6 bg-mardi-gold transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-2 block absolute h-0.5 w-6 bg-mardi-purple transform transition-all duration-300"></span>
+                    <span class="menu-line menu-line-3 block absolute h-0.5 w-6 bg-mardi-green transform transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="lg:hidden fixed inset-x-0 top-full transform -translate-y-full opacity-0 transition-all duration-500 bg-gray-900/95 backdrop-blur-xl z-50">
+            <div class="container mx-auto px-6 py-8">
+                <div class="space-y-4">
+                    <a href="index.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Home</a>
+                    <a href="services.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Services</a>
+                    <a href="gallery.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Treasure Gallery</a>
+                    <a href="our-legend.html" class="block py-3 px-6 text-gray-300 hover:text-mardi-gold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Our Captain</a>
+                    <a href="contact.html" class="block py-3 px-6 text-mardi-gold font-bold hover:bg-mardi-purple/20 rounded-lg transition-all duration-300 font-cinzel uppercase tracking-wide">Contact</a>
+                    <button class="w-full mt-6 px-6 py-3 bg-gradient-to-r from-mardi-purple to-mardi-purple/80 text-white font-cinzel uppercase tracking-wide rounded-full hover:from-mardi-gold hover:to-mardi-gold/80 transition-all duration-300">
+                        Set Sail Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24">
+
+        <!-- Contact Section with Bottle Background -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <!-- Main Heading -->
+                <div class="text-center mb-12">
+                    <h1 class="text-6xl md:text-8xl lg:text-9xl font-pirata text-transparent bg-clip-text bg-gradient-to-r from-mardi-gold to-mardi-green mb-4 font-bold">
+                        Send a Message in a Bottle
+                    </h1>
+                </div>
+                <div class="bottle-background">
+                    <!-- Contact Form (inside bottle) -->
+                    <div class="bottle-form-area">
+                        <form id="contactForm" action="https://formsubmit.co/ahoy@captainhooksjinglefactory.com" method="POST">
+            <input type="hidden" name="_subject" value="New message from Captain Hook's Jingle Factory">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://captainhooksjinglefactory.com/contact.html?sent=1">
+                            <input id="nameInput" name="name" type="text" class="form-input" placeholder="Your name..." required>
+                            <input id="emailInput" name="email" type="email" class="form-input" placeholder="Your email..." required>
+                            <textarea id="messageTextarea" name="message" class="form-textarea" placeholder="Write your message to Captain Hook..." maxlength="500"></textarea>
+                            <div class="character-counter">
+                                <span id="charCount">0</span>/500
+                            </div>
+                            <button type="submit" class="send-button">SEND MESSAGE</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info Boxes (right side) -->
+                    <div class="contact-boxes-area">
+                        <!-- Email Port -->
+                        <div class="contact-info-box">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" fill="#FFF159" viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>EMAIL PORT</h3>
+                                <p><a href="mailto:ahoy@captainhooksjinglefactory.com" class="underline text-yellow-300 hover:text-yellow-200">ahoy@captainhooksjinglefactory.com</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Signal Flags -->
+                        <div class="contact-info-box">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" fill="#FFF159" viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>SIGNAL FLAGS</h3>
+                                <p>504-788-HOOK</p>
+                            </div>
+                        </div>
+
+                        <!-- Harbor Location -->
+                        <div class="contact-info-box">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" fill="#FFF159" viewBox="0 0 24 24">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>HARBOR LOCATION</h3>
+                                <p>French Quarter, New Orleans, LA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-gray-800 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-3xl">⚓</span>
+                        <h3 class="font-pirata text-2xl text-yellow-400">Captain Hook's</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm font-crimson">
+                        A brand new legendary jingle factory launched in 2025 from the heart of Louisiana. Where music meets magic.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-mardi-purple mb-4">Quick Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-400 hover:text-mardi-gold transition-colors">Home Port</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Treasure Gallery</a></li>
+                        <li><a href="our-legend.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Our Captain</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-mardi-gold transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h3 class="font-cinzel text-lg text-mardi-green mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="terms-of-service.html" class="text-gray-400 hover:text-mardi-green transition-colors">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html" class="text-gray-400 hover:text-mardi-green transition-colors">Privacy Policy</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-mardi-green transition-colors">Refund Policy</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-mardi-green transition-colors">Copyright Info</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-mardi-green transition-colors">Licensing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div id="newsletter-signup">
+                    <h3 class="font-cinzel text-lg text-mardi-gold mb-4">Join Our Crew</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get exclusive offers and audio production tips delivered to your inbox.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email address" class="w-full px-4 py-2 bg-gray-900 border border-gray-800 rounded-lg focus:border-mardi-gold focus:outline-none transition-colors">
+                        <button type="submit" class="w-full py-2 bg-gradient-to-r from-mardi-gold to-mardi-gold/80 text-gray-900 font-cinzel font-bold rounded-lg hover:from-mardi-gold/90 hover:to-mardi-gold transition-all duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2025 Captain Hook's Jingle Factory. All treasures reserved.
+                </p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-mardi-gold">⚜️</span>
+                    <span class="text-mardi-purple">⚜️</span>
+                    <span class="text-mardi-green">⚜️</span>
+                    <span class="text-gray-400 font-cinzel text-sm">Louisiana Proud</span>
+                    <span class="text-mardi-gold">⚜️</span>
+                    <span class="text-mardi-purple">⚜️</span>
+                    <span class="text-mardi-green">⚜️</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="script_fixed.js?v=mobile-fix-1"></script>
+    <script>
+        // Character counter for the message textarea
+        document.getElementById('messageTextarea').addEventListener('input', function() {
+            const charCount = this.value.length;
+            document.getElementById('charCount').textContent = charCount;
+        });
+
+        // Form submission handler (allow native POST submit; just disable button to prevent double submit)
+        document.getElementById('contactForm').addEventListener('submit', function() {
+            const btn = this.querySelector('.send-button');
+            if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+        });
+    </script>
+    <!-- Set Sail Modal -->
+    <div id="setSailModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm opacity-0 invisible transition-all duration-300">
+        <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 md:p-12 max-w-lg w-full mx-4 border-2 border-mardi-gold/50 shadow-2xl transform scale-95 transition-all duration-300">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">⚓</div>
+                <h2 class="text-4xl md:text-5xl font-pirata text-mardi-gold mb-2">Set Sail With Us!</h2>
+                <p class="text-gray-300 font-crimson">Choose yer preferred way to contact the crew</p>
+            </div>
+            <div class="space-y-4">
+                <a href="mailto:ahoy@captainhooksjinglefactory.com" class="block w-full py-4 px-6 bg-gradient-to-r from-mardi-purple to-purple-700 text-white font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 text-center shadow-lg">
+                    <svg class="w-6 h-6 inline-block mr-2 -mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                    Send Us an Email
+                </a>
+                <a href="tel:504-788-4665" class="block w-full py-4 px-6 bg-gradient-to-r from-mardi-gold to-yellow-600 text-gray-900 font-cinzel font-bold uppercase tracking-wider rounded-full hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300 text-center shadow-lg">
+                    <svg class="w-6 h-6 inline-block mr-2 -mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                    Call Us: 504-788-4665
+                </a>
+            </div>
+            <button id="closeModal" class="mt-6 w-full py-3 text-gray-400 hover:text-white font-cinzel uppercase tracking-wider transition-colors duration-300">Close</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById("setSailModal");
+            const closeBtn = document.getElementById("closeModal");
+            const setSailButtons = document.querySelectorAll("button:not([id]):not([type=submit])");
+            const setSailBtns = Array.from(setSailButtons).filter(btn => btn.textContent.includes("Set Sail"));
+            setSailBtns.forEach(btn => { btn.addEventListener("click", (e) => { e.preventDefault(); modal.classList.remove("opacity-0", "invisible"); modal.querySelector("div").classList.remove("scale-95"); modal.querySelector("div").classList.add("scale-100"); }); });
+            closeBtn.addEventListener("click", () => { modal.classList.add("opacity-0", "invisible"); modal.querySelector("div").classList.remove("scale-100"); modal.querySelector("div").classList.add("scale-95"); });
+            modal.addEventListener("click", (e) => { if (e.target === modal) { modal.classList.add("opacity-0", "invisible"); modal.querySelector("div").classList.remove("scale-100"); modal.querySelector("div").classList.add("scale-95"); } });
+            document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.classList.contains("invisible")) { modal.classList.add("opacity-0", "invisible"); modal.querySelector("div").classList.remove("scale-100"); modal.querySelector("div").classList.add("scale-95"); } });
+        });
+    </script>
+</body>
+</html>
